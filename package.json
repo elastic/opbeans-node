@@ -1,0 +1,32 @@
+{
+  "name": "opbeans",
+  "version": "1.0.0",
+  "description": "The Opbeans inventory management system",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "opbeat": "^4.4.0",
+    "pg": "^6.1.2"
+  },
+  "devDependencies": {
+    "standard": "^8.6.0"
+  },
+  "scripts": {
+    "db-setup": "psql -d postgres -f db/setup.sql",
+    "test": "standard",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opbeat/opbeans.git"
+  },
+  "contributors": [
+    "Thomas Watson Steen <thomas@opbeat.com> (https://twitter.com/wa7son)",
+    "Vanja Ćosić <vanja@opbeat.com> (https://twitter.com/vanjacosic)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/opbeat/opbeans/issues"
+  },
+  "homepage": "https://github.com/opbeat/opbeans#readme"
+}
