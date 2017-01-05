@@ -10,12 +10,18 @@
     "pg": "^6.1.2"
   },
   "devDependencies": {
+    "concurrently": "^3.1.0",
     "standard": "^8.6.0"
   },
   "scripts": {
     "db-setup": "psql -d opbeans -f db/setup.sql && psql -d opbeans -f db/products.sql && psql -d opbeans -f db/mock_customers.sql",
     "test": "standard",
-    "start": "node server.js"
+    "server": "node server.js",
+    "client": "node client/start-client.js",
+    "client-install": "npm install --prefix client/",
+    "client-build": "npm run build --prefix client/",
+    "postinstall": "npm run client-install && npm run client-build",
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",

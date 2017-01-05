@@ -20,7 +20,7 @@ app.get('*', function (req, res) {
 })
 app.use(opbeat.middleware.express())
 
-var server = app.listen(process.env.PORT || 3000, function () {
+var server = app.listen(process.env.PORT || 3001, function () {
   var port = server.address().port
   console.log('server is listening on port', port)
 })
