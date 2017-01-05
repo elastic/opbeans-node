@@ -39,6 +39,10 @@ For a complete list of PostgreSQL environment variables [see the
 official
 documentation](https://www.postgresql.org/docs/9.5/static/libpq-envars.html).
 
+In development, you can create a `.env` file in the root of the project
+containing all your secret environemnt variables. See
+[dotenv](https://github.com/motdotla/dotenv) for details.
+
 ## Bootstrap
 
 Populate the database with tables and basic data:
