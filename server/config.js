@@ -2,6 +2,6 @@
 
 module.exports = {
   pg: {
-    database: 'opbeans'
+    database: process.env.PGDATABASE || 'opbeans'
   }
 }
