@@ -7,6 +7,42 @@ maintained by [Opbeat](https://opbeat.com).
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 <a href="https://opbeat.com" title="Opbeat"><img src="http://opbeat-brand-assets.s3-website-us-east-1.amazonaws.com/svg/logo/logo.svg" align="right" height="25px"></a>
 
+## Configuration
+
+Setup the following environment variables:
+
+- `PGHOST` - PostgreSQL server host
+- `PGPORT` - PostgreSQL server port
+- `PGUSER` - PostgreSQL database username
+- `PGPASSWORD` - PostgreSQL database password
+- `PGDATABASE` - PostgreSQL database name (defaults to `opbeans`)
+
+For a complete list of PostgreSQL environment variables [see the
+official
+documentation](https://www.postgresql.org/docs/9.5/static/libpq-envars.html).
+
+## Bootstrap
+
+Populate the database with basic data:
+
+```
+npm run db-setup
+```
+
+Generate random orders:
+
+```
+node db/generate_orders.js <num>
+```
+
+Where `<num>` is the amount of orders to create.
+
+## Start
+
+```
+npm start
+```
+
 ## License
 
 MIT
