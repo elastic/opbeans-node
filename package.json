@@ -12,7 +12,7 @@
     "standard": "^8.6.0"
   },
   "scripts": {
-    "db-setup": "psql -d opbeans -f db/setup.sql",
+    "db-setup": "psql -d opbeans -f db/setup.sql && psql -d opbeans -f db/products.sql && psql -d opbeans -f db/mock_customers.sql",
     "test": "standard",
     "start": "node server.js"
   },
