@@ -63,7 +63,8 @@ CREATE TABLE "orders" (
 
 CREATE TABLE "order_lines" (
 	"order_id" int NOT NULL,
-	"product_id" int NOT NULL
+	"product_id" int NOT NULL,
+	"amount" int NOT NULL
 ) WITH (
   OIDS=FALSE
 );
