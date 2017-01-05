@@ -1,6 +1,6 @@
 CREATE DATABASE opbeans IF NOT EXISTS;
 
-# Drop everything
+-- Drop everything
 ALTER TABLE "products" DROP CONSTRAINT IF EXISTS "products_fk0";
 ALTER TABLE "orders" DROP CONSTRAINT IF EXISTS "orders_fk0";
 ALTER TABLE "order_products" DROP CONSTRAINT IF EXISTS "order_products_fk0";
@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS "orders";
 DROP TABLE IF EXISTS "order_products";
 
 
-# Create everything
+-- Create everything
 CREATE TABLE "products" (
 	"id" serial NOT NULL,
 	"sku" varchar NOT NULL UNIQUE,
