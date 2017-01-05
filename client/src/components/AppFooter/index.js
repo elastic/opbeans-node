@@ -1,9 +1,8 @@
-import React, { PropTypes, Component } from 'react';
-import { Link } from 'react-router';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 
 class AppFooter extends Component {
-    
+
   render() {
     const { className, ...props } = this.props;
     return (

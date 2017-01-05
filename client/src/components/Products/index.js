@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router';
 import classnames from 'classnames';
 
 import './style.css';
