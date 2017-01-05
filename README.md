@@ -17,7 +17,7 @@ This application uses the following technologies:
 - [PostgreSQL](http://postgresql.org)
 - [Express](http://expressjs.com)
 - [React](https://facebook.github.io/react/)
-- [React router](https://github.com/ReactTraining/react-router)
+- [React Router](https://github.com/ReactTraining/react-router)
 - [Redux](https://github.com/reactjs/redux)
 - [Opbeat](https://opbeat.com)
 
