@@ -1,0 +1,14 @@
+.ui.vertical.stripe {
+  padding: 4em 0em;
+  min-height: 30em;
+}
+
+.ui.footer.segment {
+    padding: 4em 0em;
+}
+
+.AppFooter .ui.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
