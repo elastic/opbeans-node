@@ -15,7 +15,7 @@
   },
   "scripts": {
     "db-setup": "psql -d opbeans -f db/setup.sql && psql -d opbeans -f db/products.sql && psql -d opbeans -f db/mock_customers.sql",
-    "test": "standard server.js server/**/*.js",
+    "test": "standard server.js server/**/*.js db/**/*.js",
     "start": "node server.js"
   },
   "repository": {
