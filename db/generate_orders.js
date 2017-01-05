@@ -35,7 +35,7 @@ client.connect(function (err) {
   client.query('SELECT id FROM customers', next())
 
   function createOrder (customer, lines, cb) {
-    var sql = 'INSERT INTO orders (customer_id, date) VALUES ($1, now()) RETURNING id'
+    var sql = 'INSERT INTO orders (customer_id) VALUES ($1) RETURNING id'
     client.query(sql, [customer], function (err, result) {
       if (err) return cb(err)
       var next = afterAll(cb)

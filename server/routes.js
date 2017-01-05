@@ -2,6 +2,7 @@
 
 var opbeat = require('opbeat')
 var express = require('express')
+var afterAll = require('after-all-results')
 var db = require('./db')
 
 var app = module.exports = new express.Router()
@@ -133,6 +134,81 @@ app.get('/orders', function (req, res) {
       done()
       if (err) return error(err, res)
       res.json(result.rows)
+    })
+  })
+})
+
+/**
+ * Example body:
+ * {
+ *   customer_id: 1,
+ *   lines: [
+ *     {id: 1, amount: 1}
+ *   ]
+ * }
+ */
+app.post('/orders', function (req, res) {
+  if (!req.body.customer_id || !req.body.lines) {
+    res.status(400).end()
+    return
+  }
+
+  db.client(function (err, client, done) {
+    if (err) return error(err, res)
+
+    var next = afterAll(function (err, results) {
+      if (err) {
+        done()
+        error(err, res)
+        return
+      }
+
+      if (results.some(function (result) { return result.length === 1 })) {
+        res.status(400).end()
+        return
+      }
+
+      client.query('BEGIN', function (err) {
+        if (err) {
+          done()
+          error(err, res)
+          return
+        }
+
+        var sql = 'INSERT INTO orders (customer_id) VALUES ($1) RETURNING id'
+
+        client.query(sql, [req.body.customer_id], function (err, result) {
+          if (err) return rollback(err)
+
+          var next = afterAll(function (err) {
+            if (err) return rollback(err)
+            client.query('COMMIT', function (err) {
+              if (err) return rollback(err)
+              res.json({id: id})
+            })
+          })
+
+          var id = result.rows[0].id
+
+          req.body.lines.forEach(function (line) {
+            var sql = 'INSERT INTO order_lines (order_id, product_id, amount) ' +
+              'VALUES ($1, $2, $3)'
+            client.query(sql, [id, line.id, line.amount], next())
+          })
+        })
+
+        function rollback (err1) {
+          client.query('ROLLBACK', function (err2) {
+            done(err2)
+            error(err1, res)
+          })
+        }
+      })
+    })
+
+    client.query('SELECT id FROM customers WHERE id=$1', [req.body.customer_id], next())
+    req.body.lines.forEach(function (line) {
+      client.query('SELECT id FROM products WHERE id=$1', [line.id], next())
     })
   })
 })

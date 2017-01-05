@@ -5,12 +5,13 @@
   "main": "server.js",
   "dependencies": {
     "after-all-results": "^2.0.0",
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "opbeat": "^4.4.0",
     "pg": "^6.1.2"
   },
   "devDependencies": {
-    "concurrently": "^3.1.0",
+    "dotenv": "^2.0.0",
     "standard": "^8.6.0"
   },
   "scripts": {
@@ -21,7 +22,7 @@
     "client-install": "npm install --prefix client/",
     "client-build": "npm run build --prefix client/",
     "postinstall": "npm run client-install && npm run client-build",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "test": "standard server.js server/**/*.js db/**/*.js"
   },
   "repository": {
     "type": "git",

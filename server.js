@@ -1,9 +1,7 @@
 'use strict'
 
-var opbeat = require('opbeat').start({
-  active: process.env.NODE_ENV === 'production'
-})
-
+var conf = require('./server/config')
+var opbeat = require('opbeat').start(conf.opbeat)
 var path = require('path')
 var express = require('express')
 
@@ -13,6 +11,7 @@ app.use(function (req, res, next) {
   console.log(req.method, req.url)
   next()
 })
+app.use(require('body-parser').json())
 app.use(express.static('client/build'))
 app.use('/api', require('./server/routes'))
 app.get('*', function (req, res) {
@@ -20,7 +19,8 @@ app.get('*', function (req, res) {
 })
 app.use(opbeat.middleware.express())
 
-var server = app.listen(process.env.PORT || 3001, function () {
+var server = app.listen(conf.server.port, function () {
+
   var port = server.address().port
   console.log('server is listening on port', port)
 })
