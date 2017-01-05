@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "after-all-results": "^2.0.0",
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "opbeat": "^4.4.0",
     "pg": "^6.1.2"
