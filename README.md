@@ -30,6 +30,9 @@ Setup the following environment variables:
 - `PGUSER` - PostgreSQL database username
 - `PGPASSWORD` - PostgreSQL database password
 - `PGDATABASE` - PostgreSQL database name (defaults to `opbeans`)
+- `OPBEAT_ORGANIZATION_ID` - Your Opbeat Organization Id
+- `OPBEAT_APP_ID` - Your Opbeat App Id
+- `OPBEAT_SECRET_TOKEN` - Your Opbeat Secret Token
 
 For a complete list of PostgreSQL environment variables [see the
 official
