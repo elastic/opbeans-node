@@ -11,11 +11,9 @@ var app = express()
 
 app.use(express.static('client/build'))
 app.use('/api', require('./server/routes'))
-
-app.get('*', (req, res) => {
+app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
 })
-
 app.use(opbeat.middleware.express())
 
 var server = app.listen(process.env.PORT || 3000, function () {
