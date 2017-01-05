@@ -19,7 +19,7 @@ var conf = module.exports = {
 
 switch (env) {
   case 'development':
-    conf.server.url = 'http://localhost:' + port
+    conf.server.url = 'http://localhost:' + conf.server.port
     break
   case 'production':
     conf.server.url = 'http://opbeans.com'
