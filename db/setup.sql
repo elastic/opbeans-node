@@ -1,5 +1,3 @@
-CREATE DATABASE opbeans IF NOT EXISTS;
-
 -- Drop everything
 ALTER TABLE "products" DROP CONSTRAINT IF EXISTS "products_fk0";
 ALTER TABLE "orders" DROP CONSTRAINT IF EXISTS "orders_fk0";
