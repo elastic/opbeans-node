@@ -25,7 +25,7 @@ documentation](https://www.postgresql.org/docs/9.5/static/libpq-envars.html).
 
 ## Bootstrap
 
-Populate the database with basic data:
+Populate the database with tables and basic data:
 
 ```
 npm run db-setup
