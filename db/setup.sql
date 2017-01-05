@@ -54,7 +54,7 @@ CREATE TABLE "customers" (
 CREATE TABLE "orders" (
 	"id" serial NOT NULL UNIQUE,
 	"customer_id" int NOT NULL,
-	"date" DATE NOT NULL,
+	"created_at" TIMESTAMP NOT NULL DEFAULT NOW(),
 	CONSTRAINT orders_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
