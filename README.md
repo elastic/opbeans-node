@@ -60,3 +60,5 @@ npm start
 ## License
 
 MIT
+
+<br>Made with ♥️ and ☕️ by Opbeat.
