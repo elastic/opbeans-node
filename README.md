@@ -9,6 +9,17 @@ It's hosted on [opbeans.com](http://opbeans.com).
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 <a href="https://opbeat.com" title="Opbeat"><img src="http://opbeat-brand-assets.s3-website-us-east-1.amazonaws.com/svg/logo/logo.svg" align="right" height="25px"></a>
 
+## Technology Stack
+
+This application uses the following technologies:
+
+- [Node.js](https://nodejs.org)
+- [PostgreSQL](http://postgresql.org)
+- [React](https://facebook.github.io/react/)
+- [React router](https://github.com/ReactTraining/react-router)
+- [Redux](https://github.com/reactjs/redux)
+- [Opbeat](https://opbeat.com)
+
 ## Configuration
 
 Setup the following environment variables:
