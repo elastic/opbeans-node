@@ -1,8 +1,8 @@
 'use strict'
 
-require('dotenv').config()
-
 var env = process.env.NODE_ENV || 'development'
+
+if (env === 'development') require('dotenv').config()
 
 var conf = module.exports = {
   env: env,
