@@ -9,6 +9,10 @@ var express = require('express')
 
 var app = express()
 
+app.use(function (req, res, next) {
+  console.log(req.method, req.url)
+  next()
+})
 app.use(express.static('client/build'))
 app.use('/api', require('./server/routes'))
 app.get('*', function (req, res) {
