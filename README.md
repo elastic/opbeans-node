@@ -25,6 +25,7 @@ This application uses the following technologies:
 
 Setup the following environment variables:
 
+- `NODE_ENV` - The current Node environment (set to `production` to enable Opbeat)
 - `PGHOST` - PostgreSQL server host
 - `PGPORT` - PostgreSQL server port
 - `PGUSER` - PostgreSQL database username
