@@ -1,14 +1,14 @@
 -- Drop everything
 ALTER TABLE "products" DROP CONSTRAINT IF EXISTS "products_fk0";
 ALTER TABLE "orders" DROP CONSTRAINT IF EXISTS "orders_fk0";
-ALTER TABLE "order_products" DROP CONSTRAINT IF EXISTS "order_products_fk0";
-ALTER TABLE "order_products" DROP CONSTRAINT IF EXISTS "order_products_fk1";
+ALTER TABLE "order_lines" DROP CONSTRAINT IF EXISTS "order_lines_fk0";
+ALTER TABLE "order_lines" DROP CONSTRAINT IF EXISTS "order_lines_fk1";
 
 DROP TABLE IF EXISTS "products";
 DROP TABLE IF EXISTS "product_types";
 DROP TABLE IF EXISTS "customers";
 DROP TABLE IF EXISTS "orders";
-DROP TABLE IF EXISTS "order_products";
+DROP TABLE IF EXISTS "order_lines";
 
 
 -- Create everything
@@ -61,7 +61,7 @@ CREATE TABLE "orders" (
 );
 
 
-CREATE TABLE "order_products" (
+CREATE TABLE "order_lines" (
 	"order_id" int NOT NULL,
 	"product_id" int NOT NULL
 ) WITH (
@@ -71,5 +71,5 @@ CREATE TABLE "order_products" (
 
 ALTER TABLE "products" ADD CONSTRAINT "products_fk0" FOREIGN KEY ("type_id") REFERENCES "product_types"("id");
 ALTER TABLE "orders" ADD CONSTRAINT "orders_fk0" FOREIGN KEY ("customer_id") REFERENCES "customers"("id");
-ALTER TABLE "order_products" ADD CONSTRAINT "order_products_fk0" FOREIGN KEY ("order_id") REFERENCES "orders"("id");
-ALTER TABLE "order_products" ADD CONSTRAINT "order_products_fk1" FOREIGN KEY ("product_id") REFERENCES "products"("id");
+ALTER TABLE "order_lines" ADD CONSTRAINT "order_lines_fk0" FOREIGN KEY ("order_id") REFERENCES "orders"("id");
+ALTER TABLE "order_lines" ADD CONSTRAINT "order_lines_fk1" FOREIGN KEY ("product_id") REFERENCES "products"("id");
