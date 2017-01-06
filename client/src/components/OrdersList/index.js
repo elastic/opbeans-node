@@ -5,8 +5,6 @@ const OrdersList = ({orders}) => {
 
   let total_orders = orders.items.length;
 
-  console.log(orders);
-
   return (
       <div className="ui basic segment table-wrapper">
           { orders.loading && (
