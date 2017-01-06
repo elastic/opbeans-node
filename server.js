@@ -20,7 +20,6 @@ app.get('*', function (req, res) {
 app.use(opbeat.middleware.express())
 
 var server = app.listen(conf.server.port, function () {
-
   var port = server.address().port
   console.log('server is listening on port', port)
 })
