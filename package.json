@@ -23,7 +23,7 @@
     "client": "node client/start-client.js",
     "client-install": "npm install --prefix client/",
     "client-build": "npm run build --prefix client/",
-    "postinstall": "if [ \"$NODE_ENV\" == 'production' ]; then npm run client-install && npm run client-build; fi",
+    "postinstall": "if [[ ${NODE_ENV} == \"production\" ]]; then npm run client-install && npm run client-build; fi",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "workload": "workload -f .workload.js"
   },
