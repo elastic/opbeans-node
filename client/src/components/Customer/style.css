@@ -1,0 +1,9 @@
+.Product h1 {
+    margin-top: 5px;
+    font-size: 1.8em;
+}
+
+.Product code {
+    font-size: 1.3em;
+    vertical-align: middle;
+}

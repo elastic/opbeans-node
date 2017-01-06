@@ -24,7 +24,7 @@ class AppHeader extends Component {
                         <i className="line chart icon"></i>
                         Orders
                     </Link>
-                    <Link className="item disabled" activeClassName="active" to="">
+                    <Link className="item" activeClassName="active" to="/customers">
                         <i className="users icon"></i>
                         Customers
                     </Link>

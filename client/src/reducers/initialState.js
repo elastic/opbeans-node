@@ -3,4 +3,6 @@ export default {
   products: { loading: true, items: [] },
   order: { loading: true, order: {} },
   orders: { loading: true, items: [] },
+  customer: { loading: true, customer: {} },
+  customers: { loading: true, items: [] },
 }
