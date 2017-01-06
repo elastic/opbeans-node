@@ -11,7 +11,7 @@ app.get('/products', function (req, res) {
   db.client(function (err, client, done) {
     if (err) return error(err, res)
 
-    var sql = 'SELECT p.id, p.name, t.name AS type_name FROM products p ' +
+    var sql = 'SELECT p.id, p.name, p.stock, t.name AS type_name FROM products p ' +
       'LEFT JOIN product_types t ON p.type_id=t.id'
 
     client.query(sql, function (err, result) {

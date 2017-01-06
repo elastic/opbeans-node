@@ -5,23 +5,24 @@ import classnames from 'classnames';
 
 import './style.css';
 
-import ProductsList from '../ProductsList';
+import ProductDetail from '../ProductDetail';
 import * as productActions from '../../actions/productActions';
 
-class Products extends Component {
+class Product extends Component {
 
     componentDidMount() {
-        this.props.actions.loadProducts();
+        this.props.actions.loadProduct(this.props.params.id);
     }
 
     render() {
         const { className } = this.props;
         return (
-            <div className={classnames('Products', className)}>
+            <div className={classnames('Product', className)}>
                 <div className="ui vertical stripe segment">
                     <div className="ui container">
-                        <h1 className="ui header">All products</h1>
-                        <ProductsList products={this.props.products} />
+
+                        <ProductDetail product={this.props.product} />
+
                     </div>
                 </div>
             </div>
@@ -29,13 +30,13 @@ class Products extends Component {
     }
 }
 
-Products.propTypes = {
-    products: PropTypes.object.isRequired
+Product.propTypes = {
+    product: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
     return {
-        products: state.products
+        product: state.product
     };
 }
 
@@ -43,4 +44,4 @@ function mapDispatchToProps(dispatch) {
     return {actions: bindActionCreators(productActions, dispatch)}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default connect(mapStateToProps, mapDispatchToProps)(Product);

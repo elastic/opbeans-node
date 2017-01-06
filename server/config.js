@@ -7,7 +7,7 @@ if (env === 'development') require('dotenv').config()
 var conf = module.exports = {
   env: env,
   server: {
-    port: process.env.PORT || 3000
+    port: process.env.PORT || 3001
   },
   pg: {
     database: process.env.PGDATABASE || 'opbeans'

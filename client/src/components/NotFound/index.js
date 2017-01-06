@@ -6,9 +6,9 @@ import './style.css';
 export default class NotFound extends Component {
 
   render() {
-    const { className, ...props } = this.props;
+    const { className } = this.props;
     return (
-      <div className={classnames('NotFound', className)} {...props}>
+      <div className={classnames('NotFound', className)}>
           <div className="ui vertical stripe center aligned segment">
               <h1 className="ui icon header">
                 <i className="warning sign icon"></i>

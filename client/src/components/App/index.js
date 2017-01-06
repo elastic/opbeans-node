@@ -9,9 +9,9 @@ import AppFooter from '../AppFooter';
 class App extends Component {
 
   render() {
-    const { className, ...props } = this.props;
+    const { className } = this.props;
     return (
-      <div className={classnames('App', className)} {...props}>
+      <div className={classnames('App', className)}>
           <div className="pusher">
 
               <AppHeader />
