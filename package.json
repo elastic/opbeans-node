@@ -17,7 +17,7 @@
   },
   "scripts": {
     "db-setup": "psql -d opbeans -f db/setup.sql && psql -d opbeans -f db/products.sql && psql -d opbeans -f db/mock_customers.sql",
-    "test": "standard server.js server/**/*.js db/**/*.js",
+    "test": "standard *.js server/**/*.js db/**/*.js",
     "server": "node server.js",
     "client": "node client/start-client.js",
     "client-install": "npm install --prefix client/",
