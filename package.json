@@ -8,7 +8,8 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "opbeat": "^4.4.0",
-    "pg": "^6.1.2"
+    "pg": "^6.1.2",
+    "workload": "^2.3.0"
   },
   "devDependencies": {
     "dotenv": "^2.0.0",
@@ -16,13 +17,13 @@
   },
   "scripts": {
     "db-setup": "psql -d opbeans -f db/setup.sql && psql -d opbeans -f db/products.sql && psql -d opbeans -f db/mock_customers.sql",
-    "test": "standard",
+    "test": "standard server.js server/**/*.js db/**/*.js",
     "server": "node server.js",
     "client": "node client/start-client.js",
     "client-install": "npm install --prefix client/",
     "client-build": "npm run build --prefix client/",
     "postinstall": "npm run client-install && npm run client-build",
-    "test": "standard server.js server/**/*.js db/**/*.js"
+    "workload": "workload -f .workload.js"
   },
   "repository": {
     "type": "git",
