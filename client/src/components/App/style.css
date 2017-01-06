@@ -1,14 +1,17 @@
 .ui.vertical.stripe {
-  padding: 4em 0em;
-  min-height: 30em;
+    padding: 4em 0em;
 }
 
 .ui.footer.segment {
     padding: 4em 0em;
 }
 
-.AppFooter .ui.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+.AppMain {
+  display: flex;
+  min-height: 84vh;
+  flex-direction: column;
+}
+
+.App > .AppFooter {
+  flex: 1;
 }

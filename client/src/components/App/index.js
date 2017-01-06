@@ -12,14 +12,13 @@ class App extends Component {
     const { className } = this.props;
     return (
       <div className={classnames('App', className)}>
-          <div className="pusher">
+          <AppHeader />
 
-              <AppHeader />
-
+          <div className="AppMain">
               {this.props.children}
-
-              <AppFooter />
           </div>
+
+          <AppFooter />
       </div>
     );
   }
