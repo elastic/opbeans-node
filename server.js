@@ -17,6 +17,7 @@ if (conf.env !== 'production') {
 app.use(require('body-parser').json())
 app.use(express.static('client/build'))
 
+app.use(require('./server/coffee'))
 app.use('/api', require('./server/routes'))
 app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
