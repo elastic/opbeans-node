@@ -113,7 +113,8 @@ app.post('/orders', function (req, res) {
         return
       }
 
-      if (results.some(function (result) { return result.length === 1 })) {
+      if (results.some(function (result) { return result.rowCount === 0 })) {
+        done()
         res.status(400).end()
         return
       }
