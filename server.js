@@ -7,10 +7,13 @@ var express = require('express')
 
 var app = express()
 
-app.use(function (req, res, next) {
-  console.log(req.method, req.url)
-  next()
-})
+if (conf.env !== 'production') {
+  app.use(function (req, res, next) {
+    console.log(req.method, req.url)
+    next()
+  })
+}
+
 app.use(require('body-parser').json())
 app.use(express.static('client/build'))
 app.use('/api', require('./server/routes'))
