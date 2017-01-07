@@ -144,11 +144,12 @@ app.post('/orders', function (req, res) {
           })
         })
 
-        function rollback (err1) {
-          client.query('ROLLBACK', function (err2) {
-            if (err2) opbeat.captureError(err2)
-            done(err2)
-            error(err1, res)
+        function rollback (err) {
+          opbeat.captureError(err)
+          client.query('ROLLBACK', function (err) {
+            if (err) opbeat.captureError(err)
+            done(err)
+            res.status(500).end()
           })
         }
       })
