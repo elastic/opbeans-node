@@ -31,11 +31,10 @@ Setup the following environment variables:
 - `PGUSER` - PostgreSQL database username
 - `PGPASSWORD` - PostgreSQL database password
 - `PGDATABASE` - PostgreSQL database name (defaults to `opbeans`)
+- `NODE_OPBEAT_APP_ID` - Your Opbeat App Id for the Node.js server
+- `REACT_OPBEAT_APP_ID` - Your Opbeat App Id for the React client
 - `OPBEAT_ORGANIZATION_ID` - Your Opbeat Organization Id
-- `OPBEAT_APP_ID` - Your Opbeat App Id
 - `OPBEAT_SECRET_TOKEN` - Your Opbeat Secret Token
-- `REACT_APP_OPBEAT_APP_ID` - Your Opbeat App Id (For the client app)
-- `REACT_APP_OPBEAT_ORG_ID` - Your Opbeat Organization Id (For the client app)
 
 For a complete list of PostgreSQL environment variables [see the
 official

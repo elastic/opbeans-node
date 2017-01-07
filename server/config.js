@@ -13,6 +13,7 @@ var conf = module.exports = {
     database: process.env.PGDATABASE || 'opbeans'
   },
   opbeat: {
+    appId: process.env.NODE_OPBEAT_APP_ID,
     active: env === 'production'
   }
 }
