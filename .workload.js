@@ -1,5 +1,12 @@
 'use strict'
 
+var opbeat = require('opbeat').start({
+  appId: process.env.WORKLOAD_OPBEAT_APP_ID,
+  organizationId: process.env.WORKLOAD_OPBEAT_ORG_ID,
+  secretToken: process.env.WORKLOAD_OPBEAT_SECRET_TOKEN,
+  active: process.env.NODE_ENV === 'production'
+})
+
 var Workload = require('workload')
 var conf = require('./server/config')
 var url = conf.server.url + '/'
