@@ -13,7 +13,7 @@ var url = conf.server.url + '/'
 var api = url + 'api/'
 
 module.exports = {
-  max: 60,
+  max: 120,
   filters: [
     Workload.stdFilters.expand,
     Workload.stdFilters.workdays,
