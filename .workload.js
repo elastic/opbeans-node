@@ -16,7 +16,7 @@ module.exports = {
   max: 60,
   filters: [
     Workload.stdFilters.expand,
-    Workload.stdFilters.workingHours,
+    Workload.stdFilters.workdays,
     fillOutOrder
   ],
   requests: [
