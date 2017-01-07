@@ -31,18 +31,18 @@ Setup the following environment variables:
 - `PGUSER` - PostgreSQL database username
 - `PGPASSWORD` - PostgreSQL database password
 - `PGDATABASE` - PostgreSQL database name (defaults to `opbeans`)
-- `OPBEAT_ORGANIZATION_ID` - Your Opbeat Organization Id
-- `OPBEAT_APP_ID` - Your Opbeat App Id
-- `OPBEAT_SECRET_TOKEN` - Your Opbeat Secret Token
-- `REACT_APP_OPBEAT_APP_ID` - Your Opbeat App Id (For the client app)
-- `REACT_APP_OPBEAT_ORG_ID` - Your Opbeat Organization Id (For the client app)
+- `OPBEAT_ORGANIZATION_ID` - Opbeat Organization Id for the server app
+- `OPBEAT_APP_ID` - Opbeat App Id for the server app
+- `OPBEAT_SECRET_TOKEN` - Opbeat Secret Token for the server app
+- `REACT_APP_OPBEAT_APP_ID` - Opbeat App Id for the client app
+- `REACT_APP_OPBEAT_ORG_ID` - Opbeat Organization Id for the client app
 
 For a complete list of PostgreSQL environment variables [see the
 official
 documentation](https://www.postgresql.org/docs/9.5/static/libpq-envars.html).
 
 In development, you can create a `.env` file in the root of the project
-containing all your secret environment variables. See [dotenv](https://github.com/motdotla/dotenv) for details. Additionally if you create a `.env` file in the `/client` folder, those variables will be available in the React app.
+containing all your secret environment variables. See [dotenv](https://github.com/motdotla/dotenv) for details. Additionally if you create a `.env` file in the `/client` folder, variables prefixed with `REACT_APP_` will be available in the React app. 
 
 ## Bootstrap
 
