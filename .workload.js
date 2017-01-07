@@ -21,6 +21,8 @@ module.exports = {
   ],
   requests: [
     {weight: 10, url: url},
+    {weight: 10, url: url + 'favicon.ico'},
+    {weight: 1, url: url, method: 'OPTIONS'},
     {weight: 8, url: api + 'products'},
     {weight: 6, url: api + 'products/{1..3}'},
     {weight: 3, url: api + 'products/{1..3}/customers'},
