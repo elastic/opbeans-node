@@ -11,6 +11,7 @@
     "opbeat": "^4.4.0",
     "pg": "^6.1.2",
     "redis": "^2.6.3",
+    "request": "^2.79.0",
     "workload": "^2.3.0"
   },
   "devDependencies": {

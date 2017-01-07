@@ -5,6 +5,7 @@ var express = require('express')
 var afterAll = require('after-all-results')
 var db = require('./db')
 var redis = require('./redis')
+var accounting = require('./accounting')
 
 var app = module.exports = new express.Router()
 
@@ -152,12 +153,15 @@ app.post('/orders', function (req, res) {
 
           var next = afterAll(function (err) {
             if (err) return rollback(err)
-            client.query('COMMIT', function (err) {
+            accounting.placeOrder({id: id}, function (err) {
               if (err) return rollback(err)
-              done()
-              redis.set('newest-order', id, function (err) {
-                if (err) return error(err, res)
-                res.json({id: id})
+              client.query('COMMIT', function (err) {
+                if (err) return rollback(err)
+                done()
+                redis.set('newest-order', id, function (err) {
+                  if (err) return error(err, res)
+                  res.json({id: id})
+                })
               })
             })
           })
