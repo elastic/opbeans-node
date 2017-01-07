@@ -120,11 +120,7 @@ app.post('/orders', function (req, res) {
       }
 
       client.query('BEGIN', function (err) {
-        if (err) {
-          done()
-          error(err, res)
-          return
-        }
+        if (err) return rollback(err)
 
         var sql = 'INSERT INTO orders (customer_id) VALUES ($1) RETURNING id'
 
