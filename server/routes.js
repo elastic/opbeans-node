@@ -127,6 +127,8 @@ app.post('/orders', function (req, res) {
         client.query(sql, [req.body.customer_id], function (err, result) {
           if (err) return rollback(err)
 
+          var id = result.rows[0].id
+
           var next = afterAll(function (err) {
             if (err) return rollback(err)
             client.query('COMMIT', function (err) {
@@ -134,8 +136,6 @@ app.post('/orders', function (req, res) {
               res.json({id: id})
             })
           })
-
-          var id = result.rows[0].id
 
           req.body.lines.forEach(function (line) {
             var sql = 'INSERT INTO order_lines (order_id, product_id, amount) ' +
