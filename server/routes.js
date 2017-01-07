@@ -4,16 +4,22 @@ var opbeat = require('opbeat')
 var express = require('express')
 var afterAll = require('after-all-results')
 var db = require('./db')
+var redis = require('./redis')
 
 var app = module.exports = new express.Router()
 
 app.get('/products', function (req, res) {
-  var sql = 'SELECT p.id, p.name, p.stock, t.name AS type_name FROM products p ' +
-    'LEFT JOIN product_types t ON p.type_id=t.id'
+  redis.get('products', function (err, obj) {
+    if (err) opbeat.captureError(err)
+    else if (obj) return res.json(obj)
 
-  db.pool.query(sql, function (err, result) {
-    if (err) return error(err, res)
-    res.json(result.rows)
+    var sql = 'SELECT p.id, p.name, p.stock, t.name AS type_name FROM products p ' +
+      'LEFT JOIN product_types t ON p.type_id=t.id'
+
+    db.pool.query(sql, function (err, result) {
+      if (err) return error(err, res)
+      res.json(result.rows)
+    })
   })
 })
 
@@ -43,9 +49,14 @@ app.get('/products/:id/customers', function (req, res) {
 })
 
 app.get('/types', function (req, res) {
-  db.pool.query('SELECT * FROM product_types', function (err, result) {
-    if (err) return error(err, res)
-    res.json(result.rows)
+  redis.get('types', function (err, obj) {
+    if (err) opbeat.captureError(err)
+    else if (obj) return res.json(obj)
+
+    db.pool.query('SELECT * FROM product_types', function (err, result) {
+      if (err) return error(err, res)
+      res.json(result.rows)
+    })
   })
 })
 
@@ -64,9 +75,14 @@ app.get('/types/:id', function (req, res) {
 })
 
 app.get('/customers', function (req, res) {
-  db.pool.query('SELECT * FROM customers', function (err, result) {
-    if (err) return error(err, res)
-    res.json(result.rows)
+  redis.get('customers', function (err, obj) {
+    if (err) opbeat.captureError(err)
+    else if (obj) return res.json(obj)
+
+    db.pool.query('SELECT * FROM customers', function (err, result) {
+      if (err) return error(err, res)
+      res.json(result.rows)
+    })
   })
 })
 
@@ -79,12 +95,17 @@ app.get('/customers/:id', function (req, res) {
 })
 
 app.get('/orders', function (req, res) {
-  var sql = 'SELECT o.*, c.full_name AS customer_name FROM orders o ' +
-    'LEFT JOIN customers c ON c.id=o.customer_id'
+  redis.get('orders', function (err, obj) {
+    if (err) opbeat.captureError(err)
+    else if (obj) return res.json(obj)
 
-  db.pool.query(sql, function (err, result) {
-    if (err) return error(err, res)
-    res.json(result.rows)
+    var sql = 'SELECT o.*, c.full_name AS customer_name FROM orders o ' +
+      'LEFT JOIN customers c ON c.id=o.customer_id'
+
+    db.pool.query(sql, function (err, result) {
+      if (err) return error(err, res)
+      res.json(result.rows)
+    })
   })
 })
 
@@ -134,7 +155,10 @@ app.post('/orders', function (req, res) {
             client.query('COMMIT', function (err) {
               if (err) return rollback(err)
               done()
-              res.json({id: id})
+              redis.set('newest-order', id, function (err) {
+                if (err) return error(err, res)
+                res.json({id: id})
+              })
             })
           })
 

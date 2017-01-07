@@ -23,6 +23,7 @@ switch (env) {
     break
   case 'production':
     conf.server.url = 'http://www.opbeans.com'
+    conf.redis = process.env.REDIS_URL
     break
   default:
     throw new Error('Unknown environment: ' + env)
