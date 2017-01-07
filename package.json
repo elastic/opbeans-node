@@ -20,9 +20,9 @@
     "db-setup": "psql -d opbeans -f db/setup.sql && psql -d opbeans -f db/products.sql && psql -d opbeans -f db/mock_customers.sql",
     "test": "standard *.js server/**/*.js db/**/*.js",
     "server": "node server.js",
-    "client": "node client/start-client.js",
-    "client-install": "npm install --prefix client/",
+    "client": "npm run start --prefix client/",
     "client-build": "npm run build --prefix client/",
+    "client-install": "npm install --prefix client/",
     "postinstall": "./client/build-client.sh",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "workload": "workload -f .workload.js"
