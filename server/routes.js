@@ -150,6 +150,7 @@ app.post('/orders', function (req, res) {
 
         function rollback (err1) {
           client.query('ROLLBACK', function (err2) {
+            if (err2) opbeat.captureError(err2)
             done(err2)
             error(err1, res)
           })
