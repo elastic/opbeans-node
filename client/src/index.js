@@ -1,8 +1,8 @@
 import initOpbeat from 'opbeat-react';
 import 'opbeat-react/router';
 
-let opbeat_app_id = process.env.REACT_OPBEAT_APP_ID;
-let opbeat_org_id = process.env.OPBEAT_ORGANIZATION_ID;
+let opbeat_app_id = process.env.REACT_APP_OPBEAT_APP_ID;
+let opbeat_org_id = process.env.REACT_APP_OPBEAT_ORG_ID;
 
 if(process.env.NODE_ENV === 'production' && opbeat_app_id && opbeat_org_id) {
     initOpbeat({
