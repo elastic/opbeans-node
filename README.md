@@ -14,8 +14,8 @@ It's hosted on [opbeans.com](http://opbeans.com).
 This application uses the following technologies:
 
 - [Node.js](https://nodejs.org)
-- [PostgreSQL](http://postgresql.org)
 - [Express](http://expressjs.com)
+- [PostgreSQL](https://www.postgresql.org)
 - [React](https://facebook.github.io/react/)
 - [React Router](https://github.com/ReactTraining/react-router)
 - [Redux](https://github.com/reactjs/redux)
