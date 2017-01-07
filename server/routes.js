@@ -133,6 +133,7 @@ app.post('/orders', function (req, res) {
             if (err) return rollback(err)
             client.query('COMMIT', function (err) {
               if (err) return rollback(err)
+              done()
               res.json({id: id})
             })
           })
