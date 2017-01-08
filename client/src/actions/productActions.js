@@ -39,3 +39,23 @@ export function loadProductsRequest() {
 export function loadProductsSuccess(products) {
   return {type: types.LOAD_PRODUCTS_SUCCESS, products};
 }
+
+
+export function loadProductCustomers(id) {
+    return function(dispatch) {
+        dispatch(loadProductCustomersRequest());
+        return productApi.getProductCustomers(id).then(productCustomers => {
+            dispatch(loadProductCustomersSuccess(productCustomers));
+        }).catch(error => {
+            throw (error);
+        });
+    };
+}
+
+export function loadProductCustomersRequest() {
+  return {type: types.LOAD_PRODUCT_CUSTOMERS_REQUEST};
+}
+
+export function loadProductCustomersSuccess(productCustomers) {
+  return {type: types.LOAD_PRODUCT_CUSTOMERS_SUCCESS, productCustomers};
+}

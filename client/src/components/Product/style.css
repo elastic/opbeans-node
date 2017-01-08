@@ -7,3 +7,10 @@
     font-size: 1.3em;
     vertical-align: middle;
 }
+
+.ProductCustomersList table.ui {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-left: 0;
+    border-right: 0;
+}

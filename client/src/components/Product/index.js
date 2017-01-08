@@ -14,15 +14,17 @@ class Product extends Component {
         this.props.actions.loadProduct(this.props.params.id);
     }
 
+    getCustomers() {
+        this.props.actions.loadProductCustomers(this.props.params.id);
+    }
+
     render() {
         const { className } = this.props;
         return (
             <div className={classnames('Product', className)}>
                 <div className="ui vertical stripe segment">
                     <div className="ui container">
-
-                        <ProductDetail product={this.props.product} />
-
+                        <ProductDetail product={this.props.product} productCustomers={this.props.productCustomers} getCustomers={ this.getCustomers.bind(this) } />
                     </div>
                 </div>
             </div>
@@ -36,7 +38,8 @@ Product.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        product: state.product
+        product: state.product,
+        productCustomers: state.productCustomers
     };
 }
 

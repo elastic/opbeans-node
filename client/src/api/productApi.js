@@ -13,6 +13,13 @@ class ProductApi {
             return error;
         });
     }
+    static getProductCustomers(id) {
+        return fetch('/api/products/' + id + '/customers').then(response => {
+            return response.json();
+        }).catch(error => {
+            return error;
+        });
+    }
 }
 
 export default ProductApi;
