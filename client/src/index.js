@@ -8,6 +8,9 @@ if(process.env.NODE_ENV === 'production' && opbeat_app_id && opbeat_org_id) {
     initOpbeat({
         appId: opbeat_app_id,
         orgId: opbeat_org_id,
+        performance: {
+            'initial-page-load': true
+        },
     });
 }
 
