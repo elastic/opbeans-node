@@ -1,0 +1,12 @@
+.ui.grid .column {
+    height: 100%;
+}
+
+.ui.segment.title {
+    background-color: #f9fafb;
+    font-weight: bold;
+}
+
+.ui.horizontal.segments > .segment {
+    width: 100%;
+}

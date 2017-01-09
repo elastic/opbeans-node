@@ -2,10 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import classnames from 'classnames';
-import { Link } from 'react-router';
 
 import DashboardProductsList from '../DashboardProductsList';
+import DashboardStatsList from '../DashboardStatsList';
 import * as productActions from '../../actions/productActions';
+import * as statsActions from '../../actions/statsActions';
 
 import './style.css';
 
@@ -13,6 +14,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
       this.props.actions.loadProductsTop();
+      this.props.actions.loadStats();
   }
 
   render() {
@@ -33,6 +35,9 @@ class Dashboard extends Component {
                       <div className="eight wide column">
                           <DashboardProductsList productsTop={this.props.productsTop} />
                       </div>
+                      <div className="eight wide column">
+                          <DashboardStatsList stats={this.props.stats}/>
+                      </div>
                   </div>
               </div>
 
@@ -43,7 +48,8 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-    productsTop: PropTypes.object.isRequired
+    productsTop: PropTypes.object.isRequired,
+    stats: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
@@ -53,12 +59,13 @@ function mapStateToProps(state, ownProps) {
     });
 
     return {
-        productsTop: state.productsTop
+        productsTop: state.productsTop,
+        stats: state.stats
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {actions: bindActionCreators(productActions, dispatch)}
+    return {actions: bindActionCreators(Object.assign({}, productActions, statsActions), dispatch)}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

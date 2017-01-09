@@ -8,6 +8,7 @@ import order from './orderReducer';
 import orders from './ordersReducer';
 import customer from './customerReducer';
 import customers from './customersReducer';
+import stats from './statsReducer';
 
 const rootReducer = combineReducers({
   // short hand property names
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   orders,
   customer,
   customers,
+  stats,
 })
 
 export default rootReducer;

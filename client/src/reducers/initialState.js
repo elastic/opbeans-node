@@ -7,4 +7,5 @@ export default {
   orders: { loading: true, items: [] },
   customer: { loading: true, customer: {} },
   customers: { loading: true, items: [] },
+  stats: { loading: true, data: { numbers: {} } },
 }
