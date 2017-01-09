@@ -41,6 +41,26 @@ export function loadProductsSuccess(products) {
 }
 
 
+export function loadProductsTop() {
+    return function(dispatch) {
+        dispatch(loadProductsTopRequest());
+        return productApi.getTopProducts().then(productsTop => {
+            dispatch(loadProductsTopSuccess(productsTop));
+        }).catch(error => {
+            throw (error);
+        });
+    };
+}
+
+export function loadProductsTopRequest() {
+  return {type: types.LOAD_PRODUCTS_TOP_REQUEST};
+}
+
+export function loadProductsTopSuccess(productsTop) {
+  return {type: types.LOAD_PRODUCTS_TOP_SUCCESS, productsTop};
+}
+
+
 export function loadProductCustomers(id) {
     return function(dispatch) {
         dispatch(loadProductCustomersRequest());
