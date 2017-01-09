@@ -1,9 +1,5 @@
 .ui.vertical.stripe {
-    padding: 4em 0em;
-}
-
-.ui.footer.segment {
-    padding: 4em 0em;
+    padding: 2.5em 0em 4em 0;
 }
 
 .AppMain {
@@ -12,6 +8,20 @@
   flex-direction: column;
 }
 
+.AppHeader .menu.right .item:last-of-type:after{
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 1px;
+    background: rgba(34,36,38,.1);
+}
+
 .App > .AppFooter {
   flex: 1;
+}
+
+.ui.footer.segment {
+    padding: 2.5em 0em;
 }
