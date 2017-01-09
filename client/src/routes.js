@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route } from 'react-router';
+import { Router, Route, IndexRedirect } from 'react-router';
 
 import App from './components/App';
 
@@ -16,8 +16,9 @@ import NotFound from './components/NotFound';
 
 const Routes = (props) => (
   <Router {...props}>
-    <Route component={App}>
-        <Route path="/" component={Dashboard} />
+    <Route path="/" component={App}>
+        <IndexRedirect to="/dashboard" />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/products" component={Products} />
         <Route path="/products/:id" component={Product} />
         <Route path="/orders" component={Orders} />
