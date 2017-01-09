@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import classnames from 'classnames';
+import { Link } from 'react-router';
 
 import CustomersList from '../CustomersList';
 
@@ -33,10 +34,10 @@ const ProductDetail = ({product, productCustomers, getCustomers}) => {
                       <h3 className="ui sub header">
                           Type
                       </h3>
-                      <a className="ui blue basic label">
+                      <Link className='ui blue basic label' to={`/products/${product.product.id}`}>
                           <i className="icon tag"></i>
                           {product.product.type_name}
-                      </a>
+                      </Link>
                   </div>
               </div>
 
