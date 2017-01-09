@@ -9,6 +9,52 @@ var accounting = require('./accounting')
 
 var app = module.exports = new express.Router()
 
+app.get('/stats', function (req, res) {
+  var next = afterAll(function (err, results) {
+    if (err) return error(err, res)
+    res.json({
+      products: results[0].rows[0].count,
+      customers: results[1].rows[0].count,
+      orders: results[2].rows[0].count,
+      numbers: results[3]
+    })
+  })
+
+  db.pool.query('SELECT COUNT(*) FROM products', next())
+  db.pool.query('SELECT COUNT(*) FROM customers', next())
+  db.pool.query('SELECT COUNT(*) FROM orders', next())
+
+  var done = next()
+  var sql = 'SELECT product_id, COUNT(product_id) AS amount ' +
+    'FROM order_lines ' +
+    'GROUP BY product_id'
+
+  db.pool.query(sql, function (err, result) {
+    if (err) return done(err)
+
+    var orderedProducts = result.rows
+    var next = afterAll(function (err, results) {
+      if (err) return done(err)
+      var result = {revenue: 0, cost: 0, profit: 0}
+      results.forEach(function (r, index) {
+        var product = r.rows[0]
+        var amount = orderedProducts[index].amount
+        var cost = product.cost * amount
+        var revenue = product.selling_price * amount
+        result.revenue += revenue
+        result.cost += cost
+        result.profit += revenue - cost
+      })
+      done(null, result)
+    })
+
+    orderedProducts.forEach(function (row) {
+      var sql = 'SELECT cost, selling_price FROM products WHERE id=$1'
+      db.pool.query(sql, [row.product_id], next())
+    })
+  })
+})
+
 app.get('/products', function (req, res) {
   redis.get('products', function (err, obj) {
     if (err) opbeat.captureError(err)
