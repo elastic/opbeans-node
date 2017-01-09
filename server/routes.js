@@ -24,6 +24,32 @@ app.get('/products', function (req, res) {
   })
 })
 
+app.get('/products/top', function (req, res) {
+  var sql = 'SELECT product_id, COUNT(product_id) AS amount ' +
+    'FROM order_lines ' +
+    'GROUP BY product_id ' +
+    'LIMIT 3'
+
+  db.pool.query(sql, function (err, result) {
+    if (err) return error(err, res)
+
+    var next = afterAll(function (err, results) {
+      if (err) return error(err, res)
+      var top = result.rows.map(function (row, index) {
+        var product = results[index].rows[0]
+        product.sold = row.amount
+        return product
+      })
+      res.json(top)
+    })
+
+    result.rows.forEach(function (row) {
+      var sql = 'SELECT id, name, stock FROM products WHERE id=$1'
+      db.pool.query(sql, [row.product_id], next())
+    })
+  })
+})
+
 app.get('/products/:id', function (req, res) {
   var sql = 'SELECT p.*, t.name AS type_name FROM products p ' +
     'LEFT JOIN product_types t ON p.type_id=t.id ' +
