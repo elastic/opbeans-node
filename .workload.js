@@ -23,6 +23,7 @@ module.exports = {
     {weight: 10, url: url},
     {weight: 10, url: url + 'favicon.ico'},
     {weight: 1, url: url, method: 'OPTIONS'},
+    {weight: 8, url: api + 'stats'},
     {weight: 7, url: api + 'products'},
     {weight: 8, url: api + 'products/top'},
     {weight: 6, url: api + 'products/{1..6}'},
