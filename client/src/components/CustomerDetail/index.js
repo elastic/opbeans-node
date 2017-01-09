@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import { Link } from 'react-router';
 
 const CustomerDetail = ({customer}) => {
   return (
@@ -30,9 +31,9 @@ const CustomerDetail = ({customer}) => {
                   <h3 className="ui sub header">
                       Email
                   </h3>
-                  <div className="ui">
+                  <Link className='ui' to={`mailto:${customer.customer.email}`}>
                       {customer.customer.email}
-                  </div>
+                  </Link>
               </div>
           </div>
           <div className="ui horizontal segments">

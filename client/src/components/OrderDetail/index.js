@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import { Link } from 'react-router';
 
 const OrderDetail = ({order}) => {
   return (
@@ -22,9 +23,9 @@ const OrderDetail = ({order}) => {
                   <h3 className="ui sub header">
                       Customer ID
                   </h3>
-                  <div className="ui">
+                  <Link className='ui' to={`/customers/${order.order.customer_id}`}>
                       {order.order.customer_id}
-                  </div>
+                  </Link>
               </div>
               <div className="ui segment">
                   <h3 className="ui sub header">
