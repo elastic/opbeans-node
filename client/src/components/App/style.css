@@ -8,11 +8,16 @@
   flex-direction: column;
 }
 
+.AppHeader .ui.menu {
+    border-radius: 0;
+}
+
+.AppHeader > .menu .item.active:before,
 .AppHeader .menu.right .item:last-of-type:after{
     position: absolute;
     content: '';
     top: 0;
-    right: 0;
+    left: 0;
     height: 100%;
     width: 1px;
     background: rgba(34,36,38,.1);
@@ -20,6 +25,10 @@
 
 .App > .AppFooter {
   flex: 1;
+}
+
+.AppFooter span {
+    color: rgba(225,225,225,.3);
 }
 
 .ui.footer.segment {

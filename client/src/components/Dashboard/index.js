@@ -27,8 +27,8 @@ class Dashboard extends Component {
               <div className="ui middle aligned stackable grid container">
                   <div className="row">
                       <div className="eight wide column">
-                          <h1 className="ui header">OpBeans Admin Dashboard</h1>
-                          <p>The Sales & Inventory Management System for OpBeans Coffee Distribution Inc.</p>
+                          <h1 className="ui header">OpBeans Dashboard</h1>
+                          <p>The Sales & Inventory Management System for <a href="/">OpBeans Coffee Distribution Inc.</a></p>
                       </div>
                   </div>
                   <div className="row">

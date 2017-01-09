@@ -8,7 +8,7 @@ class AppHeader extends Component {
     const { className, ...props } = this.props;
     return (
         <div className={classnames('AppHeader', className)} {...props}>
-            <div className="ui large menu">
+            <div className="ui large blue inverted menu">
                 <div className="ui container">
                     <Link className="item" activeClassName="active" to="/">
                         <i className="dashboard icon"></i>

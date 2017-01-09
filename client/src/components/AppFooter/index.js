@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import { Link } from 'react-router';
 
 class AppFooter extends Component {
 
@@ -12,14 +13,17 @@ class AppFooter extends Component {
                   <div className="ui stackable inverted divided equal height stackable grid">
                       <div className="three wide column">
                           <div className="ui inverted link list">
-                              <a href="#" className="item disabled">Users</a>
-                              <a href="#" className="item disabled">Settings</a>
+                              <Link className="item" activeClassName="active" to="/dashboard">
+                                  Dashboard
+                              </Link>
                               <a href="#" className="item disabled">Log out</a>
                           </div>
                       </div>
                       <div className="seven wide column">
-                          <h4 className="ui inverted header">Note</h4>
-                          <p>This is just a demo application made by <a href="https://opbeat.com">Opbeat</a></p>
+                          <p>
+                              2017 © Opbeans Coffee Management System<br/>
+                              <span>This is a demo application made by <a href="https://opbeat.com">Opbeat</a></span>
+                          </p>
                       </div>
                   </div>
               </div>
