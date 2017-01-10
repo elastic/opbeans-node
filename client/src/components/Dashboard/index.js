@@ -28,8 +28,10 @@ class Dashboard extends Component {
                   <div className="row">
                       <div className="sixteen wide column">
                           <h1 className="ui header">OpBeans Dashboard</h1>
-                          <div className="ui hidden divider"></div>
-                          <p>The Sales & Inventory Management System for <a href="/">OpBeans Coffee Distribution Inc.</a><br/>Manage products, orders and customers and keep an eye on sales and stock levels.</p>
+                          <p>
+                            The Sales & Inventory Management System for <a href="/">OpBeans Coffee Distribution Inc.</a><br/>
+                            Manage products, orders and customers and keep an eye on sales and stock levels.
+                          </p>
                       </div>
                   </div>
                   <div className="ui divider"></div>
