@@ -10,7 +10,7 @@ class AppHeader extends Component {
         <div className={classnames('AppHeader', className)} {...props}>
             <div className="ui large blue inverted menu">
                 <div className="ui container">
-                    <Link className="item" activeClassName="active" to="/">
+                    <Link className="item" activeClassName="active" to="/dashboard">
                         <i className="dashboard icon"></i>
                         Dashboard
                     </Link>
