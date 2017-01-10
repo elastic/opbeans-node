@@ -5,3 +5,17 @@
 .ui.segment.table-wrapper {
     padding: 0;
 }
+
+.Products .ui.table th.Photo-cell {
+    width: 58px;
+    text-align: center;
+}
+
+.Products th.Photo-cell i {
+    margin-left: 3px;
+}
+
+.Products td.Photo-cell img {
+    height: 45px;
+    margin: -2px -3px -7px -3px;
+}

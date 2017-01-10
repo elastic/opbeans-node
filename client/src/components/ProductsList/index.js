@@ -18,6 +18,9 @@ const ProductsList = ({products}) => {
           <table className="ui celled selectable table">
               <thead>
                   <tr>
+                      <th className="Photo-cell">
+                          <i className="photo icon"></i>
+                      </th>
                       <th>Product name</th>
                       <th className="three wide">Type</th>
                       <th className="three wide">Amount</th>
@@ -28,6 +31,9 @@ const ProductsList = ({products}) => {
 
                   {products.items.map(product =>
                       <tr key={product.id}>
+                          <td className="Photo-cell">
+                              <img src={`/images/products/${product.sku}.jpg`} title={product.name} />
+                          </td>
                           <td>
                               <Link to={`/products/${product.id}`}>{product.name}</Link>
                           </td>
@@ -45,6 +51,7 @@ const ProductsList = ({products}) => {
               </tbody>
               <tfoot>
                   <tr>
+                      <th></th>
                       <th>{ total_products } products</th>
                       <th></th>
                       <th></th>

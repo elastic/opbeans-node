@@ -60,7 +60,7 @@ app.get('/products', function (req, res) {
     if (err) opbeat.captureError(err)
     else if (obj) return res.json(obj)
 
-    var sql = 'SELECT p.id, p.name, p.stock, t.name AS type_name FROM products p ' +
+    var sql = 'SELECT p.id, p.sku, p.name, p.stock, t.name AS type_name FROM products p ' +
       'LEFT JOIN product_types t ON p.type_id=t.id'
 
     db.pool.query(sql, function (err, result) {
