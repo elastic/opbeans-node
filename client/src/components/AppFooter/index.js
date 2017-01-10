@@ -4,6 +4,11 @@ import { Link } from 'react-router';
 
 class AppFooter extends Component {
 
+    getSettingsWindow (e) {
+        e.preventDefault();
+        this.loadSettings();
+    }
+
   render() {
     const { className, ...props } = this.props;
     return (
@@ -16,6 +21,7 @@ class AppFooter extends Component {
                               <Link className="item" activeClassName="active" to="/dashboard">
                                   Dashboard
                               </Link>
+                              <a href="#" onClick={ this.getSettingsWindow } className="item">Settings</a>
                               <a href="#" className="item disabled">Log out</a>
                           </div>
                       </div>
