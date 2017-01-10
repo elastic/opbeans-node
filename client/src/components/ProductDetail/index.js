@@ -107,6 +107,7 @@ function ProductCustomers({productCustomers, getCustomers}) {
         )
     }
 }
+ProductCustomers.displayName = 'ProductCustomers';
 
 function removeDuplicates(myArr, prop) {
     return myArr.filter((obj, pos, arr) => {
