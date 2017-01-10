@@ -26,7 +26,7 @@ const DashboardProductsList = ({productsTop}) => {
                   {productsTop.items.map(product =>
                       <tr key={product.id}>
                           <td className="Photo-cell">
-                              <img src={`/images/products/${product.sku}.jpg`} title={product.name} />
+                              <img src={`/images/products/${product.sku}.jpg`} alt={`${product.name}`} title={`Photo of ${product.name}`} />
                           </td>
                           <td>
                               <Link to={`/products/${product.id}`}>{product.name}</Link>

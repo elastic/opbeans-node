@@ -88,7 +88,7 @@ const ProductDetail = ({product, productCustomers, getCustomers}) => {
                       <div className="ui segments">
                           <div className="ui secondary segment">Product photo</div>
                           <div className="ui segment">
-                              <img src={`/images/products/${product.product.sku}.jpg`} title={product.product.name} />
+                              <img src={`/images/products/${product.product.sku}.jpg`} alt={`${product.product.name}`} title={`Photo of ${product.product.name}`} />
                           </div>
                       </div>
                   </div>
