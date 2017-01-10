@@ -26,11 +26,13 @@ class Dashboard extends Component {
           <div className="ui vertical stripe segment">
               <div className="ui middle aligned stackable grid container">
                   <div className="row">
-                      <div className="eight wide column">
+                      <div className="sixteen wide column">
                           <h1 className="ui header">OpBeans Dashboard</h1>
-                          <p>The Sales & Inventory Management System for <a href="/">OpBeans Coffee Distribution Inc.</a></p>
+                          <div className="ui hidden divider"></div>
+                          <p>The Sales & Inventory Management System for <a href="/">OpBeans Coffee Distribution Inc.</a><br/>Manage products, orders and customers and keep an eye on sales and stock levels.</p>
                       </div>
                   </div>
+                  <div className="ui divider"></div>
                   <div className="row">
                       <div className="eight wide column">
                           <DashboardProductsList productsTop={this.props.productsTop} />
