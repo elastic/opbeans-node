@@ -14,6 +14,10 @@ class Product extends Component {
         this.props.actions.loadProduct(this.props.params.id);
     }
 
+    componentWillUnmount() {
+        this.props.actions.resetProductCustomers();
+    }
+
     getCustomers() {
         this.props.actions.loadProductCustomers(this.props.params.id);
     }
