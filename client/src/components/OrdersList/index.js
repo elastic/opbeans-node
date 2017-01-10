@@ -1,6 +1,8 @@
 import React, {PropTypes} from 'react';
 import { Link } from 'react-router';
 
+import moment from 'moment';
+
 const OrdersList = ({orders}) => {
 
   let total_orders = orders.items.length;
@@ -28,7 +30,7 @@ const OrdersList = ({orders}) => {
                               <Link to={`/orders/${order.id}`}>{order.customer_name}</Link>
                           </td>
                           <td>#{order.id}</td>
-                          <td>{order.created_at}</td>
+                          <td>{moment(order.created_at).format('LLL')}</td>
                       </tr>
                   )}
 
