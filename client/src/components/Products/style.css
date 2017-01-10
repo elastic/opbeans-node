@@ -8,21 +8,22 @@
 
 .Dashboard .ui.table th.Photo-cell,
 .Products .ui.table th.Photo-cell {
-    width: 58px;
+    width: 55px;
     text-align: center;
 }
 
+.Dashboard th.Photo-cell i,
 .Products th.Photo-cell i {
-    margin-left: 3px;
+    margin-left: 4px;
 }
 
 .Dashboard td.Photo-cell img,
 .Products td.Photo-cell img {
-    height: 45px;
-    margin: -2px -3px -7px -3px;
+    width: 100%;
+    margin: -4px 0 -8px 0;
 }
 
 .Product img {
-    height: 355px;
-    margin: 8px 5px;
+    width: 100%;
+    margin: 3px 0px 3px 0px;
 }

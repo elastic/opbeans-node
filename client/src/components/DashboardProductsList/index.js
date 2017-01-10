@@ -17,7 +17,7 @@ const DashboardProductsList = ({productsTop}) => {
                       <th className="Photo-cell">
                           <i className="photo icon"></i>
                       </th>
-                      <th>Product name</th>
+                      <th>Name</th>
                       <th className="two wide">Sold</th>
                       <th className="three wide">Status</th>
                   </tr>

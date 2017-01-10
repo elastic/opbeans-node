@@ -21,10 +21,10 @@ const ProductsList = ({products}) => {
                       <th className="Photo-cell">
                           <i className="photo icon"></i>
                       </th>
-                      <th>Product name</th>
+                      <th>Name</th>
                       <th className="three wide">Type</th>
-                      <th className="three wide">Amount</th>
-                      <th className="three wide">Status</th>
+                      <th className="two wide">Stock</th>
+                      <th className="two wide">Status</th>
                   </tr>
               </thead>
               <tbody>
