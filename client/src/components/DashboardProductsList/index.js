@@ -14,20 +14,24 @@ const DashboardProductsList = ({productsTop}) => {
           <table className="ui celled selectable table">
               <thead>
                   <tr>
+                      <th className="Photo-cell">
+                          <i className="photo icon"></i>
+                      </th>
                       <th>Product name</th>
                       <th className="two wide">Sold</th>
-                      <th className="two wide">Stock</th>
                       <th className="three wide">Status</th>
                   </tr>
               </thead>
               <tbody>
                   {productsTop.items.map(product =>
                       <tr key={product.id}>
+                          <td className="Photo-cell">
+                              <img src={`/images/products/${product.sku}.jpg`} title={product.name} />
+                          </td>
                           <td>
                               <Link to={`/products/${product.id}`}>{product.name}</Link>
                           </td>
                           <td>{product.sold}</td>
-                          <td>{product.stock}</td>
 
                           { product.stock > 0 ? (
                             <td className="positive"><i className="icon checkmark"></i> In stock</td>

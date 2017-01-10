@@ -90,7 +90,7 @@ app.get('/products/top', function (req, res) {
     })
 
     result.rows.forEach(function (row) {
-      var sql = 'SELECT id, name, stock FROM products WHERE id=$1'
+      var sql = 'SELECT id, sku, name, stock FROM products WHERE id=$1'
       db.pool.query(sql, [row.product_id], next())
     })
   })

@@ -6,6 +6,7 @@
     padding: 0;
 }
 
+.Dashboard .ui.table th.Photo-cell,
 .Products .ui.table th.Photo-cell {
     width: 58px;
     text-align: center;
@@ -15,6 +16,7 @@
     margin-left: 3px;
 }
 
+.Dashboard td.Photo-cell img,
 .Products td.Photo-cell img {
     height: 45px;
     margin: -2px -3px -7px -3px;
