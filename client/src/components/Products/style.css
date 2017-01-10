@@ -19,3 +19,8 @@
     height: 45px;
     margin: -2px -3px -7px -3px;
 }
+
+.Product img {
+    height: 355px;
+    margin: 8px 5px;
+}
