@@ -22,6 +22,13 @@ This application uses the following technologies:
 - [Redux](https://github.com/reactjs/redux)
 - [Opbeat](https://opbeat.com)
 
+## Deployment
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+This app can be deployed directly to Heroku by pressing the button above.
+You will need to enter the required environment variables to complete the deployment. See below for configuration options.
+
 ## Configuration
 
 Setup the following environment variables:
