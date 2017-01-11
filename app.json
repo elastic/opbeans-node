@@ -1,0 +1,45 @@
+{
+    "name": "Opbeans",
+    "description": "Opbeans inventory management system (Opbeat demo app)",
+    "logo": "https://pbs.twimg.com/profile_images/700322766168305664/DpqY0ynV.png",
+    "repository": "https://github.com/opbeat/opbeans",
+    "keywords": ["opbeat", "opbeans", "performance monitoring", "error logging", "release tracking"],
+    "success_url": "/",
+    "env": {
+        "OPBEAT_ORGANIZATION_ID": {
+            "description": "Opbeat Organization Id for the server app"
+        },
+        "OPBEAT_APP_ID": {
+            "description": "Opbeat App Id for the server app"
+        },
+        "OPBEAT_SECRET_TOKEN": {
+            "description": "Opbeat Secret Token for the server app"
+        },
+        "REACT_APP_OPBEAT_APP_ID": {
+            "description": "Opbeat App Id for the client app"
+        },
+        "REACT_APP_OPBEAT_ORG_ID": {
+            "description": "Opbeat Organization Id for the client app"
+        },
+        "PGHOST": {
+            "description": "PostgreSQL server host",
+            "required": true
+        },
+        "PGPORT": {
+            "description": "PostgreSQL server port",
+            "required": true
+        },
+        "PGUSER": {
+            "description": "PostgreSQL database username",
+            "required": true
+        },
+        "PGPASSWORD": {
+            "description": "PostgreSQL database password",
+            "required": true
+        },
+        "PGDATABASE": {
+            "description": "PostgreSQL database name",
+            "required": true
+        }
+    }
+}
