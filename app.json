@@ -40,6 +40,9 @@
         "PGDATABASE": {
             "description": "PostgreSQL database name",
             "required": true
+        },
+        "REDIS_URL": {
+            "description": "Redis URL"
         }
     }
 }
