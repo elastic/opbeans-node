@@ -1,17 +1,16 @@
 import React, {PropTypes} from 'react';
 import { Link } from 'react-router';
 
+import { TableLoader, TableFiller } from '../TableLoader';
+
 const CustomersList = ({customers}) => {
 
   let total_customers = customers.items.length;
 
   return (
       <div className="ui basic segment table-wrapper">
-          { customers.loading && (
-              <div className="ui active inverted dimmer">
-                  <div className="ui text loader">Loading</div>
-              </div>
-          )}
+          <TableLoader data={customers} />
+
           <table className="ui celled selectable table">
               <thead>
                   <tr>
@@ -22,6 +21,8 @@ const CustomersList = ({customers}) => {
                   </tr>
               </thead>
               <tbody>
+
+                  <TableFiller data={customers} />
 
                   {customers.items.map(customer =>
                       <tr key={customer.id}>

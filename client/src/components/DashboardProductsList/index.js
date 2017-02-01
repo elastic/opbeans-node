@@ -1,16 +1,16 @@
 import React, {PropTypes} from 'react';
 import { Link } from 'react-router';
 
+import { TableLoader, TableFiller } from '../TableLoader';
+
 const DashboardProductsList = ({productsTop}) => {
 
   return (
       <div className="ui basic segment table-wrapper">
           <h2 className="ui header">Top selling products</h2>
-          { productsTop.loading && (
-              <div className="ui active inverted dimmer">
-                  <div className="ui text loader">Loading</div>
-              </div>
-          )}
+
+          <TableLoader data={productsTop} />
+
           <table className="ui celled selectable table">
               <thead>
                   <tr>
@@ -23,6 +23,9 @@ const DashboardProductsList = ({productsTop}) => {
                   </tr>
               </thead>
               <tbody>
+                  
+                  <TableFiller data={productsTop} />
+
                   {productsTop.items.map(product =>
                       <tr key={product.id}>
                           <td className="Photo-cell">

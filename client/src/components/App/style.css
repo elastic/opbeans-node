@@ -22,6 +22,16 @@
     background: rgba(34,36,38,.1);
 }
 
+.AppHeader > .menu .item.active:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 1px;
+    background: rgba(34,36,38,.1);
+}
+
 .AppHeader .menu.right .item:last-of-type:after{
     position: absolute;
     content: '';
@@ -42,4 +52,18 @@
 
 .ui.footer.segment {
     padding: 2.5em 0em;
+}
+
+.table-loader-wrap{
+    position: absolute;
+    margin-top: 120px;
+    width: 100%;
+}
+
+.table-loader {
+    position: relative;
+}
+
+tr.table-loader-filler {
+    height: 150px;
 }

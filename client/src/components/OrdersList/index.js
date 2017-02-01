@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import { Link } from 'react-router';
 
+import { TableLoader, TableFiller } from '../TableLoader';
 import moment from 'moment';
 
 const OrdersList = ({orders}) => {
@@ -9,11 +10,9 @@ const OrdersList = ({orders}) => {
 
   return (
       <div className="ui basic segment table-wrapper">
-          { orders.loading && (
-              <div className="ui active inverted dimmer">
-                  <div className="ui text loader">Loading</div>
-              </div>
-          )}
+
+          <TableLoader data={orders} />
+
           <table className="ui celled selectable table">
               <thead>
                   <tr>
@@ -23,6 +22,8 @@ const OrdersList = ({orders}) => {
                   </tr>
               </thead>
               <tbody>
+
+                  <TableFiller data={orders} />
 
                   {orders.items.map(order =>
                       <tr key={order.id}>
