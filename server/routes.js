@@ -113,7 +113,8 @@ app.get('/products/:id/customers', function (req, res) {
     'LEFT JOIN orders o ON c.id=o.customer_id ' +
     'LEFT JOIN order_lines l ON o.id=l.order_id ' +
     'LEFT JOIN products p ON l.product_id=p.id ' +
-    'WHERE p.id=$1'
+    'WHERE p.id=$1 ' +
+    'LIMIT 1000'
 
   db.pool.query(sql, [req.params.id], function (err, result) {
     if (err) return error(err, res)
@@ -152,7 +153,7 @@ app.get('/customers', function (req, res) {
     if (err) opbeat.captureError(err)
     else if (obj) return res.json(obj)
 
-    db.pool.query('SELECT * FROM customers', function (err, result) {
+    db.pool.query('SELECT * FROM customers LIMIT 1000', function (err, result) {
       if (err) return error(err, res)
       res.json(result.rows)
     })
@@ -173,7 +174,8 @@ app.get('/orders', function (req, res) {
     else if (obj) return res.json(obj)
 
     var sql = 'SELECT o.*, c.full_name AS customer_name FROM orders o ' +
-      'LEFT JOIN customers c ON c.id=o.customer_id'
+      'LEFT JOIN customers c ON c.id=o.customer_id ' +
+      'LIMIT 1000'
 
     db.pool.query(sql, function (err, result) {
       if (err) return error(err, res)
