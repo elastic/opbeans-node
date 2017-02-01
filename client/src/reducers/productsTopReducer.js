@@ -7,6 +7,8 @@ export default function productsTopReducer(state = initialState.productsTop, act
         return { ...state, loading: true }
     case types.LOAD_PRODUCTS_TOP_SUCCESS:
       return { loading: false, items: action.productsTop }
+    case types.UNLOAD_PRODUCTS_TOP:
+      return { ...state, items: [] }
     default:
       return state;
   }

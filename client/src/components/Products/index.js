@@ -14,6 +14,10 @@ class Products extends Component {
         this.props.actions.loadProducts();
     }
 
+    componentWillUnmount() {
+        this.props.actions.unloadProducts();
+    }
+
     render() {
         const { className } = this.props;
         return (

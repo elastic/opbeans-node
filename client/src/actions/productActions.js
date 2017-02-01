@@ -32,6 +32,10 @@ export function loadProducts() {
     };
 }
 
+export function unloadProducts() {
+  return {type: types.UNLOAD_PRODUCTS};
+}
+
 export function loadProductsRequest() {
   return {type: types.LOAD_PRODUCTS_REQUEST};
 }
@@ -58,6 +62,10 @@ export function loadProductsTopRequest() {
 
 export function loadProductsTopSuccess(productsTop) {
   return {type: types.LOAD_PRODUCTS_TOP_SUCCESS, productsTop};
+}
+
+export function unloadProductsTop() {
+  return {type: types.UNLOAD_PRODUCTS_TOP};
 }
 
 

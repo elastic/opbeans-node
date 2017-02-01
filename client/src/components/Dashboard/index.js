@@ -17,6 +17,10 @@ class Dashboard extends Component {
       this.props.actions.loadStats();
   }
 
+  componentWillUnmount() {
+        this.props.actions.unloadProductsTop();
+    }
+
   render() {
     const { className } = this.props;
 
