@@ -7,6 +7,8 @@ export default function ordersReducer(state = initialState.orders, action) {
         return { ...state, loading: true }
     case types.LOAD_ORDERS_SUCCESS:
       return { loading: false, items: action.orders }
+    case types.UNLOAD_ORDERS:
+        return { ...state, items: [] }
     default:
       return state;
   }

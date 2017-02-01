@@ -80,6 +80,6 @@ export function loadProductCustomersSuccess(productCustomers) {
   return {type: types.LOAD_PRODUCT_CUSTOMERS_SUCCESS, productCustomers};
 }
 
-export function resetProductCustomers() {
-  return {type: types.RESET_PRODUCT_CUSTOMERS};
+export function unloadProductCustomers() {
+  return {type: types.UNLOAD_PRODUCT_CUSTOMERS};
 }

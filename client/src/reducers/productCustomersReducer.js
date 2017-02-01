@@ -3,7 +3,7 @@ import initialState from './initialState';
 
 export default function productCustomersReducer(state = initialState.productCustomers, action) {
   switch(action.type) {
-    case types.RESET_PRODUCT_CUSTOMERS:
+    case types.UNLOAD_PRODUCT_CUSTOMERS:
         return { ...initialState.productCustomers }
     case types.LOAD_PRODUCT_CUSTOMERS_REQUEST:
         return { ...state, loading: true }

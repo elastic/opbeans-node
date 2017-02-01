@@ -39,3 +39,7 @@ export function loadOrdersRequest() {
 export function loadOrdersSuccess(orders) {
   return {type: types.LOAD_ORDERS_SUCCESS, orders};
 }
+
+export function unloadOrders() {
+  return {type: types.UNLOAD_ORDERS};
+}

@@ -15,7 +15,7 @@ class Product extends Component {
     }
 
     componentWillUnmount() {
-        this.props.actions.resetProductCustomers();
+        this.props.actions.unloadProductCustomers();
     }
 
     getCustomers() {

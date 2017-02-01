@@ -14,6 +14,10 @@ class Orders extends Component {
         this.props.actions.loadOrders();
     }
 
+    componentWillUnmount() {
+        this.props.actions.unloadOrders();
+    }
+
     render() {
         const { className } = this.props;
         return (

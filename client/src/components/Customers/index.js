@@ -14,6 +14,10 @@ class Customers extends Component {
         this.props.actions.loadCustomers();
     }
 
+    componentWillUnmount() {
+        this.props.actions.unloadCustomers();
+    }
+
     render() {
         const { className } = this.props;
         return (

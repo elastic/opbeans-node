@@ -39,3 +39,7 @@ export function loadCustomersRequest() {
 export function loadCustomersSuccess(customers) {
   return {type: types.LOAD_CUSTOMERS_SUCCESS, customers};
 }
+
+export function unloadCustomers() {
+  return {type: types.UNLOAD_CUSTOMERS};
+}

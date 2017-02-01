@@ -7,6 +7,8 @@ export default function customersReducer(state = initialState.customers, action)
         return { ...state, loading: true }
     case types.LOAD_CUSTOMERS_SUCCESS:
       return { loading: false, items: action.customers }
+    case types.UNLOAD_CUSTOMERS:
+      return { ...state, items: [] }
     default:
       return state;
   }
