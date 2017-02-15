@@ -28,6 +28,7 @@ module.exports = {
     {weight: 8, url: api + 'products/top'},
     {weight: 6, url: api + 'products/{1..6}'},
     {weight: 3, url: api + 'products/{1..6}/customers'},
+    {weight: 1, url: api + 'products/5/customers?count=orders&limit='},
     {weight: 3, url: api + 'types'},
     {weight: 3, url: api + 'types/{1..3}'},
     {weight: 5, url: api + 'customers'},

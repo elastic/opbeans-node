@@ -119,7 +119,22 @@ app.get('/products/:id/customers', function (req, res) {
 
   db.pool.query(sql, [req.params.id, limit], function (err, result) {
     if (err) return error(err, res)
-    res.json(result.rows)
+    if (!req.query.count) return res.json(result.rows)
+
+    var next = afterAll(function (err, results) {
+      if (err) return error(err, res)
+
+      result.rows.forEach(function (row, index) {
+        row.orderCount = results[index].rows.length
+      })
+
+      res.json(result.rows)
+    })
+
+    result.rows.forEach(function (row) {
+      var sql = 'SELECT * FROM orders WHERE customer_id=$1'
+      db.pool.query(sql, [row.id], next())
+    })
   })
 })
 
