@@ -109,14 +109,15 @@ app.get('/products/:id', function (req, res) {
 })
 
 app.get('/products/:id/customers', function (req, res) {
+  var limit = req.query.limit || 1000
   var sql = 'SELECT c.* FROM customers c ' +
     'LEFT JOIN orders o ON c.id=o.customer_id ' +
     'LEFT JOIN order_lines l ON o.id=l.order_id ' +
     'LEFT JOIN products p ON l.product_id=p.id ' +
     'WHERE p.id=$1 ' +
-    'LIMIT 1000'
+    'LIMIT $2'
 
-  db.pool.query(sql, [req.params.id], function (err, result) {
+  db.pool.query(sql, [req.params.id, limit], function (err, result) {
     if (err) return error(err, res)
     res.json(result.rows)
   })
@@ -153,7 +154,10 @@ app.get('/customers', function (req, res) {
     if (err) opbeat.captureError(err)
     else if (obj) return res.json(obj)
 
-    db.pool.query('SELECT * FROM customers LIMIT 1000', function (err, result) {
+    var limit = req.query.limit || 1000
+    var sql = 'SELECT * FROM customers LIMIT $1'
+
+    db.pool.query(sql, [limit], function (err, result) {
       if (err) return error(err, res)
       res.json(result.rows)
     })
@@ -173,11 +177,12 @@ app.get('/orders', function (req, res) {
     if (err) opbeat.captureError(err)
     else if (obj) return res.json(obj)
 
+    var limit = req.query.limit || 1000
     var sql = 'SELECT o.*, c.full_name AS customer_name FROM orders o ' +
       'LEFT JOIN customers c ON c.id=o.customer_id ' +
-      'LIMIT 1000'
+      'LIMIT $1'
 
-    db.pool.query(sql, function (err, result) {
+    db.pool.query(sql, [limit], function (err, result) {
       if (err) return error(err, res)
       res.json(result.rows)
     })
