@@ -30,7 +30,10 @@ var conf = module.exports = {
   },
   redis: process.env.REDIS_URL || null,
   opbeat: {
-    active: env === 'production'
+    active: env === 'production',
+    _apiHost: process.env.OPBEAT_API_HOST || 'intake.opbeat.com',
+    _apiPort: process.env.OPBEAT_API_PORT || '443',
+    _apiSecure: process.env.OPBEAT_API_SECURE === 'false' ? false : true
   }
 }
 
