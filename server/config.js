@@ -10,6 +10,7 @@ var conf = module.exports = {
     port: process.env.PORT || 3001
   },
   pg: {
+    url: process.env.DATABASE_URL || null,
     database: process.env.PGDATABASE || 'opbeans'
   },
   redis: process.env.REDIS_URL || null,

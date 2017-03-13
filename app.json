@@ -6,15 +6,6 @@
     "keywords": ["opbeat", "opbeans", "performance monitoring", "error logging", "release tracking"],
     "success_url": "/",
     "env": {
-        "OPBEAT_ORGANIZATION_ID": {
-            "description": "Opbeat Organization Id for the server app"
-        },
-        "OPBEAT_APP_ID": {
-            "description": "Opbeat App Id for the server app"
-        },
-        "OPBEAT_SECRET_TOKEN": {
-            "description": "Opbeat Secret Token for the server app"
-        },
         "REACT_APP_OPBEAT_APP_ID": {
             "description": "Opbeat App Id for the client app"
         },
@@ -23,26 +14,32 @@
         },
         "PGHOST": {
             "description": "PostgreSQL server host",
-            "required": true
+            "required": false
         },
         "PGPORT": {
             "description": "PostgreSQL server port",
-            "required": true
+            "required": false
         },
         "PGUSER": {
             "description": "PostgreSQL database username",
-            "required": true
+            "required": false
         },
         "PGPASSWORD": {
             "description": "PostgreSQL database password",
-            "required": true
+            "required": false
         },
         "PGDATABASE": {
             "description": "PostgreSQL database name",
-            "required": true
+            "required": false
         },
         "REDIS_URL": {
-            "description": "Redis URL"
+            "description": "Redis URL",
+            "required": false
         }
-    }
+    },
+    "addons": [
+       "heroku-redis:hobby-dev",
+       "heroku-postgresql:hobby-dev",
+       "opbeat:free"
+    ]
 }
