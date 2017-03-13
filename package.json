@@ -19,7 +19,7 @@
     "standard": "^8.6.0"
   },
   "scripts": {
-    "db-setup": "psql -d opbeans -f db/setup.sql && psql -d opbeans -f db/products.sql && psql -d opbeans -f db/mock_customers.sql",
+    "db-setup": "./db/setup.sh",
     "test": "standard *.js server/**/*.js db/**/*.js",
     "server": "node server.js",
     "client": "npm run start --prefix client/",
