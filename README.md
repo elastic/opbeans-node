@@ -74,6 +74,11 @@ Where `<num>` is the amount of orders to create.
 npm start
 ```
 
+## Demo notes
+
+The Node.js server have a built-in bug that you can trigger by
+navigating to the path `/is-it-coffee-time`.
+
 ## License
 
 MIT
