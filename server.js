@@ -5,6 +5,9 @@ var opbeat = require('opbeat').start(conf.opbeat)
 var path = require('path')
 var express = require('express')
 
+// start background worker to generate custom transactions
+require('./brewbot')
+
 var app = express()
 
 if (conf.env !== 'production') {
