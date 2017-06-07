@@ -42,7 +42,7 @@ switch (env) {
     conf.server.url = 'http://localhost:' + conf.server.port
     break
   case 'production':
-    conf.server.url = 'http://www.opbeans.com'
+    conf.server.url = process.env.OPBEANS_BASE_URL || 'http://www.opbeans.com'
     break
   default:
     throw new Error('Unknown environment: ' + env)
