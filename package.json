@@ -8,7 +8,7 @@
     "body-parser": "^1.15.2",
     "concurrently": "^3.1.0",
     "express": "^4.14.0",
-    "opbeat": "^4.4.0",
+    "opbeat": "opbeat/opbeat-node#elastic-agent",
     "pg": "^6.1.2",
     "redis": "^2.6.3",
     "request": "^2.79.0",

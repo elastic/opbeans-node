@@ -1,9 +1,10 @@
 'use strict'
 
 var opbeat = require('opbeat').start({
-  appId: process.env.WORKLOAD_OPBEAT_APP_ID,
-  organizationId: process.env.WORKLOAD_OPBEAT_ORG_ID,
-  secretToken: process.env.WORKLOAD_OPBEAT_SECRET_TOKEN,
+  apiHost: process.env.WORKLOAD_OPBEAT_API_HOST,
+  apiPort: process.env.WORKLOAD_OPBEAT_API_PORT,
+  apiHttps: process.env.WORKLOAD_OPBEAT_API_HTTPS,
+  appName: process.env.WORKLOAD_OPBEAT_APP_NAME,
   active: process.env.NODE_ENV === 'production'
 })
 

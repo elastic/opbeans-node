@@ -39,9 +39,11 @@ Setup the following environment variables:
 - `PGUSER` - PostgreSQL database username
 - `PGPASSWORD` - PostgreSQL database password
 - `PGDATABASE` - PostgreSQL database name (defaults to `opbeans`)
-- `OPBEAT_ORGANIZATION_ID` - Opbeat Organization Id for the server app
-- `OPBEAT_APP_ID` - Opbeat App Id for the server app
-- `OPBEAT_SECRET_TOKEN` - Opbeat Secret Token for the server app
+- `OPBEAT_API_HOST` - APM Receiver API hostname (defaults to
+  `localhost`)
+- `OPBEAT_API_PORT` - APM Receiver API port (defaults to `8080`)
+- `OPBEAT_API_HTTPS` - APM Receiver API port (defaults to `false`)
+- `OPBEAT_APP_NAME` - Opbeat App Name for the server app
 - `REACT_APP_OPBEAT_APP_ID` - Opbeat App Id for the client app
 - `REACT_APP_OPBEAT_ORG_ID` - Opbeat Organization Id for the client app
 
