@@ -5,8 +5,7 @@ var opbeat = require('opbeat').start({
   apiPort: process.env.WORKLOAD_OPBEAT_API_PORT,
   apiHttps: process.env.WORKLOAD_OPBEAT_API_HTTPS,
   appName: process.env.WORKLOAD_OPBEAT_APP_NAME,
-  active: process.env.NODE_ENV === 'production',
-  captureExceptions: false // the exceptions API isn't implemented yet
+  active: process.env.NODE_ENV === 'production'
 })
 
 var Workload = require('workload')

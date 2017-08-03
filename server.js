@@ -33,7 +33,7 @@ app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
 })
 
-// app.use(opbeat.middleware.express())
+app.use(opbeat.middleware.express())
 
 var server = app.listen(conf.server.port, function () {
   var port = server.address().port

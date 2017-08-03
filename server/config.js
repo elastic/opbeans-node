@@ -14,8 +14,7 @@ var conf = module.exports = {
   },
   redis: process.env.REDIS_URL || null,
   opbeat: {
-    active: env === 'production',
-    captureExceptions: false // the exceptions API isn't implemented yet
+    active: env === 'production'
   }
 }
 
