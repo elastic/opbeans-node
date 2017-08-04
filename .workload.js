@@ -44,8 +44,7 @@ module.exports = {
     {weight: 2, url: url + 'log-error'},
     {weight: 2, url: url + 'log-message'},
     {weight: 1, url: url + 'is-it-coffee-time'},
-    {weight: 1, url: url + 'throw-error'},
-    {weight: 0.25, url: url + 'throw-async-error'}
+    {weight: 1, url: url + 'throw-error'}
   ]
 }
 
