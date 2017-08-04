@@ -24,6 +24,8 @@ module.exports = {
     {weight: 10, url: url},
     {weight: 10, url: url + 'favicon.ico'},
     {weight: 1, url: url, method: 'OPTIONS'},
+
+    // api
     {weight: 8, url: api + 'stats'},
     {weight: 7, url: api + 'products'},
     {weight: 8, url: api + 'products/top'},
@@ -36,7 +38,14 @@ module.exports = {
     {weight: 4, url: api + 'customers/{1..1000}'},
     {weight: 7, url: api + 'orders'},
     {weight: 1, url: api + 'orders', method: 'POST'},
-    {weight: 6, url: api + 'orders/{1..500}'}
+    {weight: 6, url: api + 'orders/{1..500}'},
+
+    // errors
+    {weight: 2, url: url + 'log-error'},
+    {weight: 2, url: url + 'log-message'},
+    {weight: 1, url: url + 'is-it-coffee-time'},
+    {weight: 1, url: url + 'throw-error'},
+    {weight: 0.25, url: url + 'throw-async-error'}
   ]
 }
 
