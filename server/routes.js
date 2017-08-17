@@ -1,6 +1,6 @@
 'use strict'
 
-var opbeat = require('opbeat')
+var apm = require('elastic-apm')
 var express = require('express')
 var afterAll = require('after-all-results')
 var db = require('./db')
@@ -57,7 +57,7 @@ app.get('/stats', function (req, res) {
 
 app.get('/products', function (req, res) {
   redis.get('products', function (err, obj) {
-    if (err) opbeat.captureError(err)
+    if (err) apm.captureError(err)
     else if (obj) return res.json(obj)
 
     var sql = 'SELECT p.id, p.sku, p.name, p.stock, t.name AS type_name FROM products p ' +
@@ -140,7 +140,7 @@ app.get('/products/:id/customers', function (req, res) {
 
 app.get('/types', function (req, res) {
   redis.get('types', function (err, obj) {
-    if (err) opbeat.captureError(err)
+    if (err) apm.captureError(err)
     else if (obj) return res.json(obj)
 
     db.pool.query('SELECT * FROM product_types', function (err, result) {
@@ -166,7 +166,7 @@ app.get('/types/:id', function (req, res) {
 
 app.get('/customers', function (req, res) {
   redis.get('customers', function (err, obj) {
-    if (err) opbeat.captureError(err)
+    if (err) apm.captureError(err)
     else if (obj) return res.json(obj)
 
     var limit = req.query.limit || 1000
@@ -189,7 +189,7 @@ app.get('/customers/:id', function (req, res) {
 
 app.get('/orders', function (req, res) {
   redis.get('orders', function (err, obj) {
-    if (err) opbeat.captureError(err)
+    if (err) apm.captureError(err)
     else if (obj) return res.json(obj)
 
     var limit = req.query.limit || 1000
@@ -268,9 +268,9 @@ app.post('/orders', function (req, res) {
         })
 
         function rollback (err) {
-          opbeat.captureError(err)
+          apm.captureError(err)
           client.query('ROLLBACK', function (err) {
-            if (err) opbeat.captureError(err)
+            if (err) apm.captureError(err)
             done(err)
             res.status(500).end()
           })
@@ -304,6 +304,6 @@ app.get('/orders/:id', function (req, res) {
 })
 
 function error (err, res) {
-  opbeat.captureError(err)
+  apm.captureError(err)
   res.status(500).end()
 }

@@ -1,10 +1,8 @@
 'use strict'
 
-var opbeat = require('opbeat').start({
-  apiHost: process.env.WORKLOAD_OPBEAT_API_HOST,
-  apiPort: process.env.WORKLOAD_OPBEAT_API_PORT,
-  apiHttps: process.env.WORKLOAD_OPBEAT_API_HTTPS,
-  appName: process.env.WORKLOAD_OPBEAT_APP_NAME,
+var apm = require('elastic-apm').start({
+  appName: process.env.WORKLOAD_ELASTIC_APM_APP_NAME,
+  serverUrl: process.env.WORKLOAD_ELASTIC_APM_SERVER_URL,
   active: process.env.NODE_ENV === 'production'
 })
 

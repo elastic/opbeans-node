@@ -33,17 +33,15 @@ You will need to enter the required environment variables to complete the deploy
 
 Setup the following environment variables:
 
-- `NODE_ENV` - The current Node environment (set to `production` to enable Opbeat)
+- `NODE_ENV` - The current Node environment (set to `production` to enable Elastic APM)
 - `PGHOST` - PostgreSQL server host
 - `PGPORT` - PostgreSQL server port
 - `PGUSER` - PostgreSQL database username
 - `PGPASSWORD` - PostgreSQL database password
 - `PGDATABASE` - PostgreSQL database name (defaults to `opbeans`)
-- `OPBEAT_API_HOST` - APM Receiver API hostname (defaults to
-  `localhost`)
-- `OPBEAT_API_PORT` - APM Receiver API port (defaults to `8080`)
-- `OPBEAT_API_HTTPS` - APM Receiver API port (defaults to `false`)
-- `OPBEAT_APP_NAME` - Opbeat App Name for the server app
+- `ELASTIC_APM_APP_NAME` - Elastic APM App Name for the server app
+- `ELASTIC_APM_SERVER_URL` - APM Server URL (defaults to
+  `http://localhost:8080`)
 - `REACT_APP_OPBEAT_APP_ID` - Opbeat App Id for the client app
 - `REACT_APP_OPBEAT_ORG_ID` - Opbeat Organization Id for the client app
 

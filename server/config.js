@@ -13,7 +13,7 @@ var conf = module.exports = {
     database: process.env.PGDATABASE || 'opbeans'
   },
   redis: process.env.REDIS_URL || null,
-  opbeat: {
+  apm: {
     active: env === 'production'
   }
 }

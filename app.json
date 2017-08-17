@@ -6,14 +6,14 @@
     "keywords": ["opbeat", "opbeans", "performance monitoring", "error logging", "release tracking"],
     "success_url": "/",
     "env": {
-        "OPBEAT_ORGANIZATION_ID": {
-            "description": "Opbeat Organization Id for the server app"
+        "ELASTIC_APM_APP_NAME": {
+            "description": "Elastic APM App Name for the server app"
         },
-        "OPBEAT_APP_ID": {
-            "description": "Opbeat App Id for the server app"
+        "ELASTIC_APM_SECRET_TOKEN": {
+            "description": "Elastic APM Secret Token for the server app"
         },
-        "OPBEAT_SECRET_TOKEN": {
-            "description": "Opbeat Secret Token for the server app"
+        "ELASTIC_APM_SERVER_URL": {
+            "description": "Elastic APM Server URL for the server app"
         },
         "REACT_APP_OPBEAT_APP_ID": {
             "description": "Opbeat App Id for the client app"

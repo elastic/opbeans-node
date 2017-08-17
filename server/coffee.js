@@ -1,7 +1,7 @@
 'use strict'
 
 var express = require('express')
-var opbeat = require('opbeat')
+var apm = require('elastic-apm')
 
 var app = module.exports = new express.Router()
 
@@ -14,7 +14,7 @@ app.get('/is-it-coffee-time', function (req, res) {
 })
 
 app.get('/log-error', function (req, res) {
-  opbeat.captureError(new Error('foo'), function (err) {
+  apm.captureError(new Error('foo'), function (err) {
     if (err) {
       res.status(500).send('could not capture error: ' + err.message)
     } else {
@@ -24,7 +24,7 @@ app.get('/log-error', function (req, res) {
 })
 
 app.get('/log-message', function (req, res) {
-  opbeat.captureError('this is a string', function (err) {
+  apm.captureError('this is a string', function (err) {
     if (err) {
       res.status(500).send('could not capture error: ' + err.message)
     } else {

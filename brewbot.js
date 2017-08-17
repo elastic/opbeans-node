@@ -2,7 +2,7 @@
 
 // this worker simulates a background job that uses custom transactions
 
-var opbeat = require('opbeat')
+var apm = require('elastic-apm')
 
 queue(roast)
 queue(grind)
@@ -11,47 +11,47 @@ queue(pour)
 queue(serve)
 
 function roast () {
-  opbeat.startTransaction('Roast beans', 'Brewing Bot')
+  apm.startTransaction('Roast beans', 'Brewing Bot')
   performSubTask(function () {
-    opbeat.endTransaction()
+    apm.endTransaction()
     queue(roast)
   })
 }
 
 function grind () {
-  opbeat.startTransaction('Grind beans', 'Brewing Bot')
+  apm.startTransaction('Grind beans', 'Brewing Bot')
   performSubTask(function () {
-    opbeat.endTransaction()
+    apm.endTransaction()
     queue(grind)
   })
 }
 
 function boil () {
-  opbeat.startTransaction('Boil water', 'Brewing Bot')
+  apm.startTransaction('Boil water', 'Brewing Bot')
   performSubTask(function () {
-    opbeat.endTransaction()
+    apm.endTransaction()
     queue(boil)
   })
 }
 
 function pour () {
-  opbeat.startTransaction('Pour water', 'Brewing Bot')
+  apm.startTransaction('Pour water', 'Brewing Bot')
   performSubTask(function () {
-    opbeat.endTransaction()
+    apm.endTransaction()
     queue(pour)
   })
 }
 
 function serve () {
-  opbeat.startTransaction('Serve to customer', 'Brewing Bot')
+  apm.startTransaction('Serve to customer', 'Brewing Bot')
   performSubTask(function () {
-    opbeat.endTransaction()
+    apm.endTransaction()
     queue(serve)
   })
 }
 
 function performSubTask (cb) {
-  var trace = opbeat.buildTrace()
+  var trace = apm.buildTrace()
   if (trace) trace.start('perform some task')
 
   setTimeout(function () {
