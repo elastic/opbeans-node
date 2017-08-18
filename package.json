@@ -31,15 +31,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/opbeat/opbeans.git"
+    "url": "git+https://github.com/elastic/opbeans.git"
   },
   "contributors": [
-    "Thomas Watson Steen <thomas@opbeat.com> (https://twitter.com/wa7son)",
-    "Vanja Ćosić <vanja@opbeat.com> (https://twitter.com/vanjacosic)"
+    "Thomas Watson Steen <watson@elastic.co> (https://twitter.com/wa7son)",
+    "Vanja Ćosić <vanja@elastic.co> (https://twitter.com/vanjacosic)"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/opbeat/opbeans/issues"
+    "url": "https://github.com/elastic/opbeans/issues"
   },
-  "homepage": "https://github.com/opbeat/opbeans#readme"
+  "homepage": "https://github.com/elastic/opbeans#readme"
 }

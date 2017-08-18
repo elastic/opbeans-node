@@ -1,9 +1,9 @@
 {
     "name": "Opbeans",
-    "description": "Opbeans inventory management system (Opbeat demo app)",
+    "description": "Opbeans inventory management system (Elastic APM demo app)",
     "logo": "https://pbs.twimg.com/profile_images/700322766168305664/DpqY0ynV.png",
-    "repository": "https://github.com/opbeat/opbeans",
-    "keywords": ["opbeat", "opbeans", "performance monitoring", "error logging", "release tracking"],
+    "repository": "https://github.com/elastic/opbeans",
+    "keywords": ["elastic", "apm", "opbeans", "performance monitoring", "error logging", "release tracking"],
     "success_url": "/",
     "env": {
         "ELASTIC_APM_APP_NAME": {
