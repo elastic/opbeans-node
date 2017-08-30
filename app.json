@@ -7,42 +7,53 @@
     "success_url": "/",
     "env": {
         "ELASTIC_APM_APP_NAME": {
-            "description": "Elastic APM App Name for the server app"
+            "description": "Elastic APM App Name for the server app",
+            "required": false
         },
         "ELASTIC_APM_SECRET_TOKEN": {
-            "description": "Elastic APM Secret Token for the server app"
+            "description": "Elastic APM Secret Token for the server app",
+            "required": false
         },
         "ELASTIC_APM_SERVER_URL": {
-            "description": "Elastic APM Server URL for the server app"
+            "description": "Elastic APM Server URL for the server app",
+            "required": false
+        },
+        "WORKLOAD_ELASTIC_APM_APP_NAME": {
+            "description": "Elastic APM App Name for the workload app",
+            "required": false
+        },
+        "WORKLOAD_ELASTIC_APM_SECRET_TOKEN": {
+            "description": "Elastic APM Secret Token for the workload app",
+            "required": false
+        },
+        "WORKLOAD_ELASTIC_APM_SERVER_URL": {
+            "description": "Elastic APM Server URL for the workload app",
+            "required": false
         },
         "REACT_APP_OPBEAT_APP_ID": {
-            "description": "Opbeat App Id for the client app"
+            "description": "Opbeat App Id for the client app",
+            "required": false
         },
         "REACT_APP_OPBEAT_ORG_ID": {
-            "description": "Opbeat Organization Id for the client app"
+            "description": "Opbeat Organization Id for the client app",
+            "required": false
         },
         "PGHOST": {
-            "description": "PostgreSQL server host",
-            "required": true
+            "description": "PostgreSQL server host"
         },
         "PGPORT": {
-            "description": "PostgreSQL server port",
-            "required": true
+            "description": "PostgreSQL server port"
         },
         "PGUSER": {
-            "description": "PostgreSQL database username",
-            "required": true
+            "description": "PostgreSQL database username"
         },
         "PGPASSWORD": {
-            "description": "PostgreSQL database password",
-            "required": true
-        },
-        "PGDATABASE": {
-            "description": "PostgreSQL database name",
-            "required": true
-        },
-        "REDIS_URL": {
-            "description": "Redis URL"
+            "description": "PostgreSQL database password"
         }
-    }
+    },
+    "addons": [
+        {
+            "plan": "heroku-redis:hobby-dev"
+        }
+    ]
 }
