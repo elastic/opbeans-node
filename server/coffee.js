@@ -1,7 +1,7 @@
 'use strict'
 
 var express = require('express')
-var apm = require('elastic-apm')
+var apm = require('elastic-apm-node')
 
 var app = module.exports = new express.Router()
 

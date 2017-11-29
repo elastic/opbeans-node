@@ -1,6 +1,6 @@
 'use strict'
 
-var apm = require('elastic-apm')
+var apm = require('elastic-apm-node')
 var express = require('express')
 var afterAll = require('after-all-results')
 var db = require('./db')

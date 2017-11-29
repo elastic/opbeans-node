@@ -1,7 +1,7 @@
 'use strict'
 
 var conf = require('./server/config')
-var apm = require('elastic-apm').start(conf.apm)
+var apm = require('elastic-apm-node').start(conf.apm)
 var path = require('path')
 var express = require('express')
 

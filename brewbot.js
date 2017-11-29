@@ -2,7 +2,7 @@
 
 // this worker simulates a background job that uses custom transactions
 
-var apm = require('elastic-apm')
+var apm = require('elastic-apm-node')
 
 queue(roast)
 queue(grind)
