@@ -1,6 +1,5 @@
 import React from 'react';
 import { Router, Route, IndexRedirect } from 'react-router';
-import { wrapRouter } from 'opbeat-react';
 import App from './components/App';
 
 import Dashboard from './components/Dashboard';
@@ -14,10 +13,9 @@ import Customer from './components/Customer';
 
 import NotFound from './components/NotFound';
 
-const OpbeatRouter = wrapRouter(Router)
 
 const Routes = (props) => (
-  <OpbeatRouter {...props}>
+  <Router {...props}>
     <Route path="/" component={App}>
         <IndexRedirect to="/dashboard" />
         <Route path="/dashboard" component={Dashboard} />
@@ -29,7 +27,7 @@ const Routes = (props) => (
         <Route path="/customers/:id" component={Customer} />
         <Route path="*" component={NotFound} />
     </Route>
-  </OpbeatRouter>
+  </Router>
 );
 
 export default Routes;
