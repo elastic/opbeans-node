@@ -51,8 +51,8 @@ Setup the following environment variables:
 - `ELASTIC_APM_APP_NAME` - Elastic APM App Name for the server app
 - `ELASTIC_APM_SERVER_URL` - APM Server URL (defaults to
   `http://localhost:8080`)
-- `REACT_APP_OPBEAT_APP_ID` - Opbeat App Id for the client app
-- `REACT_APP_OPBEAT_ORG_ID` - Opbeat Organization Id for the client app
+- `ELASTIC_APM_JS_BASE_SERVER_URL` - Elastic APM Server URL for the client app
+- `ELASTIC_APM_JS_BASE_APP_NAME` - Elastic APM App Name for the client app
 
 For a complete list of PostgreSQL environment variables [see the
 official
@@ -62,7 +62,8 @@ In development, you can create a `.env` file in the root of the project
 containing all your secret environment variables. See
 [dotenv](https://github.com/motdotla/dotenv) for details. Additionally
 if you create a `.env` file in the `/client` folder, variables prefixed
-with `REACT_APP_` will be available in the React app.
+with `ELASTIC_APM_JS_BASE_` will be available in the React app.
+
 
 ## Bootstrap
 

@@ -30,12 +30,12 @@
             "description": "Elastic APM Server URL for the workload app",
             "required": false
         },
-        "REACT_APP_OPBEAT_APP_ID": {
-            "description": "Opbeat App Id for the client app",
+        "ELASTIC_APM_JS_BASE_SERVER_URL": {
+            "description": "Elastic APM Server URL for the client app",
             "required": false
         },
-        "REACT_APP_OPBEAT_ORG_ID": {
-            "description": "Opbeat Organization Id for the client app",
+        "ELASTIC_APM_JS_BASE_APP_NAME": {
+            "description": "Elastic APM App Name for the client app",
             "required": false
         },
         "PGHOST": {

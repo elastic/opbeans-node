@@ -26,6 +26,10 @@
 
       To begin the development, run `npm start`.
       To create a production bundle, use `npm run build`.
-    -->
+    -->   
   </body>
+  <script>
+      var pageName = window.location.pathname.split('/')[1]
+      window.elasticApm.setInitialPageLoadName(pageName)
+  </script>
 </html>
