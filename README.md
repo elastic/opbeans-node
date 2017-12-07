@@ -34,6 +34,15 @@ complete the deployment. See below for configuration options.
 Setup the following environment variables:
 
 - `NODE_ENV` - The current Node environment (set to `production` to enable Elastic APM)
+- `OPBEANS_SERVER_PROTOCOL` - Set protocol used to connect to the backend
+  server (defaults to `http:`)
+- `OPBEANS_SERVER_AUTH` - Set authentication used to connet to the
+  backend in the format of `username:password` (defaults to an empty
+  string)
+- `OPBEANS_SERVER_HOSTNAME` - Set hostname used to connect to the
+  backend (defaults to `localhost`)
+- `OPBEANS_SERVER_PORT` - Set port used to connect to the
+  backend (defaults to value of `PORT` or `3001`)
 - `PGHOST` - PostgreSQL server host
 - `PGPORT` - PostgreSQL server port
 - `PGUSER` - PostgreSQL database username
