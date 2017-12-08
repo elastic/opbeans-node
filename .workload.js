@@ -1,6 +1,6 @@
 'use strict'
 
-var apm = require('elastic-apm-node').start({
+require('elastic-apm-node').start({
   appName: process.env.WORKLOAD_ELASTIC_APM_APP_NAME,
   serverUrl: process.env.WORKLOAD_ELASTIC_APM_SERVER_URL,
   active: process.env.NODE_ENV === 'production'
