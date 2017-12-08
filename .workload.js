@@ -1,7 +1,11 @@
 'use strict'
 
 require('elastic-apm-node').start({
-  appName: process.env.WORKLOAD_ELASTIC_APM_APP_NAME,
+  // TODO: Untill the transition to serviceName is complete, we'll allow for
+  // both. Remove when the transition is complete
+  appName: process.env.WORKLOAD_ELASTIC_APM_APP_NAME || process.env.WORKLOAD_ELASTIC_APM_SERVICE_NAME,
+  servieName: process.env.WORKLOAD_ELASTIC_APM_SERVICE_NAME || process.env.WORKLOAD_ELASTIC_APM_APP_NAME,
+
   serverUrl: process.env.WORKLOAD_ELASTIC_APM_SERVER_URL,
   active: process.env.NODE_ENV === 'production'
 })
