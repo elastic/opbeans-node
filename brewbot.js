@@ -51,7 +51,9 @@ function serve () {
 }
 
 function performSubTask (cb) {
-  var trace = apm.buildTrace()
+  // TODO: Rename everything to span instead of trace once we launch 6.2. For
+  // now detect which version of the agent is running using this test.
+  var trace = apm.buildSpan ? apm.buildSpan() : apm.buildTrace()
   if (trace) trace.start('perform some task')
 
   setTimeout(function () {
