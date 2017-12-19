@@ -9,6 +9,7 @@
     "concurrently": "^3.1.0",
     "elastic-apm-node": "^0.7.0",
     "express": "^4.14.0",
+    "morgan": "^1.9.0",
     "pg": "^6.1.2",
     "redis": "^2.6.3",
     "request": "^2.79.0",
