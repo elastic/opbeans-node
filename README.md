@@ -52,7 +52,7 @@ Setup the following environment variables:
 - `ELASTIC_APM_SERVER_URL` - APM Server URL (defaults to
   `http://localhost:8080`)
 - `ELASTIC_APM_JS_BASE_SERVER_URL` - Elastic APM Server URL for the client app
-- `ELASTIC_APM_JS_BASE_APP_NAME` - Elastic APM App Name for the client app
+- `ELASTIC_APM_JS_BASE_SERVICE_NAME` - Elastic APM App Name for the client app
 
 For a complete list of PostgreSQL environment variables [see the
 official
