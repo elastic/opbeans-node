@@ -4,6 +4,7 @@ var conf = require('./server/config')
 var apm = require('elastic-apm-node').start(conf.apm)
 var path = require('path')
 var express = require('express')
+var morgan = require('morgan')
 
 // start background worker to generate custom transactions
 require('./brewbot')
@@ -34,6 +35,7 @@ app.get('*', function (req, res) {
 })
 
 app.use(apm.middleware.express())
+app.use(morgan('combined'))
 
 var server = app.listen(conf.server.port, function () {
   var port = server.address().port
