@@ -34,8 +34,8 @@
             "description": "Elastic APM Server URL for the client app",
             "required": false
         },
-        "ELASTIC_APM_JS_BASE_APP_NAME": {
-            "description": "Elastic APM App Name for the client app",
+        "ELASTIC_APM_JS_BASE_SERVICE_NAME": {
+            "description": "Elastic APM Service Name for the client app",
             "required": false
         },
         "PGHOST": {

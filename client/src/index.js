@@ -1,11 +1,11 @@
 import { init as initApm } from 'elastic-apm-js-base'
 
-let appName = process.env.ELASTIC_APM_JS_BASE_APP_NAME;
+let serviceName = process.env.ELASTIC_APM_JS_BASE_SERVICE_NAME;
 let serverUrl = process.env.ELASTIC_APM_JS_BASE_SERVER_URL;
 
 initApm({
-  appName: appName,
-  apiOrigin: serverUrl
+  serviceName: serviceName,
+  serverUrl: serverUrl
 })
 
 import React from 'react'
