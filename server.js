@@ -33,8 +33,6 @@ app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
 })
 
-app.use(apm.middleware.express())
-
 var server = app.listen(conf.server.port, function () {
   var port = server.address().port
   console.log('server is listening on port', port)
