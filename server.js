@@ -10,7 +10,9 @@ require('./brewbot')
 
 var app = express()
 
-if (conf.env !== 'production') {
+var onHeroku = process.env.NODE_HOME && process.env.NODE_HOME.indexOf('heroku') !== -1
+
+if (!onHeroku) {
   app.use(function (req, res, next) {
     console.log(req.method, req.url)
     next()
