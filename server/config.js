@@ -2,7 +2,10 @@
 
 var env = process.env.NODE_ENV || 'development'
 
-if (env === 'development') require('dotenv').config()
+if (env === 'development') {
+  require('dotenv').config()
+  env = process.env.NODE_ENV || env // in case dotenv changes NODE_ENV
+}
 
 var conf = module.exports = {
   env: env,
