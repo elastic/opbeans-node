@@ -6,7 +6,7 @@ var path = require('path')
 var express = require('express')
 
 // start background worker to generate custom transactions
-require('./brewbot')
+require('./worker')
 
 var app = express()
 
