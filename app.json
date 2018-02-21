@@ -6,8 +6,8 @@
     "keywords": ["elastic", "apm", "opbeans", "performance monitoring", "error logging", "release tracking"],
     "success_url": "/",
     "env": {
-        "ELASTIC_APM_APP_NAME": {
-            "description": "Elastic APM App Name for the server app",
+        "ELASTIC_APM_SERVICE_NAME": {
+            "description": "Elastic APM Service Name for the server app",
             "required": false
         },
         "ELASTIC_APM_SECRET_TOKEN": {
@@ -18,8 +18,8 @@
             "description": "Elastic APM Server URL for the server app",
             "required": false
         },
-        "WORKLOAD_ELASTIC_APM_APP_NAME": {
-            "description": "Elastic APM App Name for the workload app",
+        "WORKLOAD_ELASTIC_APM_SERVICE_NAME": {
+            "description": "Elastic APM Service Name for the workload app",
             "required": false
         },
         "WORKLOAD_ELASTIC_APM_SECRET_TOKEN": {
