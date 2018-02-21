@@ -34,6 +34,11 @@ app.use(function (req, res, next) {
     email: 'kimchy@elastic.co'
   })
 
+  // mimic custom context
+  apm.setCustomContext({
+    containerId: Math.floor(Math.random() * 10000)
+  })
+
   next()
 })
 

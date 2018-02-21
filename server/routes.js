@@ -298,6 +298,11 @@ app.get('/orders/:id', function (req, res) {
     db.pool.query(sql, [req.params.id], function (err, result) {
       if (err) return error(err, res)
       order.lines = result.rows
+
+      apm.setCustomContext({
+        orderLines: result.rows.length
+      })
+
       res.json(order)
     })
   })
