@@ -5,6 +5,10 @@ import { Link } from 'react-router';
 import CustomersList from '../CustomersList';
 
 const ProductDetail = ({product, productCustomers, getCustomers}) => {
+  if(Math.random()>0.7) {
+      throw "ProductDetail randomly failed to render!";
+  }
+      
   return (
       <div>
           { product.loading && (
