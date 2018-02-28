@@ -10,15 +10,22 @@ var apm = initApm({
   serverUrl: serverUrl
 })
 
-apm.setUserContext({
-  ignored: 'is ignored',
-  id: 'id',
-  username: 'username',
-  email: 'user@opbeans.com'
-})
+const users = [
+  {id: 1, username: 'arthurdent', email: 'arthur.dent@example.com'},
+  {id: 2,  username: 'fprefect', email: 'ford.prefect@example.com'},
+  {id: 3, username: 'trillian', email:'adastra@example.com'},
+  {id: 4, username: 'zaphod', email:'z@example.com'}
+]
+
+apm.setUserContext(
+  users[Math.floor(Math.random()*users.length)]
+)
 
 apm.setCustomContext({
-  superUseful: 'info'
+  userConfig: {
+    showDashboard: true,
+    featureFlags: ['double-trouble', '4423-hotfix']
+  }
 })
 
 try {
