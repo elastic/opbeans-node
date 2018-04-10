@@ -6,7 +6,7 @@ import CustomersList from '../CustomersList';
 
 const ProductDetail = ({product, productCustomers, getCustomers}) => {
   if(Math.random()>0.7) {
-      throw "ProductDetail randomly failed to render!";
+      throw new Error("ProductDetail randomly failed to render!");
   }
       
   return (
