@@ -1,0 +1,6 @@
+.git
+.idea
+.vscode
+Dockerfile
+client
+Makefile
