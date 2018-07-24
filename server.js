@@ -20,6 +20,21 @@ if (!onHeroku) {
 }
 
 app.use(require('body-parser').json())
+app.use(function (req, res, next) {
+  if (req.method !== 'GET' && req.url !== '/rum-config.js') return next()
+  const clientPkg = require('./client/package.json')
+  const serverUrl = process.env.ELASTIC_APM_JS_SERVER_URL || 'http://localhost:8200'
+  const serviceName = process.env.ELASTIC_APM_JS_SERVICE_NAME || clientPkg.name
+  const serviceVersion = process.env.ELASTIC_APM_JS_SERVICE_VERSION || clientPkg.version
+  const body = `
+    window.elasticApmJsBaseServiceName = "${serviceName}";
+    window.elasticApmJsBaseServiceVersion = "${serviceVersion}";
+    window.elasticApmJsBaseServerUrl = "${serverUrl}";
+  `
+  res.setHeader('Content-Type', 'text/javascript')
+  res.setHeader('Content-Length', Buffer.byteLength(body))
+  res.end(body)
+})
 app.use(express.static('client/build'))
 app.use(function (req, res, next) {
   apm.setTag('foo', 'bar')
