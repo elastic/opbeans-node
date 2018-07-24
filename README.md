@@ -87,6 +87,17 @@ Where `<num>` is the amount of orders to create.
 npm start
 ```
 
+## Updating the client
+
+If `NODE_ENV` isn't `production`, running `npm install` will also clone,
+install and build
+[opbeats-frontend](https://github.com/elastic/opbeans-frontend). If you
+ever want to update the opbeans-frontend, just run:
+
+```
+npm run client-update
+```
+
 ## Demo notes
 
 The Node.js server have a built-in bug that you can trigger by
