@@ -60,10 +60,7 @@ documentation](https://www.postgresql.org/docs/9.5/static/libpq-envars.html).
 
 In development, you can create a `.env` file in the root of the project
 containing all your secret environment variables. See
-[dotenv](https://github.com/motdotla/dotenv) for details. Additionally
-if you create a `.env` file in the `/client` folder, variables prefixed
-with `ELASTIC_APM_JS_BASE_` will be available in the React app.
-
+[dotenv](https://github.com/motdotla/dotenv) for details.
 
 ## Bootstrap
 
