@@ -13,7 +13,7 @@ var conf = module.exports = {
     protocol: process.env.OPBEANS_SERVER_PROTOCOL || 'http:',
     auth: process.env.OPBEANS_SERVER_AUTH || '',
     hostname: process.env.OPBEANS_SERVER_HOSTNAME || 'localhost',
-    port: process.env.OPBEANS_SERVER_PORT || process.env.PORT || 3001
+    port: process.env.OPBEANS_SERVER_PORT || process.env.PORT || 3000
   },
   pg: {
     database: process.env.PGDATABASE || 'opbeans'
