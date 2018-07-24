@@ -21,7 +21,7 @@ if (!onHeroku) {
 
 app.use(require('body-parser').json())
 app.use(function (req, res, next) {
-  if (req.method !== 'GET' && req.url !== '/rum-config.js') return next()
+  if (req.method !== 'GET' || req.url !== '/rum-config.js') return next()
   const clientPkg = require('./client/package.json')
   const serverUrl = process.env.ELASTIC_APM_JS_SERVER_URL || 'http://localhost:8200'
   const serviceName = process.env.ELASTIC_APM_JS_SERVICE_NAME || clientPkg.name
