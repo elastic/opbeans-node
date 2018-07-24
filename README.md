@@ -3,8 +3,6 @@
 The Opbeans inventory management system is a demo app created and
 maintained by [Elastic](https://elastic.co).
 
-It's hosted on [opbeans.com](http://opbeans.com).
-
 [![Build status](https://travis-ci.org/elastic/opbeans.svg?branch=master)](https://travis-ci.org/elastic/opbeans)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
@@ -21,38 +19,27 @@ This application uses the following technologies:
 - [Redux](https://github.com/reactjs/redux)
 - [Elastic APM](https://www.elastic.co/blog/starting-down-the-path-for-elastic-apm)
 
-## Deployment
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-This app can be deployed directly to Heroku by pressing the button
-above. You will need to enter the required environment variables to
-complete the deployment. See below for configuration options.
-
 ## Configuration
 
 Setup the following environment variables:
 
-- `NODE_ENV` - The current Node environment (set to `production` to enable Elastic APM)
-- `OPBEANS_SERVER_PROTOCOL` - Set protocol used to connect to the backend
-  server (defaults to `http:`)
-- `OPBEANS_SERVER_AUTH` - Set authentication used to connet to the
-  backend in the format of `username:password` (defaults to an empty
-  string)
-- `OPBEANS_SERVER_HOSTNAME` - Set hostname used to connect to the
-  backend (defaults to `localhost`)
-- `OPBEANS_SERVER_PORT` - Set port used to connect to the
-  backend (defaults to value of `PORT` or `3001`)
+- `NODE_ENV` - The current Node environment (set to `production` to
+  enable Elastic APM)
+- `PORT` - The port at which to run the Opbeans server (default: `3000`)
 - `PGHOST` - PostgreSQL server host
 - `PGPORT` - PostgreSQL server port
 - `PGUSER` - PostgreSQL database username
 - `PGPASSWORD` - PostgreSQL database password
-- `PGDATABASE` - PostgreSQL database name (defaults to `opbeans`)
+- `PGDATABASE` - PostgreSQL database name (default: `opbeans`)
 - `ELASTIC_APM_SERVICE_NAME` - Elastic APM service name for the server app
-- `ELASTIC_APM_SERVER_URL` - APM Server URL (defaults to
-  `http://localhost:8080`)
-- `ELASTIC_APM_JS_BASE_SERVER_URL` - Elastic APM Server URL for the client app
-- `ELASTIC_APM_JS_BASE_SERVICE_NAME` - Elastic APM App Name for the client app
+- `ELASTIC_APM_SERVER_URL` - APM Server URL (default:
+  `http://localhost:8200`)
+- `ELASTIC_APM_JS_BASE_SERVER_URL` - Elastic APM Server URL for the
+  client app (default: `http://localhost:3000')
+- `ELASTIC_APM_JS_BASE_SERVICE_NAME` - Elastic APM App Name for the
+  client app
+- `ELASTIC_APM_JS_BASE_SERVICE_VERSION` - Elastic APM App Name for the
+  client app
 
 For a complete list of PostgreSQL environment variables [see the
 official
