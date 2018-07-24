@@ -41,8 +41,5 @@
   "bugs": {
     "url": "https://github.com/elastic/opbeans/issues"
   },
-  "homepage": "https://github.com/elastic/opbeans#readme",
-  "engines": {
-    "node": "^6.0.0"
-  }
+  "homepage": "https://github.com/elastic/opbeans#readme"
 }
