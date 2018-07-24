@@ -1,4 +1,3 @@
 language: node_js
-before_install: make update-frontend
 node_js:
 - '6'
