@@ -6,7 +6,6 @@
   "dependencies": {
     "after-all-results": "^2.0.0",
     "body-parser": "^1.15.2",
-    "concurrently": "^3.1.0",
     "elastic-apm-node": "^1.0.3",
     "express": "^4.14.0",
     "pg": "^6.1.2",
@@ -22,11 +21,13 @@
     "db-setup": "./db/setup.sh",
     "test": "standard *.js server/**/*.js db/**/*.js",
     "server": "node server.js",
-    "client": "npm run start --prefix client/",
-    "client-build": "npm run build --prefix client/",
-    "client-install": "npm install --prefix client/",
-    "postinstall": "./client/build-client.sh",
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "postinstall": "if [ \"$NODE_ENV\" != production ]; then npm run client-update; fi",
+    "client-update": "npm run client-clone && npm run client-pull && npm run client-install && npm run client-build",
+    "client-clone": "if ! [ -d client ]; then git clone https://github.com/elastic/opbeans-frontend client; fi",
+    "client-pull": "(cd client && git pull)",
+    "client-install": "npm install --prefix client",
+    "client-build": "npm run build --prefix client",
+    "start": "node server.js",
     "workload": "workload -f .workload.js"
   },
   "repository": {
