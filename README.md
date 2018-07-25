@@ -17,7 +17,7 @@ This application uses the following technologies:
 - [React](https://facebook.github.io/react/)
 - [React Router](https://github.com/ReactTraining/react-router)
 - [Redux](https://github.com/reactjs/redux)
-- [Elastic APM](https://www.elastic.co/blog/starting-down-the-path-for-elastic-apm)
+- [Elastic APM](https://www.elastic.co/solutions/apm)
 
 ## Configuration
 
