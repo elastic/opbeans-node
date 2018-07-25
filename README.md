@@ -18,7 +18,7 @@ This application uses the following technologies:
 - [React Router](https://github.com/ReactTraining/react-router) (via
   [opbeans-frontend])
 - [Redux](https://github.com/reactjs/redux) (via [opbeans-frontend])
-- [Elastic APM](https://www.elastic.co/blog/starting-down-the-path-for-elastic-apm)
+- [Elastic APM](https://www.elastic.co/solutions/apm)
 
 ## Configuration
 
