@@ -1,5 +1,5 @@
 {
-  "name": "opbeans",
+  "name": "opbeans-node",
   "version": "1.0.0",
   "description": "The Opbeans inventory management system",
   "main": "server.js",
