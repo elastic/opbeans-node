@@ -31,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elastic/opbeans.git"
+    "url": "git+https://github.com/elastic/opbeans-node.git"
   },
   "contributors": [
     "Thomas Watson Steen <watson@elastic.co> (https://twitter.com/wa7son)",
@@ -39,7 +39,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/elastic/opbeans/issues"
+    "url": "https://github.com/elastic/opbeans-node/issues"
   },
-  "homepage": "https://github.com/elastic/opbeans#readme"
+  "homepage": "https://github.com/elastic/opbeans-node#readme"
 }
