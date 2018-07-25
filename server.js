@@ -2,6 +2,26 @@
 
 var conf = require('./server/config')
 var apm = require('elastic-apm-node').start(conf.apm)
+
+// Elastic APM needs to perform an async operation if an uncaught exception
+// occurs. This ensures that we close the Express server before this happens to
+// we don't keep accepting HTTP requests in the meantime
+process.on('uncaughtException', function () {
+  if (server) server.close()
+})
+
+// Ensure the Elastic APM queue is flushed before exiting the application in
+// case of an uncaught exception
+apm.handleUncaughtExceptions(function (err) {
+  console.error(err.stack)
+  console.error('Application encountered an uncaught exception. Flushing Elastic APM queue and exiting...')
+  apm.flush(function (err) {
+    if (err) console.error(err.stack)
+    else console.error('Elastic APM queue flushed!')
+    process.exit(1)
+  })
+})
+
 var path = require('path')
 var express = require('express')
 
