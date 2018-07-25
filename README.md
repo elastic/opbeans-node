@@ -31,7 +31,8 @@ Setup the following environment variables:
 - `PGUSER` - PostgreSQL database username
 - `PGPASSWORD` - PostgreSQL database password
 - `PGDATABASE` - PostgreSQL database name (default: `opbeans`)
-- `ELASTIC_APM_SERVICE_NAME` - Elastic APM service name for the server app
+- `ELASTIC_APM_SERVICE_NAME` - Elastic APM service name for the server
+  app (default: `opbeans-node`)
 - `ELASTIC_APM_SERVER_URL` - APM Server URL (default:
   `http://localhost:8200`)
 - `ELASTIC_APM_JS_BASE_SERVER_URL` - Elastic APM Server URL for the
