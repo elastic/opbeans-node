@@ -1,5 +1,6 @@
 'use strict'
 
+var pkg = require('../package')
 var env = process.env.NODE_ENV || 'development'
 
 if (env === 'development') {
@@ -20,6 +21,8 @@ var conf = module.exports = {
   },
   redis: process.env.REDIS_URL || null,
   apm: {
+    serviceName: process.ELASTIC_APM_SERVICE_NAME || pkg.name,
+    serviceVersion: process.ELASTIC_APM_SERVICE_VERSION || pkg.version,
     active: env === 'production'
   }
 }
