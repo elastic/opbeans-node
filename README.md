@@ -14,9 +14,10 @@ This application uses the following technologies:
 - [Express](http://expressjs.com)
 - [PostgreSQL](https://www.postgresql.org)
 - [Redis](https://redis.io)
-- [React](https://facebook.github.io/react/)
-- [React Router](https://github.com/ReactTraining/react-router)
-- [Redux](https://github.com/reactjs/redux)
+- [React](https://facebook.github.io/react/) (via [opbeans-frontend])
+- [React Router](https://github.com/ReactTraining/react-router) (via
+  [opbeans-frontend])
+- [Redux](https://github.com/reactjs/redux) (via [opbeans-frontend])
 - [Elastic APM](https://www.elastic.co/blog/starting-down-the-path-for-elastic-apm)
 
 ## Configuration
@@ -74,9 +75,8 @@ npm start
 ## Updating the client
 
 If `NODE_ENV` isn't `production`, running `npm install` will also clone,
-install and build
-[opbeats-frontend](https://github.com/elastic/opbeans-frontend). If you
-ever want to update the opbeans-frontend, just run:
+install and build [opbeats-frontend]. If you ever want to update the
+opbeans-frontend, just run:
 
 ```
 npm run client-update
@@ -92,3 +92,5 @@ navigating to the path `/is-it-coffee-time`.
 MIT
 
 <br>Made with ♥️ and ☕️ by Elastic.
+
+[opbeans-frontend]: https://github.com/elastic/opbeans-frontend
