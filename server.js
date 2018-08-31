@@ -8,6 +8,7 @@ var apm = require('elastic-apm-node').start(conf.apm)
 // we don't keep accepting HTTP requests in the meantime
 process.on('uncaughtException', function () {
   if (server) server.close()
+  if (worker) worker.stop()
 })
 
 // Ensure the Elastic APM queue is flushed before exiting the application in
@@ -26,7 +27,8 @@ var path = require('path')
 var express = require('express')
 
 // start background worker to generate custom transactions
-require('./worker')
+var worker = require('./worker')
+worker.start()
 
 var app = express()
 
