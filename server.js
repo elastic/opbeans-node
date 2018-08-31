@@ -32,14 +32,10 @@ worker.start()
 
 var app = express()
 
-var onHeroku = process.env.NODE_HOME && process.env.NODE_HOME.indexOf('heroku') !== -1
-
-if (!onHeroku) {
-  app.use(function (req, res, next) {
-    console.log(req.method, req.url)
-    next()
-  })
-}
+app.use(function (req, res, next) {
+  console.log(req.method, req.url)
+  next()
+})
 
 app.use(require('body-parser').json())
 app.use(function (req, res, next) {
