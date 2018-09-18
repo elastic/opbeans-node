@@ -91,8 +91,26 @@ npm run client-update
 
 ## Demo notes
 
-The Node.js server have a built-in bug that you can trigger by
-navigating to the path `/is-it-coffee-time`.
+### Trigger error
+
+The app have a built-in bug that you can trigger by navigating to the
+path `/is-it-coffee-time`.
+
+### Trigger slowness
+
+The app have two npm scripts for adding a new customer:
+
+- `customer-add-ok`, which will add a new customer
+- `customer-add-redos`, which fail adding a new customer and block the
+  server from processing any other requests in the meantime.
+
+Run either of the two scripts using `npm run <name>`.
+
+If running inside docker, you can run it using `docker-compose`, e.g:
+
+```
+docker-compose exec opbeans-node npm run customer-add-redos
+```
 
 ## License
 
