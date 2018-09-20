@@ -1,7 +1,10 @@
 'use strict'
 
 var conf = require('./server/config')
-var apm = require('elastic-apm-node').start(conf.apm)
+var apmConf = Object.assign({}, conf.apm, {
+  serviceName: conf.apm.serviceName + '-api'
+})
+var apm = require('elastic-apm-node').start(apmConf)
 
 // Elastic APM needs to perform an async operation if an uncaught exception
 // occurs. This ensures that we close the Express server before this happens to
