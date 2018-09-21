@@ -10,4 +10,4 @@ RUN npm install pm2 -g
 
 COPY --from=opbeans/opbeans-frontend:latest /app/ /app/client/
 
-CMD ["pm2-runtime", "processes.config.js"]
+CMD ["pm2-runtime"]
