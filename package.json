@@ -27,7 +27,9 @@
     "client-install": "npm install --prefix client",
     "client-build": "npm run build --prefix client",
     "start": "node server.js",
-    "workload": "workload -f .workload.js"
+    "workload": "workload -f .workload.js",
+    "customer-add-ok": "curl -v -X POST -H 'Content-Type: application/json' -d @db/customer-ok.json http://localhost:3000/api/customers",
+    "customer-add-redos": "curl -v -X POST -H 'Content-Type: application/json' -d @db/customer-redos.json http://localhost:3000/api/customers"
   },
   "repository": {
     "type": "git",

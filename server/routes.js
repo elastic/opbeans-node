@@ -179,6 +179,32 @@ app.get('/customers', function (req, res) {
   })
 })
 
+app.post('/customers', function (req, res) {
+  const customer = req.body
+  const isEmail = /^([a-zA-Z0-9])(([-.]|[_]+)?([a-zA-Z0-9]+))*(@){1}[a-z0-9]+[.]{1}(([a-z]{2,3})|([a-z]{2,3}[.]{1}[a-z]{2,3}))$/
+
+  if (!customer.full_name || !customer.company_name || !isEmail.test(customer.email)) {
+    res.status(400).end()
+    return
+  }
+
+  const sql = 'INSERT INTO customers (full_name, company_name, email, address, postal_code, city, country) VALUES ($1, $2, $3, $4, $5, $6, $7)'
+  const values = [
+    customer.full_name,
+    customer.company_name,
+    customer.email,
+    customer.address,
+    customer.postal_code,
+    customer.city,
+    customer.country
+  ]
+
+  db.pool.query(sql, values, function (err) {
+    if (err) return error(err, res)
+    res.end()
+  })
+})
+
 app.get('/customers/:id', function (req, res) {
   db.pool.query('SELECT * FROM customers WHERE id=$1', [req.params.id], function (err, result) {
     if (err) return error(err, res)
