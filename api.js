@@ -1,14 +1,16 @@
 'use strict'
 
 var conf = require('./server/config')
-var apm = require('elastic-apm-node').start(conf.apm)
+var apmConf = Object.assign({}, conf.apm, {
+  serviceName: conf.apm.serviceName + '-api'
+})
+var apm = require('elastic-apm-node').start(apmConf)
 
 // Elastic APM needs to perform an async operation if an uncaught exception
 // occurs. This ensures that we close the Express server before this happens to
 // we don't keep accepting HTTP requests in the meantime
 process.on('uncaughtException', function () {
   if (server) server.close()
-  if (worker) worker.stop()
 })
 
 // Ensure the Elastic APM queue is flushed before exiting the application in
@@ -23,37 +25,16 @@ apm.handleUncaughtExceptions(function (err) {
   })
 })
 
-var path = require('path')
 var express = require('express')
-
-// start background worker to generate custom transactions
-var worker = require('./worker')
-worker.start()
 
 var app = express()
 
 app.use(function (req, res, next) {
-  console.log(req.method, req.url)
+  console.log(req.method, req.url, req.headers)
   next()
 })
 
 app.use(require('body-parser').json())
-app.use(function (req, res, next) {
-  if (req.method !== 'GET' || req.url !== '/rum-config.js') return next()
-  const clientPkg = require('./client/package.json')
-  const serverUrl = process.env.ELASTIC_APM_JS_SERVER_URL || 'http://localhost:8200'
-  const serviceName = process.env.ELASTIC_APM_JS_SERVICE_NAME || clientPkg.name
-  const serviceVersion = process.env.ELASTIC_APM_JS_SERVICE_VERSION || clientPkg.version
-  const body = `
-    window.elasticApmJsBaseServiceName = "${serviceName}";
-    window.elasticApmJsBaseServiceVersion = "${serviceVersion}";
-    window.elasticApmJsBaseServerUrl = "${serverUrl}";
-  `
-  res.setHeader('Content-Type', 'text/javascript')
-  res.setHeader('Content-Length', Buffer.byteLength(body))
-  res.end(body)
-})
-app.use(express.static('client/build'))
 app.use(function (req, res, next) {
   apm.setTag('foo', 'bar')
   apm.setTag('lorem', 'ipsum dolor sit amet, consectetur adipiscing elit. Nulla finibus, ipsum id scelerisque consequat, enim leo vulputate massa, vel ultricies ante neque ac risus. Curabitur tincidunt vitae sapien id pulvinar. Mauris eu vestibulum tortor. Integer sit amet lorem fringilla, egestas tellus vitae, vulputate purus. Nulla feugiat blandit nunc et semper. Morbi purus libero, mattis sed mauris non, euismod iaculis lacus. Curabitur eleifend ante eros, non faucibus velit lacinia id. Duis posuere libero augue, at dignissim urna consectetur eget. Praesent eu congue est, iaculis finibus augue.')
@@ -75,29 +56,9 @@ app.use(function (req, res, next) {
   next()
 })
 
-app.use(require('./server/coffee'))
+app.use(require('./server/routes'))
 
-var http = require('http')
-app.use('/api', function (req, res) {
-  var clientReq = http.request({
-    method: req.method,
-    path: req.path.replace(/^\/api/, ''),
-    hostname: conf.server.hostname,
-    port: conf.server.port2
-  })
-
-  clientReq.on('response', clientRes => {
-    clientRes.pipe(res)
-  })
-
-  req.pipe(clientReq)
-})
-
-app.get('*', function (req, res) {
-  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
-})
-
-var server = app.listen(conf.server.port, function () {
+var server = app.listen(conf.server.port2, function () {
   var port = server.address().port
   console.log('server is listening on port', port)
 })
