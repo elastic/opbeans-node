@@ -9,12 +9,14 @@ var urlParse = require('url').parse
 // https://github.com/elastic/apm-integration-testing/issues/196
 const opbeansServiceUrls = (process.env.OPBEANS_SERVICES || '')
   .split(',')
-  .filter(s => !s)
+  .filter(s => s)
   .filter(s => s !== 'opbeans-node')
   .map(s => {
     return urlParse(s.indexOf('http') === 0 ? s : `http://${s}:3000`)
   })
-const opbeansRedirectProbability = opbeansServiceUrls.length === 0 ? 0 : (process.env.OPBEANS_DT_PROBABILITY || 0.5)
+const opbeansRedirectProbability = opbeansServiceUrls.length === 0
+  ? 0
+  : Number(process.env.OPBEANS_DT_PROBABILITY || 0.5)
 
 // Elastic APM needs to perform an async operation if an uncaught exception
 // occurs. This ensures that we close the Express server before this happens to
