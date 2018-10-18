@@ -2,6 +2,19 @@
 
 var conf = require('./server/config')
 var apm = require('elastic-apm-node').start(conf.apm)
+var urlParse = require('url').parse
+
+// Read config environment variables used to demonstrate Distributed Tracing
+// For more info see:
+// https://github.com/elastic/apm-integration-testing/issues/196
+const opbeansServiceUrls = (process.env.OPBEANS_SERVICES || '')
+  .split(',')
+  .filter(s => !s)
+  .filter(s => s !== 'opbeans-node')
+  .map(s => {
+    return urlParse(s.indexOf('http') === 0 ? s : `http://${s}:3000`)
+  })
+const opbeansRedirectProbability = opbeansServiceUrls.length === 0 ? 0 : (process.env.OPBEANS_DT_PROBABILITY || 0.5)
 
 // Elastic APM needs to perform an async operation if an uncaught exception
 // occurs. This ensures that we close the Express server before this happens to
@@ -79,12 +92,20 @@ app.use(require('./server/coffee'))
 
 var http = require('http')
 app.use('/api', function (req, res) {
-  var clientReq = http.request({
-    method: req.method,
-    path: req.path.replace(/^\/api/, ''),
-    hostname: conf.server.hostname,
-    port: conf.server.port2
-  })
+  const opts = { method: req.method }
+
+  if (Math.random() < opbeansRedirectProbability) {
+    const service = opbeansServiceUrls[Math.floor(Math.random() * opbeansServiceUrls.length)]
+    opts.hostname = service.hostname
+    opts.port = service.port
+    opts.path = req.path
+  } else {
+    opts.hostname = conf.server.hostname
+    opts.port = conf.server.port2
+    opts.path = req.path.replace(/^\/api/, '')
+  }
+
+  var clientReq = http.request(opts)
 
   clientReq.on('response', clientRes => {
     clientRes.pipe(res)
