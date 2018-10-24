@@ -110,6 +110,7 @@ app.use('/api', function (req, res) {
   var clientReq = http.request(opts)
 
   clientReq.on('response', clientRes => {
+    res.writeHead(clientRes.statusCode, clientRes.headers)
     clientRes.pipe(res)
   })
 
