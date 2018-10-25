@@ -100,11 +100,11 @@ app.use('/api', function (req, res) {
     const service = opbeansServiceUrls[Math.floor(Math.random() * opbeansServiceUrls.length)]
     opts.hostname = service.hostname
     opts.port = service.port
-    opts.path = req.path
+    opts.path = req.originalUrl
   } else {
     opts.hostname = conf.server.hostname
     opts.port = conf.server.port2
-    opts.path = req.path.replace(/^\/api/, '')
+    opts.path = req.url // req.url will just contain the sub-path without the /api
   }
 
   var clientReq = http.request(opts)
