@@ -3,7 +3,7 @@
 var conf = require('./server/config')
 var logger = require('pino')({ level: 'debug' })
 var apmConf = Object.assign({}, conf.apm, {
-  logger: logger.child({ level: 'info' })
+  logger: logger.child({ level: 'trace' })
 })
 var apm = require('elastic-apm-node').start(apmConf)
 var urlParse = require('url').parse

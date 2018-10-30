@@ -4,7 +4,7 @@ var conf = require('./server/config')
 var logger = require('pino')({ level: 'trace' })
 var apmConf = Object.assign({}, conf.apm, {
   serviceName: conf.apm.serviceName + '-api',
-  logger: logger.child({ level: 'info' })
+  logger: logger.child({ level: 'trace' })
 })
 var apm = require('elastic-apm-node').start(apmConf)
 
