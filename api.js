@@ -1,8 +1,10 @@
 'use strict'
 
 var conf = require('./server/config')
+var logger = require('pino')({ level: 'trace' })
 var apmConf = Object.assign({}, conf.apm, {
-  serviceName: conf.apm.serviceName + '-api'
+  serviceName: conf.apm.serviceName + '-api',
+  logger: logger.child({ level: 'info' })
 })
 var apm = require('elastic-apm-node').start(apmConf)
 
@@ -16,11 +18,11 @@ process.on('uncaughtException', function () {
 // Ensure the Elastic APM queue is flushed before exiting the application in
 // case of an uncaught exception
 apm.handleUncaughtExceptions(function (err) {
-  console.error(err.stack)
-  console.error('Application encountered an uncaught exception. Flushing Elastic APM queue and exiting...')
+  logger.error(err.stack)
+  logger.error('Application encountered an uncaught exception. Flushing Elastic APM queue and exiting...')
   apm.flush(function (err) {
-    if (err) console.error(err.stack)
-    else console.error('Elastic APM queue flushed!')
+    if (err) logger.error(err)
+    else logger.error('Elastic APM queue flushed!')
     process.exit(1)
   })
 })
@@ -29,11 +31,11 @@ var express = require('express')
 
 var app = express()
 
+app.use(require('express-pino-logger')({ logger }))
 app.use(function (req, res, next) {
-  console.log(req.method, req.url, req.headers)
+  req.log.debug('request received')
   next()
 })
-
 app.use(require('body-parser').json())
 app.use(function (req, res, next) {
   apm.setTag('foo', 'bar')
@@ -60,5 +62,5 @@ app.use(require('./server/routes'))
 
 var server = app.listen(conf.server.port2, function () {
   var port = server.address().port
-  console.log('server is listening on port', port)
+  logger.info('server is listening on port', port)
 })

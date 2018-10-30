@@ -1,7 +1,11 @@
 'use strict'
 
 var conf = require('./server/config')
-var apm = require('elastic-apm-node').start(conf.apm)
+var logger = require('pino')({ level: 'debug' })
+var apmConf = Object.assign({}, conf.apm, {
+  logger: logger.child({ level: 'info' })
+})
+var apm = require('elastic-apm-node').start(apmConf)
 var urlParse = require('url').parse
 
 // Read config environment variables used to demonstrate Distributed Tracing
@@ -29,11 +33,11 @@ process.on('uncaughtException', function () {
 // Ensure the Elastic APM queue is flushed before exiting the application in
 // case of an uncaught exception
 apm.handleUncaughtExceptions(function (err) {
-  console.error(err.stack)
-  console.error('Application encountered an uncaught exception. Flushing Elastic APM queue and exiting...')
+  logger.error(err)
+  logger.error('Application encountered an uncaught exception. Flushing Elastic APM queue and exiting...')
   apm.flush(function (err) {
-    if (err) console.error(err.stack)
-    else console.error('Elastic APM queue flushed!')
+    if (err) logger.error(err)
+    else logger.error('Elastic APM queue flushed!')
     process.exit(1)
   })
 })
@@ -47,11 +51,11 @@ worker.start()
 
 var app = express()
 
+app.use(require('express-pino-logger')({ logger }))
 app.use(function (req, res, next) {
-  console.log(req.method, req.url)
+  req.log.debug('request received')
   next()
 })
-
 app.use(require('body-parser').json())
 app.use(function (req, res, next) {
   if (req.method !== 'GET' || req.url !== '/rum-config.js') return next()
@@ -106,6 +110,7 @@ app.use('/api', function (req, res) {
     opts.port = conf.server.port2
     opts.path = req.url // req.url will just contain the sub-path without the /api
   }
+  req.log.debug('proxying request: %s => %s:%s', req.originalUrl, opts.hostname, opts.port + opts.path)
 
   var clientReq = http.request(opts)
 
@@ -123,5 +128,5 @@ app.get('*', function (req, res) {
 
 var server = app.listen(conf.server.port, function () {
   var port = server.address().port
-  console.log('server is listening on port', port)
+  logger.info('server is listening on port', port)
 })
