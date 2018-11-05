@@ -98,7 +98,7 @@ app.use(require('./server/coffee'))
 
 var http = require('http')
 app.use('/api', function (req, res, next) {
-  if (Math.random() < opbeansRedirectProbability) {
+   if (Math.random() > opbeansRedirectProbability) {
     return next()
   }
 
