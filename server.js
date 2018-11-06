@@ -97,19 +97,19 @@ app.use(function (req, res, next) {
 app.use(require('./server/coffee'))
 
 var http = require('http')
-app.use('/api', function (req, res) {
-  const opts = { method: req.method }
-
-  if (Math.random() < opbeansRedirectProbability) {
-    const service = opbeansServiceUrls[Math.floor(Math.random() * opbeansServiceUrls.length)]
-    opts.hostname = service.hostname
-    opts.port = service.port
-    opts.path = req.originalUrl
-  } else {
-    opts.hostname = conf.server.hostname
-    opts.port = conf.server.port2
-    opts.path = req.url // req.url will just contain the sub-path without the /api
+app.use('/api', function (req, res, next) {
+  if (Math.random() > opbeansRedirectProbability) {
+    return next()
   }
+
+  const service = opbeansServiceUrls[Math.floor(Math.random() * opbeansServiceUrls.length)]
+  const opts = {
+    method: req.method,
+    hostname: service.hostname,
+    port: service.port,
+    path: req.originalUrl
+  }
+
   req.log.debug('proxying request: %s => %s:%s', req.originalUrl, opts.hostname, opts.port + opts.path)
 
   var clientReq = http.request(opts)
@@ -121,6 +121,8 @@ app.use('/api', function (req, res) {
 
   req.pipe(clientReq)
 })
+
+app.use('/api', require('./server/routes'))
 
 app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
