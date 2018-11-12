@@ -60,8 +60,7 @@ function performSubTasks (tasks, cb) {
 function performSubTask (name, cb) {
   if (!running) return
 
-  var span = apm.buildSpan()
-  if (span) span.start(name)
+  var span = apm.startSpan(name)
 
   setTimeout(function () {
     if (span) span.end()
