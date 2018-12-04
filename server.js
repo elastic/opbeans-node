@@ -7,6 +7,7 @@ var apmConf = Object.assign({}, conf.apm, {
 })
 var apm = require('elastic-apm-node').start(apmConf)
 var urlParse = require('url').parse
+var fs = require('fs')
 
 // Read config environment variables used to demonstrate Distributed Tracing
 // For more info see:
@@ -57,21 +58,6 @@ app.use(function (req, res, next) {
   next()
 })
 app.use(require('body-parser').json())
-app.use(function (req, res, next) {
-  if (req.method !== 'GET' || req.url !== '/rum-config.js') return next()
-  const clientPkg = require('./client/package.json')
-  const serverUrl = process.env.ELASTIC_APM_JS_SERVER_URL || 'http://localhost:8200'
-  const serviceName = process.env.ELASTIC_APM_JS_SERVICE_NAME || clientPkg.name
-  const serviceVersion = process.env.ELASTIC_APM_JS_SERVICE_VERSION || clientPkg.version
-  const body = `
-    window.elasticApmJsBaseServiceName = "${serviceName}";
-    window.elasticApmJsBaseServiceVersion = "${serviceVersion}";
-    window.elasticApmJsBaseServerUrl = "${serverUrl}";
-  `
-  res.setHeader('Content-Type', 'text/javascript')
-  res.setHeader('Content-Length', Buffer.byteLength(body))
-  res.end(body)
-})
 app.use(express.static('client/build'))
 app.use(function (req, res, next) {
   apm.setTag('foo', 'bar')
@@ -124,8 +110,36 @@ app.use('/api', function (req, res, next) {
 
 app.use('/api', require('./server/routes'))
 
-app.get('*', function (req, res) {
-  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
+app.get('*', function (req, res, next) {
+  var file = path.resolve(__dirname, 'client/build', 'index.html')
+  fs.readFile(file, function (err, data) {
+    if (err) return next(err)
+
+    const clientPkg = require('./client/package.json')
+    const rumConfig = {
+      serviceName: process.env.ELASTIC_APM_JS_SERVICE_NAME || clientPkg.name,
+      serviceVersion: process.env.ELASTIC_APM_JS_SERVICE_VERSION || clientPkg.version,
+      serverUrl: process.env.ELASTIC_APM_JS_SERVER_URL || 'http://localhost:8200',
+      pageLoadTraceId: undefined,
+      pageLoadSpanId: undefined,
+      pageLoadSampled: undefined
+    }
+
+    const transaction = apm.currentTransaction
+    if (transaction) {
+      rumConfig.pageLoadTraceId = transaction.traceId
+      rumConfig.pageLoadSpanId = transaction.ensureParentId()
+      rumConfig.pageLoadSampled = transaction.sampled
+    }
+
+    const body = data.toString()
+      .replace('<script type="text/javascript" src="/rum-config.js"></script>', '')
+      .replace('<head>', `<head><script>window.rumConfig = ${JSON.stringify(rumConfig)}</script>`)
+
+    res.setHeader('Content-Type', 'text/javascript')
+    res.setHeader('Content-Length', Buffer.byteLength(body))
+    res.end(body)
+  })
 })
 
 var server = app.listen(conf.server.port, function () {
