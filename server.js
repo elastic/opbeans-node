@@ -58,7 +58,7 @@ app.use(function (req, res, next) {
   next()
 })
 app.use(require('body-parser').json())
-app.use(express.static('client/build'))
+app.use(express.static('client/build', { index: false }))
 app.use(function (req, res, next) {
   apm.setTag('foo', 'bar')
   apm.setTag('lorem', 'ipsum dolor sit amet, consectetur adipiscing elit. Nulla finibus, ipsum id scelerisque consequat, enim leo vulputate massa, vel ultricies ante neque ac risus. Curabitur tincidunt vitae sapien id pulvinar. Mauris eu vestibulum tortor. Integer sit amet lorem fringilla, egestas tellus vitae, vulputate purus. Nulla feugiat blandit nunc et semper. Morbi purus libero, mattis sed mauris non, euismod iaculis lacus. Curabitur eleifend ante eros, non faucibus velit lacinia id. Duis posuere libero augue, at dignissim urna consectetur eget. Praesent eu congue est, iaculis finibus augue.')
@@ -136,7 +136,7 @@ app.get('*', function (req, res, next) {
       .replace('<script type="text/javascript" src="/rum-config.js"></script>', '')
       .replace('<head>', `<head><script>window.rumConfig = ${JSON.stringify(rumConfig)}</script>`)
 
-    res.setHeader('Content-Type', 'text/javascript')
+    res.setHeader('Content-Type', 'text/html')
     res.setHeader('Content-Length', Buffer.byteLength(body))
     res.end(body)
   })
