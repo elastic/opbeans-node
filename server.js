@@ -74,7 +74,7 @@ app.use(function (req, res, next) {
 
   // mimic custom context
   apm.setCustomContext({
-    containerId: Math.floor(Math.random() * 10000)
+    shoppingBasketCount: 42
   })
 
   next()
