@@ -35,7 +35,7 @@ app.get('/stats', function (req, res) {
     var orderedProducts = result.rows
     var next = afterAll(function (err, results) {
       if (err) return done(err)
-      var result = {revenue: 0, cost: 0, profit: 0}
+      var result = { revenue: 0, cost: 0, profit: 0 }
       results.forEach(function (r, index) {
         var product = r.rows[0]
         var amount = orderedProducts[index].amount
@@ -273,14 +273,14 @@ app.post('/orders', function (req, res) {
 
           var next = afterAll(function (err) {
             if (err) return rollback(err)
-            accounting.placeOrder({id: id}, function (err) {
+            accounting.placeOrder({ id: id }, function (err) {
               if (err) return rollback(err)
               client.query('COMMIT', function (err) {
                 if (err) return rollback(err)
                 done()
                 redis.set('newest-order', id, function (err) {
                   if (err) return error(err, res)
-                  res.json({id: id})
+                  res.json({ id: id })
                 })
               })
             })
