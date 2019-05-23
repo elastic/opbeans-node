@@ -2,7 +2,7 @@ version: "2.1"
 services:
   opbeans-node:
     build: .
-    image: opbeans-node:latest
+    image: opbeans/opbeans-node:latest
     ports:
       - "127.0.0.1:${OPBEANS_NODE_PORT:-8000}:3000"
     container_name: opbeans-node
