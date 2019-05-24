@@ -86,6 +86,7 @@ pipeline {
             }
           }
           when {
+            beforeInput true
             beforeAgent true
             allOf {
               anyOf {
