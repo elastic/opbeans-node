@@ -1,3 +1,5 @@
+[![Build Status](https://apm-ci.elastic.co/job/apm-agent-nodejs/job/opbeans-node-mbp/job/master/badge/icon)](https://apm-ci.elastic.co/job/apm-agent-nodejs/job/opbeans-node-mbp/job/master/)
+
 # Opbeans for Node.js
 
 The Opbeans inventory management system is a demo app created and
@@ -88,6 +90,26 @@ opbeans-frontend, just run:
 ```
 npm run client-update
 ```
+
+## Testing locally
+
+The simplest way to test this demo is by running:
+
+```bash
+make test
+```
+
+Tests are written using [bats](https://github.com/sstephenson/bats) under the tests dir
+
+## Publishing to dockerhub locally
+
+Publish the docker image with
+
+```bash
+VERSION=1.2.3 make publish
+```
+
+NOTE: VERSION refers to the tag for the docker image which will be published in the registry
 
 ## Demo notes
 

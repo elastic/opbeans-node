@@ -1,3 +1,7 @@
 .env*
 node_modules
 client
+
+# For the BATS testing
+bats/
+target/
