@@ -1,3 +1,5 @@
+[![Build Status](https://apm-ci.elastic.co/job/apm-agent-nodejs/job/opbeans-node-mbp/job/master/badge/icon)](https://apm-ci.elastic.co/job/apm-agent-nodejs/job/opbeans-node-mbp/job/master/)
+
 # Opbeans for Node.js
 
 The Opbeans inventory management system is a demo app created and

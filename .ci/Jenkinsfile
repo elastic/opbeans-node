@@ -102,9 +102,8 @@ pipeline {
             deleteDir()
             unstash 'source'
             dir("${BASE_DIR}"){
-              dockerLogin(secret: "${DOCKERHUB_SECRET}", registry: 'docker.io') {
-                sh "VERSION=${VERSION} make publish"
-              }
+              dockerLogin(secret: "${DOCKERHUB_SECRET}", registry: 'docker.io')
+              sh "VERSION=${VERSION} make publish"
             }
           }
         }
