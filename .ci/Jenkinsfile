@@ -51,10 +51,12 @@ pipeline {
         */
         stage('Build') {
           steps {
-            deleteDir()
-            unstash 'source'
-            dir("${BASE_DIR}"){
-              sh 'make build'
+            withGithubNotify(context: 'Build') {
+              deleteDir()
+              unstash 'source'
+              dir("${BASE_DIR}"){
+                sh 'make build'
+              }
             }
           }
         }
@@ -63,10 +65,12 @@ pipeline {
         */
         stage('Test') {
           steps {
-            deleteDir()
-            unstash 'source'
-            dir("${BASE_DIR}"){
-              sh "make test"
+            withGithubNotify(context: 'Test', tab: 'tests') {
+              deleteDir()
+              unstash 'source'
+              dir("${BASE_DIR}"){
+                sh "make test"
+              }
             }
           }
           post {
@@ -99,11 +103,13 @@ pipeline {
             }
           }
           steps {
-            deleteDir()
-            unstash 'source'
-            dir("${BASE_DIR}"){
-              dockerLogin(secret: "${DOCKERHUB_SECRET}", registry: 'docker.io')
-              sh "VERSION=${VERSION} make publish"
+            withGithubNotify(context: 'Release') {
+              deleteDir()
+              unstash 'source'
+              dir("${BASE_DIR}"){
+                dockerLogin(secret: "${DOCKERHUB_SECRET}", registry: 'docker.io')
+                sh "VERSION=${VERSION} make publish"
+              }
             }
           }
         }
