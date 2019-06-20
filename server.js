@@ -60,10 +60,10 @@ app.use(function (req, res, next) {
 app.use(require('body-parser').json())
 app.use(express.static('client/build', { index: false }))
 app.use(function (req, res, next) {
-  apm.setTag('foo', 'bar')
-  apm.setTag('lorem', 'ipsum dolor sit amet, consectetur adipiscing elit. Nulla finibus, ipsum id scelerisque consequat, enim leo vulputate massa, vel ultricies ante neque ac risus. Curabitur tincidunt vitae sapien id pulvinar. Mauris eu vestibulum tortor. Integer sit amet lorem fringilla, egestas tellus vitae, vulputate purus. Nulla feugiat blandit nunc et semper. Morbi purus libero, mattis sed mauris non, euismod iaculis lacus. Curabitur eleifend ante eros, non faucibus velit lacinia id. Duis posuere libero augue, at dignissim urna consectetur eget. Praesent eu congue est, iaculis finibus augue.')
-  apm.setTag('this-is-a-very-long-tag-name-without-any-spaces', 'test')
-  apm.setTag('multi-line', 'foo\nbar\nbaz')
+  apm.setLabel('foo', 'bar')
+  apm.setLabel('lorem', 'ipsum dolor sit amet, consectetur adipiscing elit. Nulla finibus, ipsum id scelerisque consequat, enim leo vulputate massa, vel ultricies ante neque ac risus. Curabitur tincidunt vitae sapien id pulvinar. Mauris eu vestibulum tortor. Integer sit amet lorem fringilla, egestas tellus vitae, vulputate purus. Nulla feugiat blandit nunc et semper. Morbi purus libero, mattis sed mauris non, euismod iaculis lacus. Curabitur eleifend ante eros, non faucibus velit lacinia id. Duis posuere libero augue, at dignissim urna consectetur eget. Praesent eu congue est, iaculis finibus augue.')
+  apm.setLabel('this-is-a-very-long-tag-name-without-any-spaces', 'test')
+  apm.setLabel('multi-line', 'foo\nbar\nbaz')
 
   // mimic logged in user
   apm.setUserContext({
