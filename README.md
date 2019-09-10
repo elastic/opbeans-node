@@ -38,12 +38,12 @@ Setup the following environment variables:
   app (default: `opbeans-node`)
 - `ELASTIC_APM_SERVER_URL` - APM Server URL (default:
   `http://localhost:8200`)
-- `ELASTIC_APM_JS_BASE_SERVER_URL` - Elastic APM Server URL for the
+- `ELASTIC_APM_JS_SERVER_URL` - Elastic APM Server URL for the
   client app (default: `http://localhost:3000`)
-- `ELASTIC_APM_JS_BASE_SERVICE_NAME` - Elastic APM App Name for the
+- `ELASTIC_APM_JS_SERVICE_NAME` - Elastic APM App Name for the
   client app (defaults to `name` from [opbeans-frontend package.json
   file](https://github.com/elastic/opbeans-frontend/blob/master/package.json)
-- `ELASTIC_APM_JS_BASE_SERVICE_VERSION` - Elastic APM App Name for the
+- `ELASTIC_APM_JS_SERVICE_VERSION` - Elastic APM App Name for the
   client app (defaults to `version` from [opbeans-frontend package.json
   file](https://github.com/elastic/opbeans-frontend/blob/master/package.json)
 
