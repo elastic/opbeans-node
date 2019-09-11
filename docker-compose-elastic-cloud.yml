@@ -16,7 +16,7 @@ services:
       - ELASTIC_APM_APPLICATION_PACKAGES=co.elastic.apm.opbeans
       - ELASTIC_APM_JS_SERVER_URL=${ELASTIC_APM_JS_SERVER_URL:-http://localhost:8200}
       - ELASTIC_APM_JS_SERVICE_NAME=${ELASTIC_APM_JS_SERVICE_NAME:-opbeans-react}
-      - NODE_ENV=testing
+      - NODE_ENV=test
       - OPBEANS_SERVER_PORT=${OPBEANS_SERVER_PORT:-8000}
       - PGHOST=postgres
       - PGUSER=postgres
