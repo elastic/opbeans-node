@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:8-alpine
 
 WORKDIR /app
 ADD . /app
@@ -8,6 +8,7 @@ RUN npm install
 
 RUN npm install pm2 -g
 
-COPY --from=opbeans/opbeans-frontend:latest /app/ /app/client/
+COPY --from=opbeans/opbeans-frontend:latest /app/build /app/client/build
+COPY --from=opbeans/opbeans-frontend:latest /app/package.json /app/client/package.json
 
 CMD ["pm2-runtime", "ecosystem.config.js"]

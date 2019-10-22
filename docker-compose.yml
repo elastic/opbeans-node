@@ -32,7 +32,7 @@ services:
       redis:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "--write-out", "'HTTP %{http_code}'", "--silent", "--output", "/dev/null", "http://opbeans-node:3000/"]
+      test: ["CMD", "wget", "-q", "--server-response", "-O", "/dev/null", "http://opbeans-node:3000/"]
       interval: 10s
       retries: 10
 
@@ -136,7 +136,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       retries: 10
       interval: 10s
-      
+
   redis:
     image: redis:4
     ports:
@@ -149,13 +149,13 @@ services:
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
-      
+
   wait:
     image: busybox
     depends_on:
       opbeans-node:
         condition: service_healthy
-        
+
   loadPgData:
     image: node:12
     environment:
@@ -175,7 +175,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-        
+
 volumes:
   esdata:
     driver: local
