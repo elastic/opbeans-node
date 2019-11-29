@@ -15,4 +15,4 @@ docker run --rm -t \
 
 # Commit changes
 git add package.json
-git commit -m "Bump version ${AGENT_VERSION}"
+git commit -m "fix(package): bump elastic-apm-node to v${AGENT_VERSION}"
