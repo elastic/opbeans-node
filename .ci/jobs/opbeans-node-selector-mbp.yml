@@ -4,6 +4,7 @@
     display-name: Opbeans Node MBP selector
     description: Opbeans Node MBP selector
     project-type: multibranch
+    concurrent: true
     script-path: .ci/selector.groovy
     scm:
     - github:
