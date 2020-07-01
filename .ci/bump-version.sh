@@ -15,7 +15,7 @@ docker run --rm -t \
 
 
 ## Bump agent version in the Dockerfile
-sed -ibck "s#\(org.label-schema.version=\)\(.*\)#\1\"${AGENT_VERSION}\"#g" Dockerfile
+sed -ibck "s#\(org.label-schema.version=\)\(\".*\"\)\(.*\)#\1\"${AGENT_VERSION}\"\3#g" Dockerfile
 
 # Commit changes
 git add package.json Dockerfile
