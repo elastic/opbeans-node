@@ -1,5 +1,6 @@
 'use strict'
 
+// a test
 var conf = require('./server/config')
 var logger = require('pino')({ level: 'debug' })
 var apmConf = Object.assign({}, conf.apm, {
