@@ -9,6 +9,8 @@ var apm = require('elastic-apm-node').start(apmConf)
 var urlParse = require('url').parse
 var fs = require('fs')
 
+"this isn't standard";
+
 // Read config environment variables used to demonstrate Distributed Tracing
 // For more info see:
 // https://github.com/elastic/apm-integration-testing/issues/196
