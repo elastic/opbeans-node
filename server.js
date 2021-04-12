@@ -6,7 +6,7 @@ const apmConf = Object.assign({}, conf.apm, {
   logger: logger.child({ level: 'info' })
 })
 const apm = require('elastic-apm-node').start(apmConf)
-const urlParse = require('url').parse
+const URL = require('url').URL
 const fs = require('fs')
 
 // Read config environment variables used to demonstrate Distributed Tracing
@@ -17,7 +17,7 @@ const opbeansServiceUrls = (process.env.OPBEANS_SERVICES || '')
   .filter(s => s)
   .filter(s => s !== 'opbeans-node')
   .map(s => {
-    return urlParse(s.indexOf('http') === 0 ? s : `http://${s}:3000`)
+    return new URL(s.indexOf('http') === 0 ? s : `http://${s}:3000`)
   })
 const opbeansRedirectProbability = opbeansServiceUrls.length === 0
   ? 0
@@ -47,7 +47,7 @@ const path = require('path')
 const express = require('express')
 
 // start background worker to generate custom transactions
-var worker = require('./worker')
+const worker = require('./worker')
 worker.start()
 
 const app = express()
@@ -142,7 +142,7 @@ app.get('*', function (req, res, next) {
   })
 })
 
-var server = app.listen(conf.server.port, function () {
+const server = app.listen(conf.server.port, function () {
   const port = server.address().port
   logger.info('server is listening on port', port)
 })
