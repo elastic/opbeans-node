@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
-    "standard": "^12.0.1"
+    "standard": "^16.0.3"
   },
   "scripts": {
     "db-setup": "./db/setup.sh",
