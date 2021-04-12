@@ -1,13 +1,13 @@
 'use strict'
 
-var conf = require('./server/config')
-var logger = require('pino')({ level: 'debug' })
-var apmConf = Object.assign({}, conf.apm, {
+const conf = require('./server/config')
+const logger = require('pino')({ level: 'debug' })
+const apmConf = Object.assign({}, conf.apm, {
   logger: logger.child({ level: 'info' })
 })
-var apm = require('elastic-apm-node').start(apmConf)
-var urlParse = require('url').parse
-var fs = require('fs')
+const apm = require('elastic-apm-node').start(apmConf)
+const URL = require('url').URL
+const fs = require('fs')
 
 // Read config environment variables used to demonstrate Distributed Tracing
 // For more info see:
@@ -17,7 +17,7 @@ const opbeansServiceUrls = (process.env.OPBEANS_SERVICES || '')
   .filter(s => s)
   .filter(s => s !== 'opbeans-node')
   .map(s => {
-    return urlParse(s.indexOf('http') === 0 ? s : `http://${s}:3000`)
+    return new URL(s.indexOf('http') === 0 ? s : `http://${s}:3000`)
   })
 const opbeansRedirectProbability = opbeansServiceUrls.length === 0
   ? 0
@@ -43,14 +43,14 @@ apm.handleUncaughtExceptions(function (err) {
   })
 })
 
-var path = require('path')
-var express = require('express')
+const path = require('path')
+const express = require('express')
 
 // start background worker to generate custom transactions
-var worker = require('./worker')
+const worker = require('./worker')
 worker.start()
 
-var app = express()
+const app = express()
 
 app.use(require('express-pino-logger')({ logger }))
 app.use(function (req, res, next) {
@@ -82,7 +82,7 @@ app.use(function (req, res, next) {
 
 app.use(require('./server/coffee'))
 
-var http = require('http')
+const http = require('http')
 app.use('/api', function (req, res, next) {
   if (Math.random() > opbeansRedirectProbability) {
     return next()
@@ -98,7 +98,7 @@ app.use('/api', function (req, res, next) {
 
   req.log.debug('proxying request: %s => %s:%s', req.originalUrl, opts.hostname, opts.port + opts.path)
 
-  var clientReq = http.request(opts)
+  const clientReq = http.request(opts)
 
   clientReq.on('response', clientRes => {
     res.writeHead(clientRes.statusCode, clientRes.headers)
@@ -111,7 +111,7 @@ app.use('/api', function (req, res, next) {
 app.use('/api', require('./server/routes'))
 
 app.get('*', function (req, res, next) {
-  var file = path.resolve(__dirname, 'client/build', 'index.html')
+  const file = path.resolve(__dirname, 'client/build', 'index.html')
   fs.readFile(file, function (err, data) {
     if (err) return next(err)
 
@@ -142,7 +142,7 @@ app.get('*', function (req, res, next) {
   })
 })
 
-var server = app.listen(conf.server.port, function () {
-  var port = server.address().port
+const server = app.listen(conf.server.port, function () {
+  const port = server.address().port
   logger.info('server is listening on port', port)
 })

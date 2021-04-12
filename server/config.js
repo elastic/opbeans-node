@@ -1,14 +1,14 @@
 'use strict'
 
-var pkg = require('../package')
-var env = process.env.NODE_ENV || 'development'
+const pkg = require('../package')
+let env = process.env.NODE_ENV || 'development'
 
 if (env === 'development') {
   require('dotenv').config()
   env = process.env.NODE_ENV || env // in case dotenv changes NODE_ENV
 }
 
-var conf = module.exports = {
+const conf = module.exports = {
   env: env,
   server: {
     protocol: process.env.OPBEANS_SERVER_PROTOCOL || 'http:',
