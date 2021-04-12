@@ -1,6 +1,6 @@
 'use strict'
 
-var request = require('request')
+const request = require('request')
 
 exports.placeOrder = function (order, cb) {
   request.post('http://example.com/opbeans', order, function (err, res, body) {

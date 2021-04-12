@@ -1,9 +1,9 @@
 'use strict'
 
-var pg = require('pg')
-var conf = require('./config')
+const pg = require('pg')
+const conf = require('./config')
 
-var pool = new pg.Pool(conf.pg)
+const pool = new pg.Pool(conf.pg)
 
 exports.pool = pool
 

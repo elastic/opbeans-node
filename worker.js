@@ -2,8 +2,8 @@
 
 // this worker simulates a background job that uses custom transactions
 
-var apm = require('elastic-apm-node')
-var running = false
+const apm = require('elastic-apm-node')
+let running = false
 
 exports.start = function () {
   running = true
@@ -60,7 +60,7 @@ function performSubTasks (tasks, cb) {
 function performSubTask (name, cb) {
   if (!running) return
 
-  var span = apm.startSpan(name)
+  const span = apm.startSpan(name)
 
   setTimeout(function () {
     if (span) span.end()

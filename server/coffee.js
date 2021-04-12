@@ -1,9 +1,9 @@
 'use strict'
 
-var express = require('express')
-var apm = require('elastic-apm-node')
+const express = require('express')
+const apm = require('elastic-apm-node')
 
-var app = module.exports = new express.Router()
+const app = module.exports = new express.Router()
 
 app.get('/is-it-coffee-time', function (req, res) {
   if (req.paarms.level === 11) {
