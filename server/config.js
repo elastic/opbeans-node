@@ -3,11 +3,6 @@
 const pkg = require('../package')
 let env = process.env.NODE_ENV || 'development'
 
-if (env === 'development') {
-  require('dotenv').config()
-  env = process.env.NODE_ENV || env // in case dotenv changes NODE_ENV
-}
-
 const conf = module.exports = {
   env: env,
   server: {
