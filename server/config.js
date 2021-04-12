@@ -1,7 +1,7 @@
 'use strict'
 
 const pkg = require('../package')
-let env = process.env.NODE_ENV || 'development'
+const env = process.env.NODE_ENV || 'development'
 
 const conf = module.exports = {
   env: env,
