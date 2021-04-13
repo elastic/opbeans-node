@@ -16,7 +16,6 @@
     "workload": "^2.4.3"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0",
     "standard": "^16.0.3"
   },
   "scripts": {
