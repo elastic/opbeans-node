@@ -16,7 +16,7 @@
     "workload": "^2.4.3"
   },
   "devDependencies": {
-    "standard": "^16.0.3"
+    "standard": "^16.0.4"
   },
   "scripts": {
     "db-setup": "./db/setup.sh",
