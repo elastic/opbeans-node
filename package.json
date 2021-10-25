@@ -6,7 +6,7 @@
   "dependencies": {
     "after-all-results": "^2.0.0",
     "body-parser": "^1.18.3",
-    "elastic-apm-node": "^3.21.1",
+    "elastic-apm-node": "^3.22.0",
     "express": "^4.16.4",
     "express-pino-logger": "^6.0.0",
     "pg": "^8.7.1",
