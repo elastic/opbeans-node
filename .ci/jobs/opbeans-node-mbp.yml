@@ -10,7 +10,8 @@
     script-path: .ci/Jenkinsfile
     scm:
     - github:
-        branch-discovery: all
+        ## no-pr skips all the branches in the origin that match with a PR.
+        branch-discovery: no-pr
         discover-pr-forks-strategy: merge-current
         discover-pr-forks-trust: permission
         discover-pr-origin: merge-current
@@ -26,7 +27,9 @@
             ignore-tags-newer-than: -1
         - regular-branches: true
         - change-request:
-            ignore-target-only-changes: false
+            ## This will avoid building the PRs when the target branch has changed
+            ## when the MBP index scan happens
+            ignore-target-only-changes: true
         clean:
           after: true
           before: true
@@ -42,5 +45,4 @@
         timeout: '15'
         use-author: true
         wipe-workspace: 'True'
-    periodic-folder-trigger: 1d
     prune-dead-branches: true
