@@ -18,6 +18,9 @@
   "devDependencies": {
     "standard": "^16.0.4"
   },
+  "engines": {
+    "node": ">=12"
+  },
   "scripts": {
     "db-setup": "./db/setup.sh",
     "lint": "standard",
