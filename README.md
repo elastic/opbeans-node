@@ -3,7 +3,7 @@
 The Opbeans inventory management system is a demo app created and
 maintained by [Elastic](https://elastic.co).
 
-[![Build Status](https://apm-ci.elastic.co/job/apm-agent-nodejs/job/opbeans-node-mbp/job/master/badge/icon)](https://apm-ci.elastic.co/job/apm-agent-nodejs/job/opbeans-node-mbp/job/master/)
+[![Build Status](https://apm-ci.elastic.co/job/apm-agent-nodejs/job/opbeans-node-mbp/job/main/badge/icon)](https://apm-ci.elastic.co/job/apm-agent-nodejs/job/opbeans-node-mbp/job/main/)
 [![Lint status](https://github.com/elastic/opbeans-node/workflows/Lint/badge.svg)](https://github.com/elastic/opbeans-node/actions)
 
 ## Technology Stack
