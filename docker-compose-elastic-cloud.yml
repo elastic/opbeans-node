@@ -35,7 +35,7 @@ services:
       test: ["CMD", "curl", "--write-out", "'HTTP %{http_code}'", "--silent", "--output", "/dev/null", "http://opbeans-node:3000/"]
       interval: 10s
       retries: 10
-      
+
   apm-server:
     image: docker.elastic.co/apm/apm-server:${STACK_VERSION:-7.3.0}
     ports:
@@ -72,7 +72,7 @@ services:
       test: ["CMD", "curl", "--write-out", "'HTTP %{http_code}'", "--silent", "--output", "/dev/null", "http://apm-server:8200/"]
       retries: 10
       interval: 10s
-      
+
   postgres:
     image: postgres:latest
     environment:
@@ -86,7 +86,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       retries: 10
       interval: 10s
-      
+
   redis:
     image: redis:4
     ports:
@@ -99,15 +99,15 @@ services:
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
-      
+
   wait:
     image: busybox
     depends_on:
       opbeans-node:
         condition: service_healthy
-        
+
   loadPgData:
-    image: node:12
+    image: node:12-bullseye
     environment:
       - PGHOST=postgres
       - PGUSER=postgres
@@ -125,7 +125,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-        
+
 volumes:
   esdata:
     driver: local
