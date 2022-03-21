@@ -10,7 +10,7 @@
     "express": "^4.17.3",
     "express-pino-logger": "^7.0.0",
     "pg": "^8.7.3",
-    "pino": "^7.8.1",
+    "pino": "^7.9.1",
     "redis": "^3.1.0",
     "request": "^2.88.0",
     "workload": "^2.4.3"
