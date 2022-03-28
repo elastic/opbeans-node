@@ -16,7 +16,8 @@ docker run --rm -t \
 
 ## Bump agent version in the Dockerfile
 sed -ibck "s#\(org.label-schema.version=\)\(\".*\"\)\(.*\)#\1\"${AGENT_VERSION}\"\3#g" Dockerfile
+rm -f Dockerfilebck
 
 # Commit changes
-git add package.json Dockerfile
+git add package.json package-lock.json Dockerfile
 git commit -m "fix(package): bump elastic-apm-node to v${AGENT_VERSION}"
