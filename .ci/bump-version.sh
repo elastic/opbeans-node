@@ -11,7 +11,7 @@ docker run --rm -t \
   -w /app \
   -v "$(pwd):/app" \
   node:12-alpine /bin/sh -c "set -x
-    CI=true npm install elastic-apm-node@${AGENT_VERSION}"
+    CI=true npm install --ignore-scripts elastic-apm-node@${AGENT_VERSION}"
 
 
 ## Bump agent version in the Dockerfile
