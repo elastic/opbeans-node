@@ -11,12 +11,13 @@ docker run --rm -t \
   -w /app \
   -v "$(pwd):/app" \
   node:12-alpine /bin/sh -c "set -x
-    CI=true npm install elastic-apm-node@${AGENT_VERSION}"
+    CI=true npm install --ignore-scripts elastic-apm-node@${AGENT_VERSION}"
 
 
 ## Bump agent version in the Dockerfile
 sed -ibck "s#\(org.label-schema.version=\)\(\".*\"\)\(.*\)#\1\"${AGENT_VERSION}\"\3#g" Dockerfile
+rm -f Dockerfilebck
 
 # Commit changes
-git add package.json Dockerfile
+git add package.json package-lock.json Dockerfile
 git commit -m "fix(package): bump elastic-apm-node to v${AGENT_VERSION}"
