@@ -1,6 +1,7 @@
 .env*
 node_modules
 client
+/.vscode
 
 # For the BATS testing
 bats/
