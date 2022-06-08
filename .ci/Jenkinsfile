@@ -171,34 +171,34 @@ pipeline {
       // }
       steps {
         withGithubNotify(context: 'Update Agent Dep') {
-
-
           deleteDir()
           unstash 'source'
           dir(BASE_DIR){
-            sh(
-              label: "XXX hi",
-              script: "pwd && ls && make help && echo && printenv && echo && git tag -ln"
-            )
+            echo "XXX here"
             // sh(
-            //   label: "XXX npm",
-            //   script: "npm --version; node --version"
+            //   label: "XXX hi",
+            //   script: "pwd && ls && make help && echo && printenv && echo && git tag -ln"
             // )
+            // script {
+            //   GIT_COMMIT_EMAIL = sh (
+            //       script: 'git --no-pager show -s --format=\'%ae\'',
+            //       returnStdout: true
+            //   ).trim()
+            // }
+            // echo "Git committer email: ${GIT_COMMIT_EMAIL}"
             script {
-              GIT_COMMIT_EMAIL = sh (
-                  script: 'git --no-pager show -s --format=\'%ae\'',
-                  returnStdout: true
-              ).trim()
-            }
-            echo "Git committer email: ${GIT_COMMIT_EMAIL}"
-            script {
-              AVAIL_AGENT_UPDATE_VER = sh (
+              AVAIL_AGENT_UPDATE_VER = sh(
                   // script: '.ci/avail-agent-update-ver.sh',
-                  script: 'echo "v3.36.0"', // XXX
+                  script: 'echo "3.36.0"', // XXX
                   returnStdout: true
               ).trim()
               if (AVAIL_AGENT_UPDATE_VER) {
                 echo "XXX we have an agent to update to"
+                sh(script: ".ci/bump-version.sh ${AVAIL_AGENT_UPDATE_VER}")
+                // // The opbeans pipeline will trigger a release for the main branch
+                // gitPush()
+                // // The opbeans pipeline will trigger a release for the release tag
+                // gitCreateTag(tag: "${AVAIL_AGENT_UPDATE_VER}")
               }
             }
           }
