@@ -41,6 +41,10 @@ pipeline {
     */
     stage('Checkout') {
       steps {
+        // XXX apm-agent-nodejs has this to not get *two* builds when pushing a
+        //     branch and immediately making a PR from it
+        pipelineManager([ cancelPreviousRunningBuilds: [ when: 'PR' ] ])
+
         deleteDir()
         gitCheckout(basedir: BASE_DIR)
         stash allowEmpty: true, name: 'source', useDefaultExcludes: false
@@ -177,6 +181,15 @@ pipeline {
               label: "XXX hi",
               script: "pwd && ls && make help && echo && printenv && echo && git tag -ln"
             )
+            sh(
+              label: "XXX npm",
+              script: "npm --version; node --version"
+            )
+            GIT_COMMIT_EMAIL = sh (
+                script: 'git --no-pager show -s --format=\'%ae\'',
+                returnStdout: true
+            ).trim()
+            echo "Git committer email: ${GIT_COMMIT_EMAIL}"
           }
         }
       }
