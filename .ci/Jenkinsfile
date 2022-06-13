@@ -8,20 +8,12 @@ pipeline {
   environment {
     BASE_DIR = 'src/github.com/elastic'
     NOTIFY_TO = credentials('notify-to')
-    JOB_GCS_BUCKET = credentials('gcs-bucket')
-    JOB_GCS_CREDENTIALS = 'apm-ci-gcs-plugin'
-    DOCKERHUB_SECRET = 'secret/apm-team/ci/elastic-observability-dockerhub'
     PIPELINE_LOG_LEVEL = 'INFO'
     PATH = "${env.PATH}:${env.WORKSPACE}/bin"
     HOME = "${env.WORKSPACE}"
-    DOCKER_REGISTRY_SECRET = 'secret/apm-team/ci/docker-registry/prod'
-    REGISTRY = 'docker.elastic.co'
-    STAGING_IMAGE = "${env.REGISTRY}/observability-ci"
-    GITHUB_CHECK_ITS_NAME = 'Integration Tests'
-    ITS_PIPELINE = 'apm-integration-tests-selector-mbp/main'
   }
   options {
-    timeout(time: 1, unit: 'HOURS')
+    timeout(time: 10, unit: 'MINUTES')
     buildDiscarder(logRotator(numToKeepStr: '20', artifactNumToKeepStr: '20', daysToKeepStr: '30'))
     timestamps()
     ansiColor('xterm')
@@ -32,143 +24,13 @@ pipeline {
     disableConcurrentBuilds(abortPrevious: isPR())
   }
   triggers {
-    issueCommentTrigger("${obltGitHubComments()}")
     // Only main branch will run on a timer basis
     cron(env.BRANCH_NAME == 'main' ? '@weekly' : '')
   }
   stages {
-    /**
-      Checkout the code and stash it, to use it on other stages.
-    */
-    stage('Checkout') {
-      steps {
-        deleteDir()
-        gitCheckout(basedir: BASE_DIR)
-        stash allowEmpty: true, name: 'source', useDefaultExcludes: false
-      }
-    }
-    // stage('Build') {
-    //   steps {
-    //     withGithubNotify(context: 'Build') {
-    //       deleteDir()
-    //       unstash 'source'
-    //       dir(BASE_DIR){
-    //         sh 'make build'
-    //       }
-    //     }
-    //   }
-    //   post {
-    //     always {
-    //       dir(BASE_DIR){
-    //         // Let's store the docker log files for debugging purposes
-    //         script {
-    //           if (fileExists('docker-compose.yml')) {
-    //             sh(label: 'docker-compose start', script: 'docker-compose up --build -d', returnStatus: true)
-    //             dockerLogs()
-    //             sh(label: 'docker-compose stop', script: 'docker-compose down -v', returnStatus: true)
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
-    // stage('Test') {
-    //   steps {
-    //     withGithubNotify(context: 'Test', tab: 'tests') {
-    //       deleteDir()
-    //       unstash 'source'
-    //       dir(BASE_DIR){
-    //         sh 'make test'
-    //       }
-    //     }
-    //   }
-    //   post {
-    //     always {
-    //       junit(allowEmptyResults: true,
-    //         keepLongStdio: true,
-    //         testResults: "${BASE_DIR}/**/junit-*.xml")
-    //     }
-    //   }
-    // }
-    // stage('Staging') {
-    //   steps {
-    //     withGithubNotify(context: 'Staging') {
-    //       deleteDir()
-    //       unstash 'source'
-    //       dir(BASE_DIR){
-    //         dockerLogin(secret: "${DOCKER_REGISTRY_SECRET}", registry: "${REGISTRY}")
-    //         sh label: "push docker image to ${env.STAGING_IMAGE}/${env.REPO_NAME}",
-    //             script: "VERSION=${env.GIT_BASE_COMMIT} IMAGE=${env.STAGING_IMAGE}/${env.REPO_NAME} make publish"
-    //       }
-    //     }
-    //   }
-    // }
-    // stage('Integration Tests') {
-    //   steps {
-    //     runBuildITs("${env.REPO_NAME}", "${env.STAGING_IMAGE}/${env.REPO_NAME}")
-    //   }
-    // }
-    // stage('Downstream') {
-    //   when {
-    //     allOf {
-    //       branch 'main'
-    //       expression { return pipelineParams?.downstreamJobs }
-    //     }
-    //     beforeAgent true
-    //   }
-    //   steps {
-    //     script {
-    //       pipelineParams?.downstreamJobs.each { job ->
-    //         build job: "${job}", propagate: false, wait: false
-    //       }
-    //     }
-    //   }
-    // }
-    // stage('Release') {
-    //   when {
-    //     anyOf {
-    //       branch 'main'
-    //       tag pattern: '(v\\d+\\.\\d+|@).*', comparator: 'REGEXP'
-    //     }
-    //   }
-    //   environment {
-    //     VERSION = "${env.BRANCH_NAME.equals('main') ? 'latest' : 'agent-' + env.BRANCH_NAME}"
-    //   }
-    //   stages {
-    //     stage('Publish') {
-    //       steps {
-    //         withGithubNotify(context: 'Publish') {
-    //           deleteDir()
-    //           unstash 'source'
-    //           dir(BASE_DIR){
-    //             // opbeans-frontend uses a different tag versioning
-    //             script {
-    //               if (env.VERSION.contains('@')) {
-    //                 env.TAG = env.VERSION.replaceAll('.*@', 'agent-')
-    //               } else {
-    //                 env.TAG = env.VERSION
-    //               }
-    //             }
-    //             dockerLogin(secret: "${DOCKERHUB_SECRET}", registry: 'docker.io')
-    //             sh "VERSION=${env.TAG} make publish"
-    //           }
-    //         }
-    //       }
-    //     }
-    //     stage('Release Notes') {
-    //       when {
-    //         expression { return false }
-    //       }
-    //       steps {
-    //         echo 'TBD'
-    //       }
-    //     }
-    //   }
-    // }
-    // XXX make this an *optional* part of the opbeansPipeline with an arg to it,
-    //     then a PR to robots
-    // XXX any vars/env required to use `gitCmd`?
-    stage('Update Agent Dep') {
+    // If there is an available newer APM agent version, e.g. "1.2.3", then
+    // update to it and tag this repo with that version, e.g. "v1.2.3".
+    stage('Update APM Agent Dep') {
       // XXX
       // when {
       //   branch 'main'
@@ -176,23 +38,19 @@ pipeline {
       steps {
         withGithubNotify(context: 'Update Agent Dep') {
           deleteDir()
-          unstash 'source'
+          gitCheckout(basedir: BASE_DIR)
           dir(BASE_DIR){
-            echo "XXX HERE"
             sh(script: 'printenv')
             script {
               AVAIL_AGENT_UPDATE_VER = sh(
                   script: '.ci/avail-agent-update-ver.sh',
-                  // script: 'echo "3.36.0"', // XXX
                   returnStdout: true
               ).trim()
               if (AVAIL_AGENT_UPDATE_VER) {
                 echo "Available agent version update: '${AVAIL_AGENT_UPDATE_VER}'"
-                sh(script: ".ci/bump-version.sh ${AVAIL_AGENT_UPDATE_VER}")
-                // // The opbeans pipeline will trigger a release for the main branch
+                // sh(script: ".ci/bump-version.sh ${AVAIL_AGENT_UPDATE_VER}")
                 // gitPush()
-                // // The opbeans pipeline will trigger a release for the release tag
-                // gitCreateTag(tag: "${AVAIL_AGENT_UPDATE_VER}")
+                // gitCreateTag(tag: "v${AVAIL_AGENT_UPDATE_VER}")
               } else {
                 echo "This repo is already using the latest available APM agent version."
               }
