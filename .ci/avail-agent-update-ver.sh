@@ -5,9 +5,6 @@
 
 set -euo pipefail
 
-echo "1.2.3"
-exit
-
 # Use docker to ensure the environment is easy to reproduce, and doesn't rely
 # on 'with${FOO}Env' directives in the calling Jenkinsfile code.
 docker run --rm -t \
