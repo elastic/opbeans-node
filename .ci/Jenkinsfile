@@ -39,7 +39,6 @@ pipeline {
           deleteDir()
           gitCheckout(basedir: BASE_DIR)
           dir(BASE_DIR){
-            sh(script: 'printenv')
             script {
               AVAIL_AGENT_UPDATE_VER = sh(
                   script: '.ci/avail-agent-update-ver.sh',
