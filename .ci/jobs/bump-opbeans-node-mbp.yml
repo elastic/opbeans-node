@@ -1,8 +1,8 @@
 ---
 - job:
     name: apm-agent-nodejs/bump-opbeans-node-mbp
-    display-name: Bump nodejs version
-    description: Bump nodejs version
+    display-name: Opbeans Node Bump
+    description: Opbeans Node - Bump nodejs version
     view: APM-CI
     project-type: multibranch
     script-path: .ci/bump-opbeans-node.groovy
