@@ -1,8 +1,6 @@
 #!/usr/bin/env groovy
 @Library('apm@current') _
 
-opbeansPipeline()
-
 // Periodically check if there is an available newer APM agent version, e.g.
 // "1.2.3". If so, then update to it and tag this repo with that version, e.g.
 // "v1.2.3".
