@@ -10,7 +10,7 @@ docker run --rm -t \
   -e AGENT_VERSION="${AGENT_VERSION}" \
   -w /app \
   -v "$(pwd):/app" \
-  node:12-alpine /bin/sh -c "set -x
+  node:14-alpine /bin/sh -c "set -x
     CI=true npm install --ignore-scripts elastic-apm-node@${AGENT_VERSION}"
 
 

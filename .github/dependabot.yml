@@ -8,6 +8,10 @@ updates:
     # Check for updates once a week
     schedule:
       interval: "weekly"
+    ignore:
+      # Updating elastic-apm-node is handled by the "Update APM Agent Dep"
+      # stage in the Jenkinsfile.
+      - dependency-name: "elastic-apm-node"
     reviewers:
       - "elastic/apm-agent-node-js"
 
