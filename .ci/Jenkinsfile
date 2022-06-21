@@ -20,7 +20,8 @@ pipeline {
     disableResume()
     durabilityHint('PERFORMANCE_OPTIMIZED')
     rateLimitBuilds(throttle: [count: 60, durationName: 'hour', userBoost: true])
-    quietPeriod(10)
+    // XXX
+    // quietPeriod(10)
     disableConcurrentBuilds(abortPrevious: isPR())
   }
   triggers {
@@ -35,19 +36,17 @@ pipeline {
         sh(script: 'git branch')
         sh(script: 'set', returnStatus: true)
         withGithubNotify(context: 'Update Agent Dep') {
-          gitCheckout(
-            credentialsId: 'f6c7695a-671e-4f4f-a331-acdce44ff9ba',
-            repo: 'git@github.com:elastic/opbeans-node.git',
-            branch: 'main',
-            basedir: BASE_DIR
-          )
-          dir(BASE_DIR){
+         dir(BASE_DIR){
+            deleteDir()
+            git(
+              credentialsId: 'f6c7695a-671e-4f4f-a331-acdce44ff9ba',
+              url: 'git@github.com:elastic/opbeans-node.git',
+              branch: 'main'
+            )
             sh(script: 'pwd', label: 'XXX after git checkout')
             sh(script: 'ls -al')
             sh(script: 'git status')
             sh(script: 'git branch')
-            sh(script: 'git config user.email', returnStatus: true)
-            sh(script: 'set', returnStatus: true)
             script {
               AVAIL_AGENT_UPDATE_VER = sh(
                   script: '.ci/avail-agent-update-ver.sh',
@@ -56,6 +55,9 @@ pipeline {
               if (AVAIL_AGENT_UPDATE_VER) {
                 echo "Available agent version update: '${AVAIL_AGENT_UPDATE_VER}'"
                 sh(script: ".ci/bump-version.sh ${AVAIL_AGENT_UPDATE_VER}")
+
+                githubEnv() // Set envvars needed by gitPush() and gitCreateTag()
+                sh(script: 'set', returnStatus: true)
                 // gitPush()
                 // gitCreateTag(tag: "v${AVAIL_AGENT_UPDATE_VER}")
               } else {
