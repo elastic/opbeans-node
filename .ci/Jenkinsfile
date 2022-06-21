@@ -10,7 +10,6 @@ pipeline {
     BASE_DIR = 'src/github.com/elastic'
     NOTIFY_TO = credentials('notify-to')
     PIPELINE_LOG_LEVEL = 'INFO'
-    PATH = "${env.PATH}:${env.WORKSPACE}/bin"
     HOME = "${env.WORKSPACE}"
   }
   options {
@@ -32,7 +31,6 @@ pipeline {
       steps {
         sh(script: 'pwd', label: 'XXX before')
         sh(script: 'ls')
-        sh(script: "ls -al ${env.WORKSPACE}/bin")
         sh(script: 'git status')
         sh(script: 'git branch')
         sh(script: 'set', returnStatus: true)
