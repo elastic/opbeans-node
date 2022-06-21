@@ -29,9 +29,6 @@ pipeline {
   }
   stages {
     stage('Update APM Agent Dep') {
-      when {
-        branch 'main'
-      }
       steps {
         withGithubNotify(context: 'Update Agent Dep') {
           sh(script: 'pwd')
