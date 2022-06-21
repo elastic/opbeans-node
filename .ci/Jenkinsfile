@@ -34,20 +34,21 @@ pipeline {
         sh(script: 'ls')
         sh(script: 'git status')
         sh(script: 'git branch')
-        sh(script: 'git config user.email', returnStatus: true)
+        sh(script: 'set', returnStatus: true)
         withGithubNotify(context: 'Update Agent Dep') {
           dir(BASE_DIR){
             deleteDir()
-            git(
+            gitCheckout(
               credentialsId: 'f6c7695a-671e-4f4f-a331-acdce44ff9ba',
-              url: 'git@github.com:elastic/opbeans-node.git',
+            //   url: 'git@github.com:elastic/opbeans-node.git',
               branch: 'main'
             )
             sh(script: 'pwd', label: 'XXX after git checkout')
-            sh(script: 'ls')
+            sh(script: 'ls -al')
             sh(script: 'git status')
             sh(script: 'git branch')
             sh(script: 'git config user.email', returnStatus: true)
+            sh(script: 'set', returnStatus: true)
             script {
               AVAIL_AGENT_UPDATE_VER = sh(
                   script: '.ci/avail-agent-update-ver.sh',
