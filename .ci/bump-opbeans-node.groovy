@@ -25,8 +25,7 @@ pipeline {
     disableConcurrentBuilds(abortPrevious: isPR())
   }
   triggers {
-    // Only main branch will run on a timer basis
-    cron(env.BRANCH_NAME == 'main' ? '@weekly' : '')
+    issueCommentTrigger('/trent-test-build')
   }
   stages {
     stage('Update APM Agent Dep') {
@@ -35,26 +34,22 @@ pipeline {
       }
       steps {
         withGithubNotify(context: 'Update Agent Dep') {
-          dir(BASE_DIR){
-            deleteDir()
-            git(
-              credentialsId: 'f6c7695a-671e-4f4f-a331-acdce44ff9ba',
-              url: 'git@github.com:elastic/opbeans-node.git',
-              branch: 'main'
-            )
-            script {
-              AVAIL_AGENT_UPDATE_VER = sh(
-                  script: '.ci/avail-agent-update-ver.sh',
-                  returnStdout: true
-              ).trim()
-              if (AVAIL_AGENT_UPDATE_VER) {
-                echo "Available agent version update: '${AVAIL_AGENT_UPDATE_VER}'"
-                sh(script: ".ci/bump-version.sh ${AVAIL_AGENT_UPDATE_VER}")
-                gitPush()
-                gitCreateTag(tag: "v${AVAIL_AGENT_UPDATE_VER}")
-              } else {
-                echo "This repo is already using the latest available APM agent version."
-              }
+          sh(script: 'pwd')
+          sh(script: 'ls -al')
+          sh(script: 'git status')
+          sh(script: 'git branch')
+          sh(script: 'git config user.email')
+          script {
+            AVAIL_AGENT_UPDATE_VER = sh(
+                script: '.ci/avail-agent-update-ver.sh',
+                returnStdout: true
+            ).trim()
+            if (AVAIL_AGENT_UPDATE_VER) {
+              echo "Available agent version update: '${AVAIL_AGENT_UPDATE_VER}'"
+              sh(script: ".ci/bump-version.sh ${AVAIL_AGENT_UPDATE_VER}")
+              sh(script: "git diff")
+            } else {
+              echo "This repo is already using the latest available APM agent version."
             }
           }
         }
