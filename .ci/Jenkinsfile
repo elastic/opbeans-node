@@ -32,17 +32,18 @@ pipeline {
       steps {
         sh(script: 'pwd', label: 'XXX before')
         sh(script: 'ls')
+        sh(script: "ls -al ${env.WORKSPACE}/bin")
         sh(script: 'git status')
         sh(script: 'git branch')
         sh(script: 'set', returnStatus: true)
         withGithubNotify(context: 'Update Agent Dep') {
+          gitCheckout(
+            credentialsId: 'f6c7695a-671e-4f4f-a331-acdce44ff9ba',
+            repo: 'git@github.com:elastic/opbeans-node.git',
+            branch: 'main',
+            basedir: BASE_DIR
+          )
           dir(BASE_DIR){
-            deleteDir()
-            gitCheckout(
-              credentialsId: 'f6c7695a-671e-4f4f-a331-acdce44ff9ba',
-              repo: 'git@github.com:elastic/opbeans-node.git',
-              branch: 'main'
-            )
             sh(script: 'pwd', label: 'XXX after git checkout')
             sh(script: 'ls -al')
             sh(script: 'git status')
