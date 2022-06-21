@@ -10,7 +10,6 @@ pipeline {
     BASE_DIR = 'src/github.com/elastic'
     NOTIFY_TO = credentials('notify-to')
     PIPELINE_LOG_LEVEL = 'INFO'
-    PATH = "${env.PATH}:${env.WORKSPACE}/bin"
     HOME = "${env.WORKSPACE}"
   }
   options {
@@ -35,13 +34,16 @@ pipeline {
       }
       steps {
         withGithubNotify(context: 'Update Agent Dep') {
+          gitCheckout(
+            credentialsId: 'f6c7695a-671e-4f4f-a331-acdce44ff9ba',
+            repo: 'git@github.com:elastic/opbeans-node.git',
+            branch: 'main',
+            basedir: BASE_DIR
+          )
           dir(BASE_DIR){
-            deleteDir()
-            git(
-              credentialsId: 'f6c7695a-671e-4f4f-a331-acdce44ff9ba',
-              url: 'git@github.com:elastic/opbeans-node.git',
-              branch: 'main'
-            )
+            // gitCheckout() leaves the repo in a detached HEAD state. Move HEAD
+            // back to the branch, so we can gitPush() below.
+            sh(script: 'git checkout main')
             script {
               AVAIL_AGENT_UPDATE_VER = sh(
                   script: '.ci/avail-agent-update-ver.sh',
