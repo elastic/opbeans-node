@@ -1,0 +1,33 @@
+name: release
+
+on:
+  push:
+    branches: [ "main" ]
+  create:
+    tags: [ "v*" ]
+
+permissions:
+  contents: read
+
+jobs:
+
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: elastic/apm-pipeline-library/.github/actions/docker-login@current
+      with:
+        registry: docker.io
+        secret: secret/apm-team/ci/elastic-observability-dockerhub
+        url: ${{ secrets.VAULT_ADDR }}
+        roleId: ${{ secrets.VAULT_ROLE_ID }}
+        secretId: ${{ secrets.VAULT_SECRET_ID }}
+
+    - name: Set version if tags
+      run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      if: startsWith(github.ref, 'refs/tags/v')
+
+    - name: Run publish
+      run: make publish
