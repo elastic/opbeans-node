@@ -1,0 +1,37 @@
+name: Bump elastic-apm-node to latest version
+
+sources:
+  elastic-apm-node:
+    name: Get latest elastic-apm-node version from npm registry
+    kind: npm
+    spec:
+      name: elastic-apm-node
+
+conditions:
+  default:
+    name: Check if installed version differs
+    kind: shell
+    sourceid: elastic-apm-node
+    spec:
+      command: .ci/scripts/test-version.sh
+      environments:
+        - name: PATH
+
+targets:
+  dockerfile:
+    name: Set version in Dockerfile
+    sourceid: elastic-apm-node
+    kind: file
+    spec:
+      file: Dockerfile
+      matchpattern: 'org\.label-schema\.version="(\d+.\d+.\d+)"'
+      replacepattern: org.label-schema.version="$1"
+
+  npm:
+    name: Set npm dependency version
+    sourceid: elastic-apm-node
+    kind: shell
+    spec:
+      command: bash .ci/scripts/npm-install-elastic-apm-node.sh
+      environments:
+        - name: PATH

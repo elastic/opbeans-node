@@ -17,23 +17,21 @@ jobs:
         with:
           node-version: 14
           cache: 'npm'
-      - name: Get available agent update version
-        run: |
-          CURR=$(jq '.dependencies."elastic-apm-node".version' package-lock.json)
-          LATEST=$(npm info elastic-apm-node@latest version)
-          if [[ "${CURR}" != "${LATEST}" ]]; then
-            echo "AGENT_VERSION=${LATEST}" >> $GITHUB_ENV
-          fi
-      - name: Update version
-        if: ${{ env.AGENT_VERSION }}
-        run: |
-          npm install --ignore-scripts elastic-apm-node@${{ env.AGENT_VERSION }}
-          sed -ibck "s#\(org.label-schema.version=\)\(\".*\"\)\(.*\)#\1\"${{ env.AGENT_VERSION }}\"\3#g" Dockerfile
-          rm -f Dockerfilebck
+      - name: Install Updatecli in the runner
+        uses: updatecli/updatecli-action@v2
+      - name: Run Updatecli
+        run: updatecli diff --config ./updatecli.yml
+      - name: Check git-diff
+        id: git-diff
+        run: git diff --exit-code --name-only || echo "diff=true" >> $GITHUB_OUTPUT
+      - name: Get new version
+        if: steps.git-diff.outputs.diff
+        run: echo "NEW_AGENT_VERSION=$(jq -r '.dependencies."elastic-apm-node".version')" >> $GITHUB_ENV
       - name: Add, commit and push
-        if: ${{ env.AGENT_VERSION }}
+        if: steps.git-diff.outputs.diff
         uses: EndBug/add-and-commit@v9.1.1
         with:
           add: package.json package-lock.json Dockerfile
-          message: "fix(package): bump elastic-apm-node to v${{ env.AGENT_VERSION }}"
-          tag: v${{ env.AGENT_VERSION }}
+          message: |-
+            fix(package): bump elastic-apm-node to v${NEW_AGENT_VERSION}
+          tag: v${{ env.NEW_AGENT_VERSION }}
