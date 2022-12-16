@@ -1,0 +1,34 @@
+---
+# JUST FOR TESTING, WILL BE REMOVED
+name: Bump opbeans node
+
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: 'npm'
+      - name: Get available agent update version
+        run: |
+          CURR=$(jq '.dependencies."elastic-apm-node".version' package-lock.json)
+          LATEST=$(npm info elastic-apm-node@latest version)
+          if [[ "${CURR}" != "${LATEST}" ]]; then
+            echo "AGENT_VERSION=${LATEST}" >> $GITHUB_ENV
+          fi
+      - name: Update version
+        if: ${{ env.AGENT_VERSION }}
+        run: |
+          npm install --ignore-scripts elastic-apm-node@${{ env.AGENT_VERSION }}
+          sed -ibck "s#\(org.label-schema.version=\)\(\".*\"\)\(.*\)#\1\"${{ env.AGENT_VERSION }}\"\3#g" Dockerfile
+          rm -f Dockerfilebck
+      - name: Debug
+        run: |
+          cat Dockerfile
+          jq '.dependencies."elastic-apm-node".version' package-lock.json
