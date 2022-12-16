@@ -30,7 +30,7 @@ jobs:
           npm install --ignore-scripts elastic-apm-node@${{ env.AGENT_VERSION }}
           sed -ibck "s#\(org.label-schema.version=\)\(\".*\"\)\(.*\)#\1\"${{ env.AGENT_VERSION }}\"\3#g" Dockerfile
           rm -f Dockerfilebck
-      - name: Add & Commit & Tag
+      - name: Add, commit and push
         if: ${{ env.AGENT_VERSION }}
         uses: EndBug/add-and-commit@v9.1.1
         with:
