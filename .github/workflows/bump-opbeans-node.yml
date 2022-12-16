@@ -1,0 +1,38 @@
+---
+## Workflow to periodically check if there is an available newer APM agent version, e.g.
+## "1.2.3". If so, then update to it and tag this repo with that version, e.g.
+## "v1.2.3".
+name: Bump opbeans node
+
+on:
+  schedule:
+    - cron:  '0 20 * * 6'
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.version }}
+      - name: Get available agent update version
+        run: |
+          CURR=$(jq '.dependencies."elastic-apm-node".version' package-lock.json)
+          LATEST=$(npm info elastic-apm-node@latest version)
+          if [[ "${CURR}" != "${LATEST}" ]]; then
+            echo "AGENT_VERSION=${LATEST}" >> $GITHUB_ENV
+          fi
+      - name: Update version
+        if: ${{ env.AGENT_VERSION }}
+        run: |
+          npm install --ignore-scripts elastic-apm-node@${{ env.AGENT_VERSION }}
+          sed -ibck "s#\(org.label-schema.version=\)\(\".*\"\)\(.*\)#\1\"${{ env.AGENT_VERSION }}\"\3#g" Dockerfile
+          rm -f Dockerfilebck
+      - name: Add & Commit & Tag
+        if: ${{ env.AGENT_VERSION }}
+        uses: EndBug/add-and-commit@v9.1.1
+        with:
+          add: package.json package-lock.json Dockerfile
+          message: "fix(package): bump elastic-apm-node to v${{ env.AGENT_VERSION }}"
+          tag: v${{ env.AGENT_VERSION }}
