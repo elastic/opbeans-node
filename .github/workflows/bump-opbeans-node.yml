@@ -16,6 +16,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 14
+          cache: 'npm'
       - name: Get available agent update version
         run: |
           CURR=$(jq '.dependencies."elastic-apm-node".version' package-lock.json)
