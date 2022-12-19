@@ -20,7 +20,7 @@ jobs:
       - name: Install Updatecli in the runner
         uses: updatecli/updatecli-action@v2
       - name: Run Updatecli
-        run: updatecli diff --config ./updatecli.yml
+        run: updatecli diff --config ./.updatecli/bump-opbeans-node.yml
       - name: Check git-diff
         id: git-diff
         run: git diff --exit-code --name-only --diff-filter=M --ignore-all-space || echo "diff=true" >> $GITHUB_OUTPUT
