@@ -23,7 +23,7 @@ jobs:
         run: updatecli diff --config ./updatecli.yml
       - name: Check git-diff
         id: git-diff
-        run: git diff --exit-code --name-only || echo "diff=true" >> $GITHUB_OUTPUT
+        run: git diff --exit-code --name-only --diff-filter=M --ignore-all-space || echo "diff=true" >> $GITHUB_OUTPUT
       - name: Get new version
         if: steps.git-diff.outputs.diff
         run: echo "NEW_AGENT_VERSION=$(jq -r '.dependencies."elastic-apm-node".version')" >> $GITHUB_ENV
