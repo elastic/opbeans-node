@@ -22,13 +22,13 @@ conditions:
 
 targets:
   dockerfile:
-    name: Set org.lablel-schema.version in Dockerfile
+    name: Set org.label-schema.version in Dockerfile
     sourceid: elastic-apm-node
     kind: file
     spec:
       file: Dockerfile
       matchpattern: 'org\.label-schema\.version="(\d+.\d+.\d+)"'
-      replacepattern: org.label-schema.version="$1"
+      replacepattern: org.label-schema.version="{{ source `elastic-apm-node` }}"
 
   npm:
     name: Install new elastic-apm-node npm dependency version
