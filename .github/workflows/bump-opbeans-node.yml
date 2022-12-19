@@ -21,17 +21,3 @@ jobs:
         uses: updatecli/updatecli-action@v2
       - name: Run Updatecli
         run: updatecli diff --config ./.updatecli/bump-opbeans-node.yml
-      - name: Check git-diff
-        id: git-diff
-        run: git diff --exit-code --name-only --diff-filter=M --ignore-all-space || echo "diff=true" >> $GITHUB_OUTPUT
-      - name: Get new version
-        if: steps.git-diff.outputs.diff
-        run: echo "NEW_AGENT_VERSION=$(jq -r '.dependencies."elastic-apm-node".version')" >> $GITHUB_ENV
-      - name: Add, commit and push
-        if: steps.git-diff.outputs.diff
-        uses: EndBug/add-and-commit@v9.1.1
-        with:
-          add: package.json package-lock.json Dockerfile
-          message: |-
-            fix(package): bump elastic-apm-node to v${{ env.NEW_AGENT_VERSION }}
-          tag: v${{ env.NEW_AGENT_VERSION }}
