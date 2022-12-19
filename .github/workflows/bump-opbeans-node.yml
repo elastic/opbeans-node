@@ -33,5 +33,5 @@ jobs:
         with:
           add: package.json package-lock.json Dockerfile
           message: |-
-            fix(package): bump elastic-apm-node to v${NEW_AGENT_VERSION}
+            fix(package): bump elastic-apm-node to v${{ env.NEW_AGENT_VERSION }}
           tag: v${{ env.NEW_AGENT_VERSION }}
