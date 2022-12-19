@@ -18,6 +18,6 @@ jobs:
           node-version: 14
           cache: 'npm'
       - name: Install Updatecli in the runner
-        uses: updatecli/updatecli-action@v2
+        uses: updatecli/updatecli-action@453502948b442d7b9a923de7b40cc7ce8628505c
       - name: Run Updatecli
         run: updatecli diff --config ./.updatecli/bump-opbeans-node.yml
