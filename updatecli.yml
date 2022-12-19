@@ -1,3 +1,7 @@
+---
+## Workflow to periodically check if there is an available newer APM agent version, e.g.
+## "1.2.3". If so, then update to it and tag this repo with that version, e.g.
+## "v1.2.3".
 name: Bump elastic-apm-node to latest version
 
 sources:
@@ -8,7 +12,7 @@ sources:
       name: elastic-apm-node
 
 conditions:
-  default:
+  elastic-apm-node-version-check:
     name: Check if installed version differs
     kind: shell
     sourceid: elastic-apm-node
@@ -19,7 +23,7 @@ conditions:
 
 targets:
   dockerfile:
-    name: Set version in Dockerfile
+    name: Set org.lablel-schema.version in Dockerfile
     sourceid: elastic-apm-node
     kind: file
     spec:
@@ -28,7 +32,7 @@ targets:
       replacepattern: org.label-schema.version="$1"
 
   npm:
-    name: Set npm dependency version
+    name: Install new elastic-apm-node npm dependency version
     sourceid: elastic-apm-node
     kind: shell
     spec:
