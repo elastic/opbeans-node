@@ -1,0 +1,27 @@
+---
+## Workflow to periodically check if there is an available newer APM agent version, e.g.
+## "1.2.3". If so, then update to it and tag this repo with that version, e.g.
+## "v1.2.3".
+name: Bump opbeans node
+
+on:
+  schedule:
+    - cron:  '0 20 * * 6'
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: 'npm'
+      - name: Install Updatecli in the runner
+        uses: updatecli/updatecli-action@453502948b442d7b9a923de7b40cc7ce8628505c
+      - name: Run Updatecli
+        run: updatecli apply --config ./.updatecli/bump-opbeans-node.yml

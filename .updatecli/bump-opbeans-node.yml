@@ -1,0 +1,65 @@
+---
+## Workflow to periodically check if there is an available newer APM agent version, e.g.
+## "1.2.3". If so, then update to it.
+name: Bump elastic-apm-node to latest version
+
+scms:
+  githubConfig:
+    kind: github
+    spec:
+      user: '{{ requiredEnv "GIT_USER" }}'
+      email: '{{ requiredEnv "GIT_EMAIL" }}'
+      owner: elastic
+      repository: opbeans-node
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "GIT_USER" }}'
+      branch: main
+
+actions:
+  opbeans-node:
+    kind: github/pullrequest
+    scmid: githubConfig
+    spec:
+      automerge: false
+      labels:
+        - dependencies
+        - javascript
+
+
+sources:
+  elastic-apm-node:
+    name: Get latest elastic-apm-node version from npm registry
+    kind: npm
+    spec:
+      name: elastic-apm-node
+
+conditions:
+  elastic-apm-node-version-check:
+    name: Check if installed version differs
+    kind: shell
+    sourceid: elastic-apm-node
+    spec:
+      command: bash .updatecli/scripts/test-version.sh
+      environments:
+        - name: PATH
+
+targets:
+  dockerfile:
+    name: Set org.label-schema.version in Dockerfile
+    sourceid: elastic-apm-node
+    scmid: githubConfig
+    kind: file
+    spec:
+      file: Dockerfile
+      matchpattern: 'org\.label-schema\.version="(\d+.\d+.\d+)"'
+      replacepattern: org.label-schema.version="{{ source `elastic-apm-node` }}"
+
+  npm:
+    name: Install new elastic-apm-node npm dependency version
+    sourceid: elastic-apm-node
+    scmid: githubConfig
+    kind: shell
+    spec:
+      command: bash .updatecli/scripts/npm-install-elastic-apm-node.sh
+      environments:
+        - name: PATH
