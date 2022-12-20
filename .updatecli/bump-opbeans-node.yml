@@ -15,6 +15,17 @@ scms:
       username: '{{ requiredEnv "GIT_USER" }}'
       branch: main
 
+actions:
+  opbeans-node:
+    kind: github/pullrequest
+    scmid: githubConfig
+    spec:
+      automerge: false
+      labels:
+        - dependencies
+        - javascript
+
+
 sources:
   elastic-apm-node:
     name: Get latest elastic-apm-node version from npm registry
@@ -28,7 +39,7 @@ conditions:
     kind: shell
     sourceid: elastic-apm-node
     spec:
-      command: .updatecli/scripts/test-version.sh
+      command: bash .updatecli/scripts/test-version.sh
       environments:
         - name: PATH
 
@@ -49,6 +60,6 @@ targets:
     scmid: githubConfig
     kind: shell
     spec:
-      command: .updatecli/scripts/npm-install-elastic-apm-node.sh
+      command: bash .updatecli/scripts/npm-install-elastic-apm-node.sh
       environments:
         - name: PATH
