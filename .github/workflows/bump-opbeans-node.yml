@@ -8,6 +8,10 @@ on:
   schedule:
     - cron:  '0 20 * * 6'
 
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
   bump:
     runs-on: ubuntu-latest
