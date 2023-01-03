@@ -39,7 +39,7 @@ conditions:
     kind: shell
     sourceid: elastic-apm-node
     spec:
-      command: bash .updatecli/scripts/test-version.sh
+      command: bash .ci/scripts/test-version.sh
       environments:
         - name: PATH
 
@@ -60,6 +60,6 @@ targets:
     scmid: githubConfig
     kind: shell
     spec:
-      command: bash .updatecli/scripts/npm-install-elastic-apm-node.sh
+      command: bash .ci/scripts/npm-install-elastic-apm-node.sh
       environments:
         - name: PATH
