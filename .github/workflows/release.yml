@@ -3,7 +3,6 @@ name: release
 on:
   push:
     branches: [ "main" ]
-  create:
     tags: [ "v*" ]
 
 permissions:
