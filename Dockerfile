@@ -1,7 +1,7 @@
 FROM node:18-alpine
 
 WORKDIR /app
-ADD . /app
+COPY . /app
 ENV NODE_ENV=production
 ENV ELASTIC_APM_JS_BASE_SERVICE_NAME=opbeans-react
 RUN npm install
