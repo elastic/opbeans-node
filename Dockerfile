@@ -15,7 +15,7 @@ LABEL \
     org.label-schema.schema-version="1.0" \
     org.label-schema.vendor="Elastic" \
     org.label-schema.name="opbeans-node" \
-    org.label-schema.version="3.44.1" \
+    org.label-schema.version="3.45.0" \
     org.label-schema.url="https://hub.docker.com/r/opbeans/opbeans-node" \
     org.label-schema.vcs-url="https://github.com/elastic/opbeans-node" \
     org.label-schema.license="MIT"
