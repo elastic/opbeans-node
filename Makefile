@@ -1,7 +1,7 @@
 PORT ?= 3000
 IMAGE ?= opbeans/opbeans-node
 VERSION ?= latest
-LTS_ALPINE ?= 14-alpine
+LTS_ALPINE ?= 20-alpine
 
 .DEFAULT_GOAL := help
 

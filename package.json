@@ -19,7 +19,7 @@
     "standard": "^17.1.0"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "scripts": {
     "db-setup": "./db/setup.sh",
