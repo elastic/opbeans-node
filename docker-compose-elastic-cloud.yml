@@ -107,7 +107,7 @@ services:
         condition: service_healthy
 
   loadPgData:
-    image: node:14-bullseye
+    image: node:20-bullseye
     environment:
       - PGHOST=postgres
       - PGUSER=postgres
