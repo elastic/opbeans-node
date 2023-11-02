@@ -28,7 +28,6 @@ updates:
     reviewers:
       - "elastic/apm-agent-node-js"
 
-  # GitHub actions
   - package-ecosystem: "github-actions"
     directory: "/"
     reviewers:
