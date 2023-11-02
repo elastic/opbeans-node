@@ -8,6 +8,8 @@ updates:
     # Check for updates once a week
     schedule:
       interval: "weekly"
+      day: "sunday"
+      time: "22:00"
     ignore:
       # Updating elastic-apm-node is handled by the "Update APM Agent Dep"
       # stage in the Jenkinsfile.
@@ -21,5 +23,21 @@ updates:
     # Check for updates once a week
     schedule:
       interval: "weekly"
+      day: "sunday"
+      time: "22:00"
     reviewers:
       - "elastic/apm-agent-node-js"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    reviewers:
+      - "elastic/observablt-ci"
+      - "elastic/apm-agent-node-js"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "22:00"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
