@@ -33,6 +33,7 @@ updates:
     directory: "/"
     reviewers:
       - "elastic/observablt-ci"
+      - "elastic/apm-agent-node-js"
     schedule:
       interval: "weekly"
       day: "sunday"
