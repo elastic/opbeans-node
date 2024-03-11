@@ -34,15 +34,15 @@ sources:
       name: elastic-apm-node
 
 conditions:
-  elastic-apm-node-version-check:
-    name: Check if installed version differs
-    kind: shell
-    sourceid: elastic-apm-node
+  package.json:
+    name: "elastic-apm-node used"
+    kind: file
+    disablesourceinput: true
+    scmid: githubConfig
     spec:
-      command: bash .ci/scripts/test-version.sh
-      environments:
-        - name: PATH
-    failwhen: true
+      file: package.json
+      matchpattern: '"elastic-apm-node": "v{{ source "elastic-apm-node" }}"'
+    failwhen: false
 
 targets:
   dockerfile:
