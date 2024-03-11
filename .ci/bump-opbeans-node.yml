@@ -42,6 +42,7 @@ conditions:
       command: bash .ci/scripts/test-version.sh
       environments:
         - name: PATH
+    failwhen: true
 
 targets:
   dockerfile:
