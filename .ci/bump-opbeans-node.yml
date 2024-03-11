@@ -13,7 +13,7 @@ scms:
       repository: opbeans-node
       token: '{{ requiredEnv "GITHUB_TOKEN" }}'
       username: '{{ requiredEnv "GIT_USER" }}'
-      branch: main
+      branch: test/1
 
 actions:
   opbeans-node:
