@@ -34,14 +34,15 @@ sources:
       name: elastic-apm-node
 
 conditions:
-  package.json:
-    name: "elastic-apm-node used"
+  elastic-apm-node-version-check:
+    name: Check if installed version differs
     kind: file
     disablesourceinput: true
     scmid: githubConfig
     spec:
       file: package.json
-      matchpattern: '"elastic-apm-node": "v{{ source "elastic-apm-node" }}"'
+      matchpattern: '"elastic-apm-node": "^{{ source "elastic-apm-node:" }}'
+    failwhen: true
     failwhen: false
 
 targets:
