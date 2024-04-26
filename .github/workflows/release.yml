@@ -29,8 +29,8 @@ jobs:
     - name: Set version if tag exists
       run: |
         TAG=$(git tag --points-at HEAD | tail -1)
-        if [ -n "$TAG" ]; then
-          echo "VERSION=$()" >> $GITHUB_ENV
+        if [ -n "${TAG}" ]; then
+          echo "VERSION=${TAG}" >> $GITHUB_ENV
         fi
 
     - name: Run publish
