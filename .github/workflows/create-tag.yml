@@ -18,11 +18,18 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # also fetch tags
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install dependencies # This is needed to be able to run the npm list command
+        run: npm ci
       - run: |
-          ELASTIC_APM_NODE_VERSION="v$(jq -r '.dependencies."elastic-apm-node".version' package-lock.json)"
+          ELASTIC_APM_NODE_VERSION=$(npm list --depth 0 --json elastic-apm-node | jq -r '.dependencies."elastic-apm-node".version')
+          ELASTIC_APM_NODE_VERSION_WITH_PREFIX="v${ELASTIC_APM_NODE_VERSION}"
           # if the tag does not exist
-          if [[ ! $(git tag -l "${ELASTIC_APM_NODE_VERSION}") ]]; then
+          if [[ ! $(git tag -l "${ELASTIC_APM_NODE_VERSION_WITH_PREFIX}") ]]; then
             git tag ${ELASTIC_APM_NODE_VERSION}
-            git push origin "refs/tags/${ELASTIC_APM_NODE_VERSION}"
+            git push origin "refs/tags/${ELASTIC_APM_NODE_VERSION_WITH_PREFIX}"
           fi
           
