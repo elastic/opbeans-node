@@ -29,7 +29,7 @@ jobs:
           ELASTIC_APM_NODE_VERSION_WITH_PREFIX="v${ELASTIC_APM_NODE_VERSION}"
           # if the tag does not exist
           if [[ ! $(git tag -l "${ELASTIC_APM_NODE_VERSION_WITH_PREFIX}") ]]; then
-            git tag ${ELASTIC_APM_NODE_VERSION}
+            git tag ${ELASTIC_APM_NODE_VERSION_WITH_PREFIX}
             git push origin "refs/tags/${ELASTIC_APM_NODE_VERSION_WITH_PREFIX}"
           fi
           
