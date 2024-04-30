@@ -18,6 +18,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # also fetch tags
+      - uses: elastic/apm-pipeline-library/.github/actions/setup-git@current
+        with:
+          # This should help with running GitHub events
+          token: ${{ secrets.CREATE_TAG_TOKEN }}
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
