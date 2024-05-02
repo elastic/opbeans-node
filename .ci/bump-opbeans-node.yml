@@ -19,6 +19,8 @@ actions:
   opbeans-node:
     kind: github/pullrequest
     scmid: githubConfig
+    sourceid: elastic-apm-node
+    title: 'build(deps): Bump elastic-apm to {{ source "elastic-apm-node" }}'
     spec:
       automerge: false
       labels:
