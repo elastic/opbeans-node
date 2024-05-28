@@ -23,7 +23,7 @@ jobs:
 
       - uses: elastic/oblt-actions/updatecli/run@v1
         with:
-          command: "apply --config .ci/bump-opbeans-node.yml"
+          command: "--experimental apply --config .ci/bump-opbeans-node.yml"
         env:
           GITHUB_TOKEN: ${{ secrets.UPDATECLI_GH_TOKEN }}
 
