@@ -25,13 +25,12 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
-    - uses: elastic/apm-pipeline-library/.github/actions/docker-login@current
+    - name: Log in to the Container registry
+      uses: docker/login-action@0d4c9c5ea7693da7b068278f7b52bda2a190a446 # v3.2.0
       with:
-        registry: docker.io
-        secret: secret/apm-team/ci/elastic-observability-dockerhub
-        url: ${{ secrets.VAULT_ADDR }}
-        roleId: ${{ secrets.VAULT_ROLE_ID }}
-        secretId: ${{ secrets.VAULT_SECRET_ID }}
+        registry: ${{ secrets.DOCKERHUB_REGISTRY }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Extract metadata (tags, labels)
       id: docker-meta
