@@ -122,10 +122,10 @@ The app have two npm scripts for adding a new customer:
 
 Run either of the two scripts using `npm run <name>`.
 
-If running inside docker, you can run it using `docker-compose`, e.g:
+If running inside docker, you can run it using `docker compose`, e.g:
 
 ```
-docker-compose exec opbeans-node npm run customer-add-redos
+docker compose exec opbeans-node npm run customer-add-redos
 ```
 
 ## License

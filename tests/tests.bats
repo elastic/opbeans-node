@@ -9,12 +9,12 @@ CONTAINER="opbeans-node"
 
 @test "build image" {
 	cd $BATS_TEST_DIRNAME/..
-	run docker-compose build
+	run docker compose build
 	assert_success
 }
 
 @test "create test container" {
-	run docker-compose up -d
+	run docker compose up -d
 	assert_success
 }
 
@@ -32,6 +32,6 @@ CONTAINER="opbeans-node"
 }
 
 @test "clean test containers" {
-	run docker-compose down
+	run docker compose down
 	assert_success
 }
