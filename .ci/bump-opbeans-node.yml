@@ -40,7 +40,7 @@ conditions:
     name: Check if installed version differs
     kind: shell
     sourceid: elastic-apm-node
-    failwhen: true
+    failwhen: false
     spec:
       command: bash .ci/scripts/test-version.sh
       environments:
