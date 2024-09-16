@@ -21,6 +21,17 @@ jobs:
         with:
           fetch-depth: 0 # also fetch tags
 
+      - name: Get token
+        id: get_token
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2.1.0
+        with:
+          app_id: ${{ secrets.OBS_AUTOMATION_APP_ID }}
+          private_key: ${{ secrets.OBS_AUTOMATION_APP_PEM }}
+          permissions: >-
+            {
+              "contents": "write"
+            }
+
       - run: make create-release
         env:
-          GH_TOKEN: ${{ secrets.CREATE_TAG_TOKEN }}
+          GH_TOKEN: ${{ steps.get_token.outputs.token }}
