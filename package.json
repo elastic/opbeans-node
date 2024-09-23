@@ -16,7 +16,7 @@
     "workload": "^2.4.3"
   },
   "devDependencies": {
-    "standard": "^17.1.0"
+    "standard": "^17.1.2"
   },
   "engines": {
     "node": ">=18"
