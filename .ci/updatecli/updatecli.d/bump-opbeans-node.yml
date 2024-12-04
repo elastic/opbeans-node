@@ -8,11 +8,11 @@ scms:
     kind: github
     spec:
       user: '{{ requiredEnv "GITHUB_ACTOR" }}'
-      owner: elastic
-      repository: opbeans-node
+      owner: "{{ .scm.owner }}"
+      repository: "{{ .scm.repository }}"
       token: '{{ requiredEnv "GITHUB_TOKEN" }}'
       username: '{{ requiredEnv "GITHUB_ACTOR" }}'
-      branch: main
+      branch: "{{ .scm.branch }}"
       commitusingapi: true
 
 actions:
@@ -26,7 +26,6 @@ actions:
       labels:
         - dependencies
         - javascript
-
 
 sources:
   elastic-apm-node:
