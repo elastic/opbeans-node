@@ -2,7 +2,7 @@ scm:
   enabled: true
   owner: elastic
   repository: opbeans-node
-  branch: main
+  branch: test/updatecli-1
   commitusingapi: true
   # begin update-compose policy values
   user: obltmachine
