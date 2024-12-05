@@ -40,14 +40,14 @@ jobs:
 
       - uses: elastic/oblt-actions/updatecli/run@v1
         with:
-          command: --experimental compose diff
+          command: --experimental compose diff --clean=true
           version-file: .tool-versions
         env:
           GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
 
       - uses: elastic/oblt-actions/updatecli/run@v1
         with:
-          command: --experimental compose apply
+          command: --experimental compose apply --clean=true
           version-file: .tool-versions
         env:
           GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
