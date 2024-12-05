@@ -1,8 +1,5 @@
 ---
-## Workflow to periodically check if there is an available newer APM agent version, e.g.
-## "1.2.3". If so, then update to it and tag this repo with that version, e.g.
-## "v1.2.3".
-name: Bump opbeans node
+name: updatecli
 
 on:
   workflow_dispatch:
@@ -11,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  packages: read
 
 jobs:
   bump:
@@ -34,9 +32,23 @@ jobs:
               "pull_requests": "write"
             }
 
+      - uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3.3.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: elastic/oblt-actions/updatecli/run@v1
         with:
-          command: "--experimental apply --config .ci/bump-opbeans-node.yml"
+          command: --experimental compose diff
+          version-file: .tool-versions
+        env:
+          GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
+
+      - uses: elastic/oblt-actions/updatecli/run@v1
+        with:
+          command: --experimental compose apply
+          version-file: .tool-versions
         env:
           GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
 
