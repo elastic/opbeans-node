@@ -14,8 +14,6 @@ updates:
       # Updating elastic-apm-node is handled by the "Update APM Agent Dep"
       # stage in the Jenkinsfile.
       - dependency-name: "elastic-apm-node"
-    reviewers:
-      - "elastic/apm-agent-node-js"
 
   # Enable version updates for Docker
   - package-ecosystem: "docker"
@@ -25,14 +23,9 @@ updates:
       interval: "weekly"
       day: "sunday"
       time: "22:00"
-    reviewers:
-      - "elastic/apm-agent-node-js"
 
   - package-ecosystem: "github-actions"
     directory: "/"
-    reviewers:
-      - "elastic/observablt-ci"
-      - "elastic/apm-agent-node-js"
     schedule:
       interval: "weekly"
       day: "sunday"
