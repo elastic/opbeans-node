@@ -15,7 +15,7 @@ updates:
       # stage in the Jenkinsfile.
       - dependency-name: "elastic-apm-node"
     cooldown:
-      days: 14
+      default-days: 14
 
   # Enable version updates for Docker
   - package-ecosystem: "docker"
