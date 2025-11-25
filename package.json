@@ -9,7 +9,7 @@
     "elastic-apm-node": "^4.15.0",
     "express": "^4.21.2",
     "express-pino-logger": "^7.0.0",
-    "pg": "^8.15.6",
+    "pg": "^8.16.3",
     "pino": "^9.6.0",
     "redis": "^3.1.0",
     "request": "^2.88.0",
