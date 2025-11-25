@@ -79,7 +79,7 @@ services:
       - POSTGRES_PASSWORD=hunter2
       - POSTGRES_DB=opbeans
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql
     ports:
       - "127.0.0.1:5432:5432"
     healthcheck:
