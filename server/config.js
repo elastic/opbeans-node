@@ -4,7 +4,7 @@ const pkg = require('../package')
 const env = process.env.NODE_ENV || 'development'
 
 const conf = module.exports = {
-  env: env,
+  env,
   server: {
     protocol: process.env.OPBEANS_SERVER_PROTOCOL || 'http:',
     auth: process.env.OPBEANS_SERVER_AUTH || '',
