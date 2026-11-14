@@ -7,7 +7,7 @@ policies:
     values:
       - .ci/updatecli/values.d/scm.yml
   - name: Update Updatecli policies
-    policy: ghcr.io/updatecli/policies/autodiscovery/updatecli:0.10.0@sha256:588fb5b274c1e484198885723b5a67688416feeec414d41a33908826e448fd41
+    policy: ghcr.io/updatecli/policies/autodiscovery/updatecli:0.12.0@sha256:6b53297d62350862ce1205fc183539c985464b97678404f7da9c133a442b0576
     values:
       - .ci/updatecli/values.d/scm.yml
       - .ci/updatecli/values.d/update-compose.yml
